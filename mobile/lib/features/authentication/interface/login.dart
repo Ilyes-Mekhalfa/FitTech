@@ -11,15 +11,16 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('LOGIN PAGE'),
-            ElevatedButton(onPressed:(){
-              context.push('/singup');
-            }, child: const Text('d\'ont have an acount signup')),
-          ],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              const Text('LOGIN PAGE'),
+              ElevatedButton(onPressed:(){
+                context.push('/singup');
+              }, child: const Text('d\'ont have an acount signup')),
+            ],
+          ),
         ),
       ),
     );

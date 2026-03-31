@@ -20,6 +20,12 @@ class _HomeState extends State<Home> {
             const Text('Home'),
             ElevatedButton(
               onPressed:(){
+                context.push(Pages.singup);
+              }, 
+              child: const Text('Go to Signup')
+              ),
+            ElevatedButton(
+              onPressed:(){
                 context.push(Pages.login);
               }, 
               child: const Text('Go to Login')

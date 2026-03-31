@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
+import 'package:mobile/features/authentication/interface/signup/signup.dart';
 import 'package:mobile/home.dart';
-import 'package:mobile/features/authentication/interface/singup.dart';
 import 'package:mobile/features/authentication/interface/login.dart';
 import 'package:mobile/navigation/pages.dart';
 
@@ -25,7 +25,7 @@ GoRouter appRouter = GoRouter(
       path: Pages.singup, 
       name: Pages.singup,
       builder: (context, state) {
-        return Singup();
+        return SignupScreen();
       },
     ),
   ],
