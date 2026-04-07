@@ -1,0 +1,129 @@
+﻿.sidebar {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  background-color: var(--surface-container-lowest);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  border-right: none;
+  z-index: 40;
+  min-height: 100vh;
+  animation: slideInSidebar 0.6s ease forwards;
+}
+
+@keyframes slideInSidebar {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.sidebar-logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary-container);
+  font-family: 'Lexend', sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.sidebar-subtitle {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--secondary);
+  margin-top: -4px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--secondary);
+  transition: all 0.2s ease;
+  border-right: 4px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+}
+
+.nav-item:hover {
+  color: var(--primary-container);
+  background-color: var(--surface-container-low);
+}
+
+.nav-item.active {
+  background-color: var(--surface-container-low);
+  color: var(--on-surface);
+  border-right-color: var(--primary);
+  font-weight: 600;
+}
+
+.nav-item .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.sidebar-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  color: var(--secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sidebar-footer:hover {
+  color: var(--primary-container);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 12px 24px;
+    flex-direction: row;
+    gap: 24px;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    overflow-x: auto;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    gap: 4px;
+  }
+
+  .nav-item {
+    white-space: nowrap;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .sidebar-footer {
+    display: none;
+  }
+}
