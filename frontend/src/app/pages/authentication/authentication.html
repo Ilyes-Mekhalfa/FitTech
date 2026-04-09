@@ -11,7 +11,7 @@
       <div class="input-group">
         <label>Annex Code</label>
         <input type="text" formControlName="annexCode" placeholder="ANX-123" />
-        <span *ngIf="form.get('annexCode')?.invalid && form.get('annexCode')?.touched">
+        <span *ngIf="loginForm.get('annexCode')?.invalid && loginForm.get('annexCode')?.touched">
           Invalid format (ANX-###)
         </span>
       </div>
@@ -19,7 +19,7 @@
       <div class="input-group">
         <label>Password</label>
         <input type="password" formControlName="password" placeholder="••••••••" />
-        <span *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+        <span *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
           Min 8 characters
         </span>
       </div>
@@ -32,7 +32,7 @@
         <a href="#" (click)="forgetPassword()">Forgot?</a>
       </div>
 
-      <button type="submit" class="btn" (click)="onSubmit()" [disabled]="form.invalid">
+      <button type="submit" class="btn" (click)="onSubmit()" [disabled]="loginForm.invalid">
         Login
       </button>
 
