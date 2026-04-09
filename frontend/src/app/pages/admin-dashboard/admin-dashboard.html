@@ -1,7 +1,6 @@
 
   <div class="layout-grid" [class.sidebar-hidden]="!sidebarVisible">
     <app-side-bar *ngIf="sidebarVisible" ></app-side-bar>
-    <!-- Header -->
     <header class="header" >
       <div class="header-actions">
         <button type="button" class="sidebar-toggle" (click)="toggleSidebar()">
@@ -22,40 +21,37 @@
       </div>
     </header>
 
-    <!-- Main Content -->
     <main class="main-content">
-      <!-- Page Header -->
       <div class="page-header">
         <div class="page-title">
           <h1>North Annex Dashboard</h1>
           <p class="page-subtitle">Real-time performance metrics and member insights</p>
         </div>
         <div class="page-actions">
-          <button class="btn btn-secondary">
+          <button class="btn btn-secondary" (click)="exportData">
             <span class="material-symbols-outlined">download</span>
             Export
           </button>
           <button class="btn btn-primary">
-            <span class="material-symbols-outlined">add</span>
+            <span class="material-symbols-outlined" (click)="addNewMember()">add</span>
             New Member
           </button>
         </div>
       </div>
 
-      <!-- Stats Grid -->
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-label">Total Members</div>
-          <div class="stat-value">1,240</div>
+          <div class="stat-value">{{dashboardData.totalMembers}}</div>
           <div class="stat-change">
             <span class="material-symbols-outlined">trending_up</span>
-            <span>+8.2% this month</span>
+            <span>{{dashboardData.trending_up}} this month</span>
           </div>
         </div>
 
         <div class="stat-card">
           <div class="stat-label">Active Classes</div>
-          <div class="stat-value">24</div>
+          <div class="stat-value">{{dashboardData.activeClasses}}</div>
           <div class="stat-change">
             <span>6 classes today</span>
           </div>
@@ -63,7 +59,7 @@
 
         <div class="stat-card">
           <div class="stat-label">Live Capacity</div>
-          <div class="stat-value">68%</div>
+          <div class="stat-value">{{dashboardData.liveCapacity}}</div>
           <div class="stat-change">
             <span>142 members active</span>
           </div>
@@ -71,7 +67,7 @@
 
         <div class="stat-card featured">
           <div class="stat-label">Monthly Revenue</div>
-          <div class="stat-value">$49.6k</div>
+          <div class="stat-value">{{dashboardData.monthelyRevenue}}</div>
           <div class="stat-change">
             <span class="material-symbols-outlined">trending_up</span>
             <span>12% above target</span>
@@ -133,7 +129,7 @@
               <div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
                   <span style="font-size: 13px; font-weight: 600;">Premium</span>
-                  <span style="font-size: 13px; font-weight: 700; font-family: 'Lexend', sans-serif;">45%</span>
+                  <span style="font-size: 13px; font-weight: 700; font-family: 'Lexend', sans-serif;">{{dashboardData.memberMix.premium}}</span>
                 </div>
                 <div style="height: 6px; background-color: var(--surface-container-low); border-radius: 3px; overflow: hidden;">
                   <div style="height: 100%; width: 45%; background-color: var(--primary);"></div>
@@ -142,7 +138,7 @@
               <div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
                   <span style="font-size: 13px; font-weight: 600;">Standard</span>
-                  <span style="font-size: 13px; font-weight: 700; font-family: 'Lexend', sans-serif;">35%</span>
+                  <span style="font-size: 13px; font-weight: 700; font-family: 'Lexend', sans-serif;">{{dashboardData.memberMix.standard}}%</span>
                 </div>
                 <div style="height: 6px; background-color: var(--surface-container-low); border-radius: 3px; overflow: hidden;">
                   <div style="height: 100%; width: 35%; background-color: var(--tertiary);"></div>
@@ -151,7 +147,7 @@
               <div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
                   <span style="font-size: 13px; font-weight: 600;">Basic</span>
-                  <span style="font-size: 13px; font-weight: 700; font-family: 'Lexend', sans-serif;">20%</span>
+                  <span style="font-size: 13px; font-weight: 700; font-family: 'Lexend', sans-serif;">{{dashboardData.memberMix.basic}}%</span>
                 </div>
                 <div style="height: 6px; background-color: var(--surface-container-low); border-radius: 3px; overflow: hidden;">
                   <div style="height: 100%; width: 20%; background-color: var(--secondary);"></div>
