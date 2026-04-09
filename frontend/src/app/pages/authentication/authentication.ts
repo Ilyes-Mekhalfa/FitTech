@@ -8,6 +8,22 @@ import { AuthService } from '../../core/services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './authentication.html',
-  styleUrls: ['./authentication.css']
+  styleUrl: './authentication.css',
 })
-export class LoginComponent  {}
+export class LoginComponent  {
+  loginForm: FormGroup;
+  showPassword: boolean = false;
+
+  constructor(private fb: FormBuilder, private authService: AuthService){
+    this.loginForm = this.fb.group({
+      annexCode: ['',[Validators.required, Validators.pattern(/^ANX-\d{3}$/)]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    })
+  }
+
+  showPassword(){
+    this.showPassword = !this.showPassword
+  }
+
+  
+}
