@@ -26,7 +26,7 @@ export class LoginComponent {
   }
 
   forgetPassword() {
-    this.router.navigate(['/forget-Password'])
+    this.router.navigate(['/forget-password'])
   }
 
   onSubmit() {
@@ -35,7 +35,7 @@ export class LoginComponent {
     }
     this.authService.login(this.loginForm.value).subscribe({
       next: (res) => {
-        this.router.navigate(['/dashboard'])
+        this.router.navigate(['/admin-dashboard'])
       },
       error: (err) => {
         throw new Error(err.error.message)
