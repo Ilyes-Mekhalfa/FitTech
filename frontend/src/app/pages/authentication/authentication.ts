@@ -21,7 +21,7 @@ export class LoginComponent  {
     })
   }
 
-  showPassword(){
+  handleShowPassword(){
     this.showPassword = !this.showPassword
   }
 
