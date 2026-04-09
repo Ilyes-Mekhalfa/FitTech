@@ -30,12 +30,13 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.router.navigate(['/admin-dashboard'])
     if (this.loginForm.invalid) {
       throw new Error('form invalid')
     }
     this.authService.login(this.loginForm.value).subscribe({
       next: (res) => {
-        this.router.navigate(['/dashboard'])
+        this.router.navigate(['/admin-dashboard'])
       },
       error: (err) => {
         throw new Error(err.error.message)
