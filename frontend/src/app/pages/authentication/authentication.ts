@@ -1,29 +1,47 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil, debounceTime } from 'rxjs/operators';
 import { AuthService } from '../../core/services/auth.service';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login',
+  imports: [CommonModule, NgIf, ReactiveFormsModule],
   templateUrl: './authentication.html',
   styleUrl: './authentication.css',
 })
-export class LoginComponent  {
+export class LoginComponent {
   loginForm: FormGroup;
   showPassword: boolean = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService){
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
-      annexCode: ['',[Validators.required, Validators.pattern(/^ANX-\d{3}$/)]],
+      annexCode: ['', [Validators.required, Validators.pattern(/^ANX-\d{4}$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     })
   }
 
-  handleShowPassword(){
+  handleShowPassword() {
     this.showPassword = !this.showPassword
   }
 
-  
+  forgetPassword() {
+    this.router.navigate(['/forget-Password'])
+  }
+
+  onSubmit() {
+    if (this.loginForm.invalid) {
+      throw new Error('form invalid')
+    }
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        this.router.navigate(['/dashboard'])
+      },
+      error: (err) => {
+        throw new Error(err.error.message)
+      }
+    });
+  }
+
+
 }
