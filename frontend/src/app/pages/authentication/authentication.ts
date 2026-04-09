@@ -26,11 +26,10 @@ export class LoginComponent {
   }
 
   forgetPassword() {
-    this.router.navigate(['/forget-Password'])
+    this.router.navigate(['/forget-password'])
   }
 
   onSubmit() {
-    this.router.navigate(['/admin-dashboard'])
     if (this.loginForm.invalid) {
       throw new Error('form invalid')
     }
