@@ -13,8 +13,8 @@
         <div class="header-divider"></div>
         <div class="header-user">
           <div class="user-info">
-            <div class="user-name">Jordan Blake</div>
-            <div class="user-role">Manager</div>
+            <div class="user-name">{{username}}</div>
+            <div class="user-role">{{role}}</div>
           </div>
           <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect fill='%23d4d4d4' width='40' height='40'/%3E%3C/svg%3E" alt="Avatar" class="user-avatar">
         </div>
@@ -24,16 +24,16 @@
     <main class="main-content">
       <div class="page-header">
         <div class="page-title">
-          <h1>North Annex Dashboard</h1>
+          <h1>{{annexName}}</h1>
           <p class="page-subtitle">Real-time performance metrics and member insights</p>
         </div>
         <div class="page-actions">
-          <button class="btn btn-secondary" (click)="exportData">
+          <button class="btn btn-secondary" (click)="exportData()">
             <span class="material-symbols-outlined">download</span>
             Export
           </button>
           <button class="btn btn-primary">
-            <span class="material-symbols-outlined" (click)="addNewMember()">add</span>
+            <span class="material-symbols-outlined" (click)="handleAddNewMember()">add</span>
             New Member
           </button>
         </div>

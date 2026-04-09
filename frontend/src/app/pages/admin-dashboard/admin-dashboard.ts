@@ -2,24 +2,26 @@ import { Component } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { SideBar } from '../../shared/components/side-bar/side-bar';
 import { DashboardDTO} from './dto/admin-dashboard.dto';
-import { AdminDashboardService} from '../../core/services/admin-dashboardService'
+import { DashboardService} from '../../core/services/dashboard.service'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [SideBar, NgIf, DashboardDTO],
+  imports: [SideBar, NgIf],
   templateUrl: './admin-dashboard.html',
   styleUrl: './admin-dashboard.css',
 })
 export class AdminDashboard {
   sidebarVisible = true;
   dashboardData: DashboardDTO;
-  constructor(private adminDashboardService: AdminDashboardService){}
+  constructor(private dashboardService: DashboardService,private router: Router){
+  }
   toggleSidebar(): void {
     this.sidebarVisible = !this.sidebarVisible;
   }
 
   ngOnInit(){
-    this.adminDashboardService.getDashboardData().subscribe({
+    this.dashboardService.dashboard().subscribe({
       next: (res: DashboardDTO)=>{
         this.dashboardData = res
       },
@@ -28,5 +30,22 @@ export class AdminDashboard {
         
       }
     })
+  }
+
+  exportData(){
+    this.dashboardService.exportData().subscribe({
+      next: (res: any)=>{
+        console.log(res);
+        
+      },
+      error: (err: any)=>{
+        console.log(err);
+        
+      }
+    })
+  }
+
+  handleAddNewMember(){
+    this.router.navigate(['/add-manager'])
   }
 }
