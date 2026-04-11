@@ -1,107 +1,227 @@
+/* ============================================================
+   FitTech – Login Page
+   Follows: Kinetic Gallery design system
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
 :host {
   display: block;
-  height: 100vh;
 }
 
-/* wrapper */
+/* ── Reset & Root ── */
 .login-wrapper {
-  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background-color: #f9f9f9;
+  color: #1a1c1c;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: linear-gradient(135deg, #0f172a, #1e293b);
+  padding: 24px;
+  /* Kinetic radial ambient bg */
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(227, 27, 35, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(185, 0, 20, 0.06) 0%, transparent 50%);
+  position: relative;
+  overflow: hidden;
 }
 
-/* card */
+/* Decorative ambient blobs (Kinetic Gallery) */
+.login-wrapper::before,
+.login-wrapper::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.login-wrapper::before {
+  width: 320px;
+  height: 320px;
+  background: rgba(185, 0, 20, 0.05);
+  top: 10%;
+  right: 5%;
+}
+
+.login-wrapper::after {
+  width: 480px;
+  height: 480px;
+  background: rgba(185, 0, 20, 0.04);
+  bottom: 5%;
+  left: -5%;
+}
+
+/* ── Card Container ── */
 .login-card {
   width: 100%;
-  max-width: 380px;
-  padding: 30px;
-
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-
-  color: white;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  max-width: 420px;
+  background: #ffffff;
+  padding: 48px 40px 40px;
+  /* Ambient shadow per design system */
+  box-shadow: 0 20px 40px rgba(26, 28, 28, 0.06);
+  border-radius: 0.25rem; /* lg = 0.25rem per token */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
 }
 
-/* header */
+/* Ghost border fallback (outline-variant at 15% opacity) */
+.login-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(231, 189, 184, 0.15);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* ── Header ── */
 .header {
-  text-align: center;
-  margin-bottom: 25px;
-
-  h1 {
-    font-size: 28px;
-  }
-
-  p {
-    font-size: 14px;
-    color: #94a3b8;
-  }
+  margin-bottom: 32px;
 }
 
-/* form */
+.header h1 {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #b90014;           /* primary */
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.header h3 {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1c1c;           /* on-surface */
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+/* ── Input Group ── */
 .input-group {
-  margin-bottom: 18px;
-
-  label {
-    display: block;
-    font-size: 13px;
-    margin-bottom: 6px;
-  }
-
-  input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-
-    background: rgba(255,255,255,0.1);
-    color: white;
-  }
-
-  span {
-    color: #f87171;
-    font-size: 12px;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 28px;
 }
 
-/* row */
+.input-group label {
+  font-size: 0.6875rem;             /* Label-SM */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #5d3f3c;                   /* on-surface-variant */
+}
+
+.input-group input {
+  height: 48px;
+  padding: 0 16px;
+  background: #f3f3f3;              /* surface-container-low */
+  border: none;
+  border-radius: 0.25rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1a1c1c;
+  outline: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.input-group input::placeholder {
+  color: rgba(146, 110, 107, 0.5);  /* outline at 50% */
+}
+
+.input-group input:focus {
+  box-shadow: 0 0 0 2px rgba(185, 0, 20, 0.25);
+}
+
+/* Validation error */
+.input-group span {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #93000a;                   /* on-error-container */
+  background: #ffdad6;              /* error-container */
+  padding: 4px 10px;
+  border-radius: 0.125rem;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+/* ── Row (Checkbox and Link) ── */
 .row {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  font-size: 13px;
-  margin-bottom: 20px;
-
-  a {
-    color: #38bdf8;
-    text-decoration: none;
-  }
+  margin-bottom: 28px;
 }
 
-/* button */
+.row label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #5d3f3c;
+  cursor: pointer;
+}
+
+.row label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #b90014;
+  cursor: pointer;
+}
+
+.row a {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #b90014;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.row a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* ── Primary CTA – Login ── */
 .btn {
   width: 100%;
-  padding: 12px;
+  height: 52px;
+  /* Kinetic gradient per design system */
+  background: linear-gradient(135deg, #e31b23 0%, #b90014 100%);
+  color: #ffffff;
+  font-family: 'Lexend', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
   border: none;
-  border-radius: 10px;
-
-  background: linear-gradient(135deg, #38bdf8, #6366f1);
-  color: white;
-  font-weight: bold;
-
+  border-radius: 0.25rem;
   cursor: pointer;
-  transition: 0.3s;
+  letter-spacing: 0.01em;
+  box-shadow: 0 8px 24px rgba(185, 0, 20, 0.2);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
 
-  &:hover {
-    opacity: 0.9;
-  }
+.btn:hover:not(:disabled) {
+  filter: brightness(1.05);
+  box-shadow: 0 12px 32px rgba(185, 0, 20, 0.28);
+}
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+  box-shadow: 0 4px 12px rgba(185, 0, 20, 0.15);
+}
+
+.btn:disabled {
+  background: #e0e0e0;
+  color: #9e9e9e;
+  box-shadow: none;
+  cursor: not-allowed;
 }
