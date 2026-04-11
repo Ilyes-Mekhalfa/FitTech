@@ -9,10 +9,10 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
       <div class="input-group">
-        <label>Annex Code</label>
-        <input type="text" formControlName="annexCode" placeholder="ANX-123" />
-        <span *ngIf="loginForm.get('annexCode')?.invalid && loginForm.get('annexCode')?.touched">
-          Invalid format (ANX-###)
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="you@example.com" />
+        <span *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          Please enter a valid email address
         </span>
       </div>
 
