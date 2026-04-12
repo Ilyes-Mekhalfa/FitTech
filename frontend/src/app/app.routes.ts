@@ -11,16 +11,16 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'forget-password',
+        component: ForgetPassword
+    },
+    {
         path: 'login',
         component: LoginComponent,
     },
     {
         path:'reset-password',
         component: ResetPassword
-    },
-    {
-        path: 'forget-password',
-        component: ForgetPassword
     },
     {
         path: 'admin-dashboard',
