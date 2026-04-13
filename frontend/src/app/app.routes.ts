@@ -3,11 +3,12 @@ import { LoginComponent } from './pages/authentication/authentication';
 import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
 import { ResetPassword } from './pages/reset-password/reset-password';
 import { ForgetPassword } from './pages/forget-password/forget-password';
-
+import { Coach } from './pages/coach/coach';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo:'home',
+        redirectTo:'login',
+
         pathMatch: 'full'
     },
     {
@@ -25,5 +26,9 @@ export const routes: Routes = [
     {
         path: 'admin-dashboard',
         component: AdminDashboard,
+    },
+    {
+        path: 'coach',
+        component: Coach,
     }
 ];
