@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SideBar } from '../shared/components/side-bar/side-bar';
+import { SideBar } from '../../shared/components/side-bar/side-bar';
 @Component({
   selector: 'app-member',
   imports: [SideBar],

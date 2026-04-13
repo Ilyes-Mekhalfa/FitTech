@@ -4,11 +4,12 @@ import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
 import { ResetPassword } from './pages/reset-password/reset-password';
 import { ForgetPassword } from './pages/forget-password/forget-password';
 import { Coach } from './pages/coach/coach';
-import { Member } from './member/member';
+import { Member } from './pages/member/member';
+import { Plan } from './pages/plan/plan';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo:'login',
+        redirectTo: 'login',
 
         pathMatch: 'full'
     },
@@ -21,7 +22,7 @@ export const routes: Routes = [
         component: LoginComponent,
     },
     {
-        path:'reset-password',
+        path: 'reset-password',
         component: ResetPassword
     },
     {
@@ -35,5 +36,9 @@ export const routes: Routes = [
     {
         path: 'member',
         component: Member,
+    },
+    {
+        path: 'plan',
+        component: Plan,
     }
 ];
