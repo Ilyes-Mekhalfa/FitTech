@@ -1,0 +1,142 @@
+<div class="members-shell">
+
+  <header class="members-topbar">
+    <div class="topbar-left">
+      <div class="search-wrap">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input class="search-input" type="text" placeholder="Search members..." />
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <button class="topbar-icon-btn">
+        <span class="material-symbols-outlined">notifications</span>
+        <span class="notif-dot"></span>
+      </button>
+      <div class="topbar-divider"></div>
+      <div class="topbar-user">
+        <div class="user-meta">
+          <span class="user-name">Admin</span>
+          <span class="user-role">Superuser</span>
+        </div>
+        <div class="user-avatar-wrap">
+          <img src="https://i.pravatar.cc/40" class="user-avatar" alt="Admin" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="members-content">
+
+    <div class="page-header">
+      <div>
+        <h2 class="page-title">Members Management</h2>
+        <p class="page-subtitle">Monitor and manage your athlete database.</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn-secondary">
+          <span class="material-symbols-outlined">ios_share</span> Export
+        </button>
+        <button class="btn-primary">
+          <span class="material-symbols-outlined">mail</span> Email
+        </button>
+        <button class="btn-primary">
+          <span class="material-symbols-outlined">add</span> Add new Member
+        </button>
+      </div>
+    </div>
+
+    <div class="members-grid">
+      <div class="members-main">
+        
+        <div class="filter-bar">
+          <div class="filter-group">
+            <div class="filter-item">
+              <label class="filter-label">Status</label>
+              <select class="filter-select">
+                <option>All Status</option>
+                <option>Active</option>
+                <option>Expired</option>
+              </select>
+            </div>
+            <div class="filter-item">
+              <label class="filter-label">Membership Plan</label>
+              <select class="filter-select">
+                <option>All Plans</option>
+                <option>Elite Annual</option>
+                <option>Monthly</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn-apply">Apply Filters</button>
+        </div>
+
+        <div class="table-card">
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Status</th>
+                  <th>Plan</th>
+                  <th>Join Date</th>
+                  <th class="th-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-row">
+                  <td>
+                    <div class="member-cell">
+                      <div class="member-avatar avatar--red">AC</div>
+                      <div class="member-info">
+                        <span class="member-name">Alex Chen</span>
+                        <small class="member-email">alex@mail.com</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge--active">Active</span></td>
+                  <td>
+                    <div class="plan-cell">
+                      <span class="plan-name">Elite Annual</span>
+                    </div>
+                  </td>
+                  <td><span class="join-date">2024-01-10</span></td>
+                  <td class="actions-cell">
+                    <div class="action-btns">
+                      <button class="action-btn"><span class="material-symbols-outlined">refresh</span></button>
+                      <button class="action-btn"><span class="material-symbols-outlined">stat_1</span></button>
+                      <button class="action-btn"><span class="material-symbols-outlined">more_vert</span></button>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+            </table>
+          </div>
+
+          <div class="pagination">
+            <span class="pagination-info">Showing 1-10 of 248 members</span>
+            <div class="pagination-controls">
+              <button class="page-btn page-btn--nav" disabled>
+                <span class="material-symbols-outlined">chevron_left</span>
+              </button>
+              <button class="page-btn page-btn--active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <button class="page-btn page-btn--nav">
+                <span class="material-symbols-outlined">chevron_right</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="sidebar-column">
+        <div class="sidebar-placeholder">
+          <span class="material-symbols-outlined placeholder-icon">person_search</span>
+          <p class="placeholder-text">Select a member to view full profile details and history.</p>
+        </div>
+      </aside>
+    </div>
+
+  </main>
+</div>
