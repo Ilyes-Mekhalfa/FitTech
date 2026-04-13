@@ -1,1 +1,174 @@
-<p>plan works!</p>
+<header class="topbar">
+  <div class="topbar__search">
+    <span class="material-symbols-outlined topbar__search-icon">search</span>
+    <input type="text" placeholder="Search membership plans..." />
+  </div>
+
+  <div class="topbar__right">
+    <button class="topbar__notif">
+      <span class="material-symbols-outlined">notifications</span>
+      <span class="topbar__notif-dot"></span>
+    </button>
+    <div class="topbar__divider"></div>
+    <div class="topbar__user">
+      <div class="topbar__user-info">
+        <p class="topbar__user-name">Super-Admin</p>
+        <p class="topbar__user-role">Global Access</p>
+      </div>
+      <div class="topbar__avatar">
+        <span class="material-symbols-outlined">person</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main-canvas">
+  <div class="page-content">
+    <div class="page-header">
+      <div>
+        <h1 class="page-header__title">Membership Plans</h1>
+        <p class="page-header__subtitle">Configure and manage membership tiers for your elite athletes.</p>
+      </div>
+      <button class="btn btn-primary">
+        <span class="material-symbols-outlined">add</span> Create New Plan
+      </button>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <p class="stat-card__label">Total Active Plans</p>
+        <p class="stat-card__value">12</p>
+        <p class="stat-card__meta stat-card__meta--positive">
+          <span class="material-symbols-outlined">trending_up</span> +2 this quarter
+        </p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-card__label">Total Subscribers</p>
+        <p class="stat-card__value">3,452</p>
+        <p class="stat-card__meta stat-card__meta--positive">
+          <span class="material-symbols-outlined">arrow_upward</span> +12% from last month
+        </p>
+      </div>
+      <div class="stat-card stat-card--featured">
+        <p class="stat-card__label">Monthly Revenue</p>
+        <p class="stat-card__value">$184k</p>
+        <p class="stat-card__meta">
+          <span class="material-symbols-outlined">payments</span> Target: $200k
+        </p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-card__label">Avg. Retention</p>
+        <p class="stat-card__value">91%</p>
+        <p class="stat-card__meta stat-card__meta--warning">
+          <span class="material-symbols-outlined">schedule</span> 7 plans up for review
+        </p>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="main-column">
+        <div class="filter-bar">
+          <div class="filter-tabs">
+            <button class="filter-tab active">All Plans</button>
+            <button class="filter-tab">Active</button>
+            <button class="filter-tab">Inactive</button>
+            <button class="filter-tab">Archived</button>
+          </div>
+          <div class="filter-sort">
+            <span class="filter-sort__label">Sort by:</span>
+            <select>
+              <option>Newest First</option>
+              <option>Price (High–Low)</option>
+              <option>Popularity</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Plan Name</th>
+                <th>Type</th>
+                <th class="align-center">Monthly / Yearly</th>
+                <th class="align-center">Members</th>
+                <th>Status</th>
+                <th class="align-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="plan-name-cell">
+                    <div class="plan-indicator"></div>
+                    <div>
+                      <p class="plan-name">Titanium Elite</p>
+                      <p class="plan-access">Full House Access</p>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="plan-type-tag">Premium</span></td>
+                <td class="align-center"><p class="plan-price">$120 / $1,200</p></td>
+                <td class="align-center"><p class="plan-members">452</p></td>
+                <td><span class="badge badge-active">Active</span></td>
+                <td class="align-right">
+                  <div class="row-actions">
+                    <button class="btn-icon"><span class="material-symbols-outlined">edit</span></button>
+                    <button class="btn-icon"><span class="material-symbols-outlined">content_copy</span></button>
+                    <button class="btn-icon btn-icon-danger"><span class="material-symbols-outlined">delete</span></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="pagination">
+            <div class="pagination__info">Showing 1 to 10 of 42 plans</div>
+            <div class="pagination__pages">
+              <button class="page-btn-nav" disabled>Previous</button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn-nav">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side-panel">
+        <div class="plan-preview-card">
+          <div class="plan-preview-img">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600" alt="Gym" />
+            <div class="plan-preview-img__overlay"></div>
+            <span class="plan-preview-img__badge">Selected Preview</span>
+            <h3 class="plan-preview-img__title">Titanium Elite</h3>
+          </div>
+          <div class="plan-preview-body">
+            <p class="preview-section-label">Key Features</p>
+            <ul class="feature-list">
+              <li>
+                <span class="material-symbols-outlined feature-list__icon">check_circle</span>
+                <div>
+                  <p class="feature-list__name">24/7 Priority Access</p>
+                  <p class="feature-list__desc">Enter any FitTech location worldwide.</p>
+                </div>
+              </li>
+            </ul>
+            <div class="plan-metrics">
+              <div>
+                <p class="plan-metric__label">Churn Rate</p>
+                <p class="plan-metric__value">2.4%</p>
+              </div>
+              <div>
+                <p class="plan-metric__label">Growth</p>
+                <p class="plan-metric__value plan-metric__value--positive">+18%</p>
+              </div>
+            </div>
+            <div class="plan-actions">
+              <button class="btn btn-secondary">Edit Full Plan</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>

@@ -39,6 +39,6 @@ export const routes: Routes = [
     },
     {
         path: 'plan',
-        component: Plan
+        component: Plan,
     }
 ];
