@@ -4,6 +4,7 @@ import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
 import { ResetPassword } from './pages/reset-password/reset-password';
 import { ForgetPassword } from './pages/forget-password/forget-password';
 import { Coach } from './pages/coach/coach';
+import { Member } from './member/member';
 export const routes: Routes = [
     {
         path: '',
@@ -30,5 +31,9 @@ export const routes: Routes = [
     {
         path: 'coach',
         component: Coach,
+    },
+    {
+        path: 'member',
+        component: Member,
     }
 ];

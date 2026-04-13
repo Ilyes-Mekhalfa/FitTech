@@ -1,0 +1,13 @@
+.app-layout {
+  display: flex;
+  height: 100vh;
+}
+
+app-side-bar {
+  width: 250px; /* or your sidebar width */
+}
+
+.app-content {
+  flex: 1;
+  overflow: auto;
+}

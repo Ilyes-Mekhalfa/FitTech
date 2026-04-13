@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { SideBar } from '../../shared/components/side-bar/side-bar';
 import { CoachService } from '../../core/services/coach.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-coach',
-  imports: [SideBar],
+  imports: [],
   templateUrl: './coach.html',
   styleUrl: './coach.css',
 })
