@@ -33,9 +33,6 @@
   --shadow-ambient: 0 20px 40px rgba(26, 28, 28, 0.06);
 }
 
-/* ═══════════════════════════════════════════════
-   Shell / Layout
-═══════════════════════════════════════════════ */
 .members-shell {
   display: flex;
   flex-direction: column;
