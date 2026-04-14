@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
-import { SideBar } from '../../shared/components/side-bar/side-bar';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-member',
-  imports: [SideBar],
+  imports: [],
   templateUrl: './member.html',
   styleUrl: './member.css',
 })
 export class Member {
 
+  constructor(router : Router){}
+
+  addMember(){
+    return 1
+  }
 }
