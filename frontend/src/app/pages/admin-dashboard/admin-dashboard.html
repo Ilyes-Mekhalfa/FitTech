@@ -1,6 +1,5 @@
 
   <div class="layout-grid" [class.sidebar-hidden]="!sidebarVisible">
-    <app-side-bar *ngIf="sidebarVisible" ></app-side-bar>
     <header class="header" >
       <div class="header-actions">
        
@@ -11,8 +10,8 @@
         <div class="header-divider"></div>
         <div class="header-user">
           <div class="user-info">
-            <div class="user-name">{{username}}</div>
-            <div class="user-role">{{role}}</div>
+            <div class="user-name">username</div>
+            <div class="user-role">role</div>
           </div>
           <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect fill='%23d4d4d4' width='40' height='40'/%3E%3C/svg%3E" alt="Avatar" class="user-avatar">
         </div>
@@ -22,7 +21,7 @@
     <main class="main-content">
       <div class="page-header">
         <div class="page-title">
-          <h1>{{annexName}}</h1>
+          <h1>annexName</h1>
           <p class="page-subtitle">Real-time performance metrics and member insights</p>
         </div>
         <div class="page-actions">
@@ -33,7 +32,7 @@
           <button class="btn btn-primary">
             <span class="material-symbols-outlined" (click)="handleAddNewMember()">add</span>
             New Member
-          </button> -->
+          </button> 
         </div>
       </div>
 
@@ -65,7 +64,7 @@
 
         <div class="stat-card featured">
           <div class="stat-label">Monthly Revenue</div>
-          <div class="stat-value">{{dashboardData.monthelyRevenue}}</div>
+          <div class="stat-value">{{dashboardData.monthlyRevenue}}</div>
           <div class="stat-change">
             <span class="material-symbols-outlined">trending_up</span>
             <span>12% above target</span>
@@ -145,7 +144,7 @@
               <div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
                   <span style="font-size: 13px; font-weight: 600;">Basic</span>
-                  <span style="font-size: 13px; font-weight: 700; font-family: 'Lexend', sans-serif;">{{dashboardData.memberMix.basic}}%</span>
+                  <span style="font-size: 13px; font-weight: 700; font-family: 'Lexend', sans-serif;">{{dashboardData.memberMix.standard}}%</span>
                 </div>
                 <div style="height: 6px; background-color: var(--surface-container-low); border-radius: 3px; overflow: hidden;">
                   <div style="height: 100%; width: 20%; background-color: var(--secondary);"></div>
