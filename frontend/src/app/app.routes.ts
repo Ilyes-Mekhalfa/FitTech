@@ -6,6 +6,7 @@ import { ForgetPassword } from './pages/forget-password/forget-password';
 import { Coach } from './pages/coach/coach';
 import { Member } from './pages/member/member';
 import { Plan } from './pages/plan/plan';
+import { Settings } from './pages/settings/settings';
 export const routes: Routes = [
     {
         path: '',
@@ -40,5 +41,9 @@ export const routes: Routes = [
     {
         path: 'plan',
         component: Plan,
+    },
+    {
+        path: 'settings',
+        component: Settings,
     }
 ];
