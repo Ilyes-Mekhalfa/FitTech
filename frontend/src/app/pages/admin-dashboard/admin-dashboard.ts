@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { SideBar } from '../../shared/components/side-bar/side-bar';
+import { LiveEnterance } from '../../shared/components/live-enterance/live-enterance';
 import { DashboardDTO } from './dto/admin-dashboard.dto';
 import { DashboardService } from '../../core/services/dashboard.service'
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin-dashboard',
+  imports: [LiveEnterance],
   standalone: true,
   templateUrl: './admin-dashboard.html',
   styleUrl: './admin-dashboard.css',
