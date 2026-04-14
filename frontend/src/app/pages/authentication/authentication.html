@@ -3,16 +3,16 @@
 
     <div class="header">
       <h1>FitTech</h1>
-      <p>Annex Manager Portal</p>
+      <h3>Annex Manager Portal</h3>
     </div>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
       <div class="input-group">
-        <label>Annex Code</label>
-        <input type="text" formControlName="annexCode" placeholder="ANX-123" />
-        <span *ngIf="loginForm.get('annexCode')?.invalid && loginForm.get('annexCode')?.touched">
-          Invalid format (ANX-###)
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="you@example.com" />
+        <span *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          Please enter a valid email address
         </span>
       </div>
 
@@ -29,7 +29,7 @@
           <input type="checkbox" />
           Remember me
         </label>
-        <a href="#" (click)="forgetPassword()">Forgot password?</a>
+        <a  (click)="forgetPassword()">Forgot password?</a>
       </div>
 
       <button type="submit" class="btn" (click)="onSubmit()" [disabled]="loginForm.invalid">

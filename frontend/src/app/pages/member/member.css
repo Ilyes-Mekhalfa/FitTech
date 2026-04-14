@@ -1,0 +1,128 @@
+:host {
+  /* FitTech Design Tokens */
+  --primary: #b90014;
+  --primary-container: #e31b23;
+  --on-primary: #ffffff;
+  --surface: #f9f9f9;
+  --surface-low: #f3f3f3;
+  --surface-lowest: #ffffff;
+  --surface-high: #e8e8e8;
+  --surface-highest: #e2e2e2;
+  --on-surface: #1a1c1c;
+  --secondary: #5f5e5e;
+  --tertiary-fixed: #cde5ff;
+  --on-tertiary-fixed: #001d32;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --shadow-ambient: 0 20px 40px rgba(26, 28, 28, 0.06);
+  --font-headline: 'Lexend', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+.members-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--surface);
+  font-family: var(--font-body);
+}
+
+/* --- Topbar Fix: Removed left margin to delete white space --- */
+.members-topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--surface-high);
+  z-index: 30;
+}
+
+.search-wrap { position: relative; width: 400px; }
+.search-icon { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: var(--secondary); }
+.search-input { 
+  width: 100%; height: 40px; padding: 0 1rem 0 2.5rem; 
+  background: var(--surface-low); border: none; border-radius: var(--radius-md); 
+}
+
+.topbar-right { display: flex; align-items: center; gap: 1rem; }
+.user-avatar-wrap { width: 36px; height: 36px; border-radius: 50%; overflow: hidden; }
+
+/* --- Main Content --- */
+.members-content { 
+  margin-top: 64px; 
+  padding: 2rem; 
+}
+
+.page-header { 
+  display: flex; justify-content: space-between; align-items: flex-end; 
+  margin-bottom: 2rem; 
+}
+.page-title { font-family: var(--font-headline); font-size: 2rem; font-weight: 800; margin: 0; }
+
+.header-actions { display: flex; gap: 0.75rem; }
+.btn-primary, .btn-secondary {
+  padding: 0.6rem 1.25rem; border-radius: var(--radius-md); font-weight: 700;
+  display: flex; align-items: center; gap: 0.5rem; border: none; cursor: pointer;
+}
+.btn-primary { background: var(--primary); color: white; }
+.btn-secondary { background: var(--surface-highest); color: var(--on-surface); }
+
+/* --- Grid Layout: Table (Left) | Profile (Right) --- */
+.members-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px; /* Fixed right space for preview */
+  gap: 2rem;
+}
+
+/* --- Table Card --- */
+.table-card { 
+  background: white; border-radius: var(--radius-lg); 
+  box-shadow: var(--shadow-ambient); overflow: hidden; 
+}
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th { background: var(--surface-low); padding: 1rem; text-align: left; font-size: 0.75rem; color: var(--secondary); }
+.data-table td { padding: 1rem; border-top: 1px solid var(--surface-low); }
+
+.member-cell { display: flex; align-items: center; gap: 0.75rem; }
+.member-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+.avatar--red { background: var(--primary-container); color: white; }
+
+.badge { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; }
+.badge--active { background: var(--tertiary-fixed); color: var(--on-tertiary-fixed); }
+
+/* --- Right Side Profile Preview --- */
+.sidebar-column {
+  position: sticky;
+  top: 84px; /* Topbar height + padding */
+  height: fit-content;
+}
+
+.profile-preview-card {
+  background: white; border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-ambient);
+}
+
+.preview-header {
+  background: linear-gradient(135deg, var(--primary), #80000b);
+  padding: 2rem 1.5rem; text-align: center; color: white;
+}
+
+.preview-avatar {
+  width: 80px; height: 80px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.2);
+  margin-bottom: 1rem;
+}
+
+.preview-body { padding: 1.5rem; }
+.info-row { display: flex; justify-content: space-between; margin-bottom: 1rem; border-bottom: 1px solid var(--surface-low); padding-bottom: 0.5rem; }
+.info-label { font-size: 0.75rem; color: var(--secondary); }
+.info-value { font-size: 0.875rem; font-weight: 600; }
+
+.sidebar-placeholder {
+  background: white; border-radius: var(--radius-lg); padding: 3rem 1.5rem;
+  text-align: center; border: 2px dashed var(--surface-high); color: var(--secondary);
+}

@@ -1,4 +1,5 @@
 export interface DashboardDTO{
+    annexName : string
     totalMembers: number;
     activeClasses: number;
     liveCapacity: number;

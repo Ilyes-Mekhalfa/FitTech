@@ -232,7 +232,7 @@
   }
 
   .btn-primary {
-    @apply btn gradient-kinetic text-on-primary shadow-primary-md hover:shadow-primary-lg active:scale-95;
+    @apply btn bg-gradient-primary text-on-primary shadow-primary-md hover:shadow-primary-lg active:scale-95;
   }
 
   .btn-secondary {

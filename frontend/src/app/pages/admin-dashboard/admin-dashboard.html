@@ -1,31 +1,84 @@
-<div class="dashboard-shell">
-  <header class="dashboard-topbar">
-    <div class="topbar-left">
-      <h2 class="topbar-title">Management Dashboard</h2>
-    </div>
-    <div class="topbar-right">
-      <div class="topbar-user">
-        <span class="user-name">Admin</span>
-        <img src="https://i.pravatar.cc/40" class="user-avatar" />
+
+  <div class="layout-grid" [class.sidebar-hidden]="!sidebarVisible">
+    <header class="header" >
+      <div class="header-actions">
+       
+        <button class="notification-btn">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="notification-dot"></span>
+        </button>
+        <div class="header-divider"></div>
+        <div class="header-user">
+          <div class="user-info">
+            <div class="user-name">username</div>
+            <div class="user-role">role</div>
+          </div>
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect fill='%23d4d4d4' width='40' height='40'/%3E%3C/svg%3E" alt="Avatar" class="user-avatar">
+        </div>
       </div>
     </div>
   </header>
 
-  <main class="dashboard-content">
-    <div class="dashboard-grid">
-      
-      <aside class="live-feed-column">
-        <div class="feed-header">
-          <span class="material-symbols-outlined icon-live">sensors</span>
-          <h3>Live Check-in</h3>
-          <span class="live-pulse"></span>
+    <main class="main-content">
+      <div class="page-header">
+        <div class="page-title">
+          <h1>annexName</h1>
+          <p class="page-subtitle">Real-time performance metrics and member insights</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-secondary" (click)="exportData()">
+            <span class="material-symbols-outlined">download</span>
+            Export
+          </button>
+          <button class="btn btn-primary">
+            <span class="material-symbols-outlined" (click)="handleAddNewMember()">add</span>
+            New Member
+          </button> 
         </div>
 
-        <div class="feed-container">
-          <div class="scan-card" [class.access-denied]="member.status === 'Expired'">
-            <div class="scan-photo-wrap">
-              <img src="https://i.pravatar.cc/100?u=alex" class="scan-photo">
-              <div class="status-indicator"></div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total Members</div>
+          <div class="stat-value">{{dashboardData.totalMembers}}</div>
+          <div class="stat-change">
+            <span class="material-symbols-outlined">trending_up</span>
+            <span>{{dashboardData.trending_up}} this month</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Active Classes</div>
+          <div class="stat-value">{{dashboardData.activeClasses}}</div>
+          <div class="stat-change">
+            <span>6 classes today</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Live Capacity</div>
+          <div class="stat-value">{{dashboardData.liveCapacity}}</div>
+          <div class="stat-change">
+            <span>142 members active</span>
+          </div>
+        </div>
+
+        <div class="stat-card featured">
+          <div class="stat-label">Monthly Revenue</div>
+          <div class="stat-value">{{dashboardData.monthlyRevenue}}</div>
+          <div class="stat-change">
+            <span class="material-symbols-outlined">trending_up</span>
+            <span>12% above target</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analytics Grid -->
+      <div class="analytics-grid">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Revenue Trend</div>
+              <div class="chart-subtitle">Monthly performance vs last quarter</div>
             </div>
             <div class="scan-details">
               <p class="scan-time">Just now</p>
@@ -37,11 +90,42 @@
             </div>
           </div>
 
-          <div class="scan-card-mini">
-            <img src="https://i.pravatar.cc/50?u=sarah" class="mini-photo">
-            <div class="mini-details">
-              <p class="mini-name">Sarah Jenkins</p>
-              <p class="mini-time">2 mins ago • Monthly Plan</p>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Member Mix</div>
+              <div class="chart-subtitle">Distribution by plan type</div>
+            </div>
+          </div>
+          <div style="padding: 32px 0;">
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600;">Premium</span>
+                  <span style="font-size: 13px; font-weight: 700; font-family: 'Lexend', sans-serif;">{{dashboardData.memberMix.premium}}</span>
+                </div>
+                <div style="height: 6px; background-color: var(--surface-container-low); border-radius: 3px; overflow: hidden;">
+                  <div style="height: 100%; width: 45%; background-color: var(--primary);"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600;">Standard</span>
+                  <span style="font-size: 13px; font-weight: 700; font-family: 'Lexend', sans-serif;">{{dashboardData.memberMix.standard}}%</span>
+                </div>
+                <div style="height: 6px; background-color: var(--surface-container-low); border-radius: 3px; overflow: hidden;">
+                  <div style="height: 100%; width: 35%; background-color: var(--tertiary);"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600;">Basic</span>
+                  <span style="font-size: 13px; font-weight: 700; font-family: 'Lexend', sans-serif;">{{dashboardData.memberMix.standard}}%</span>
+                </div>
+                <div style="height: 6px; background-color: var(--surface-container-low); border-radius: 3px; overflow: hidden;">
+                  <div style="height: 100%; width: 20%; background-color: var(--secondary);"></div>
+                </div>
+              </div>
             </div>
           </div>
 
