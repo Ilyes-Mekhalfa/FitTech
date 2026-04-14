@@ -1,8 +1,8 @@
 
-  <div class="layout-grid" [class.sidebar-hidden]="!sidebarVisible">
+  <div class="layout-grid" >
+    <app-live-enterance></app-live-enterance>
     <header class="header" >
       <div class="header-actions">
-       
         <button class="notification-btn">
           <span class="material-symbols-outlined">notifications</span>
           <span class="notification-dot"></span>
@@ -16,8 +16,7 @@
           <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect fill='%23d4d4d4' width='40' height='40'/%3E%3C/svg%3E" alt="Avatar" class="user-avatar">
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
     <main class="main-content">
       <div class="page-header">
@@ -32,9 +31,10 @@
           </button>
           <button class="btn btn-primary">
             <span class="material-symbols-outlined" (click)="handleAddNewMember()">add</span>
-            New Member
-          </button> 
+            New Manager
+          </button>
         </div>
+      </div>
 
       <div class="stats-grid">
         <div class="stat-card">
@@ -80,15 +80,39 @@
               <div class="chart-title">Revenue Trend</div>
               <div class="chart-subtitle">Monthly performance vs last quarter</div>
             </div>
-            <div class="scan-details">
-              <p class="scan-time">Just now</p>
-              <h4 class="scan-name">Alex Chen</h4>
-              <span class="scan-badge">Titanium Elite</span>
-              <div class="scan-meta">
-                <span><span class="material-symbols-outlined">event</span> Exp: Dec 2024</span>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <div class="legend-dot" style="background-color: var(--primary);"></div>
+                Current
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background-color: var(--surface-container-high);"></div>
+                Previous
               </div>
             </div>
           </div>
+          <div class="chart-container">
+            <svg class="sparkline" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color:var(--primary);stop-opacity:0.1"></stop>
+                  <stop offset="100%" style="stop-color:var(--primary);stop-opacity:0"></stop>
+                </linearGradient>
+              </defs>
+              <path d="M 20 150 Q 80 120 140 100 T 260 60 T 380 40" fill="none" stroke="var(--primary)" stroke-width="3" stroke-linecap="round"></path>
+              <path d="M 20 150 Q 80 120 140 100 T 260 60 T 380 40 L 380 200 L 20 200 Z" fill="url(#chartGrad)"></path>
+              <path d="M 20 160 Q 80 140 140 130 T 260 90 T 380 80" fill="none" stroke="var(--surface-container-high)" stroke-width="2" stroke-dasharray="4,4" opacity="0.5"></path>
+            </svg>
+          </div>
+          <div class="chart-axis">
+            <span class="axis-label">Jan</span>
+            <span class="axis-label">Feb</span>
+            <span class="axis-label">Mar</span>
+            <span class="axis-label">Apr</span>
+            <span class="axis-label">May</span>
+            <span class="axis-label">Jun</span>
+          </div>
+        </div>
 
         <div class="chart-card">
           <div class="chart-header">
@@ -128,41 +152,173 @@
               </div>
             </div>
           </div>
-
-          <div class="scan-card-mini access-denied">
-            <img src="https://i.pravatar.cc/50?u=mike" class="mini-photo">
-            <div class="mini-details">
-              <p class="mini-name">Mike Ross</p>
-              <p class="mini-time">10 mins ago • <span class="error-text">Expired</span></p>
-            </div>
-          </div>
-        </div>
-      </aside>
-
-      <div class="main-stats-column">
-        <div class="stats-row">
-          <div class="stat-box">
-            <label>Current Capacity</label>
-            <div class="stat-value">84 <small>/ 150</small></div>
-            <div class="stat-progress"><div class="progress-fill" style="width: 56%"></div></div>
-          </div>
-          <div class="stat-box">
-            <label>Daily Revenue</label>
-            <div class="stat-value">$1,240</div>
-            <p class="stat-trend">+8% vs yesterday</p>
-          </div>
-        </div>
-
-        <div class="chart-card">
-          <div class="card-header">
-            <h4>Check-in Trends (Weekly)</h4>
-          </div>
-          <div class="chart-placeholder">
-            <p>Peak hours: 5:00 PM - 8:00 PM</p>
-          </div>
         </div>
       </div>
 
-    </div>
-  </main>
-</div>
+      <!-- Table Section -->
+      <div class="table-section">
+        <div class="table-header">
+          <div class="table-title">Recent Member Activity</div>
+          <div class="table-filters">
+            <select class="filter-select">
+              <option>All Members</option>
+              <option>Active</option>
+              <option>Inactive</option>
+            </select>
+            <select class="filter-select">
+              <option>All Actions</option>
+              <option>Check-in</option>
+              <option>Renewal</option>
+              <option>Cancellation</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Member</th>
+                <th>Action</th>
+                <th>Date & Time</th>
+                <th>Status</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="member-cell">
+                    <div class="member-avatar" style="background-color: var(--primary-fixed); color: var(--on-primary-container);">MK</div>
+                    <div class="member-info">
+                      <div class="member-name">Marcus Keller</div>
+                      <div class="member-id">#M-01240</div>
+                    </div>
+                  </div>
+                </td>
+                <td>Check-in</td>
+                <td>Today, 6:42 PM</td>
+                <td><span class="badge badge-active">Completed</span></td>
+                <td style="color: var(--primary); font-weight: 700;">-</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="member-cell">
+                    <div class="member-avatar" style="background-color: var(--tertiary-fixed); color: var(--on-tertiary-fixed);">SJ</div>
+                    <div class="member-info">
+                      <div class="member-name">Sarah Johnson</div>
+                      <div class="member-id">#M-00891</div>
+                    </div>
+                  </div>
+                </td>
+                <td>Renewal</td>
+                <td>Yesterday, 2:15 PM</td>
+                <td><span class="badge badge-active">Completed</span></td>
+                <td style="font-weight: 700;">$120.00</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="member-cell">
+                    <div class="member-avatar" style="background-color: var(--surface-container-high); color: var(--secondary);">DL</div>
+                    <div class="member-info">
+                      <div class="member-name">David Lopez</div>
+                      <div class="member-id">#M-02104</div>
+                    </div>
+                  </div>
+                </td>
+                <td>Plan Upgrade</td>
+                <td>3 days ago, 4:30 PM</td>
+                <td><span class="badge badge-pending">Pending</span></td>
+                <td style="font-weight: 700;">$280.00</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="member-cell">
+                    <div class="member-avatar" style="background-color: var(--primary-fixed); color: var(--on-primary-container);">EC</div>
+                    <div class="member-info">
+                      <div class="member-name">Emma Clark</div>
+                      <div class="member-id">#M-01892</div>
+                    </div>
+                  </div>
+                </td>
+                <td>Check-in</td>
+                <td>1 week ago</td>
+                <td><span class="badge badge-inactive">Inactive</span></td>
+                <td style="color: var(--primary); font-weight: 700;">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Activity Feed Grid -->
+      <div class="activity-section">
+        <div class="activity-feed">
+          <div class="activity-title">Recent Events</div>
+          <div class="activity-item">
+            <div class="activity-icon">
+              <span class="material-symbols-outlined">person_add</span>
+            </div>
+            <div class="activity-content">
+              <div class="activity-action">New member registered</div>
+              <div class="activity-detail">Thomas Rodriguez joined Premium plan</div>
+              <div class="activity-time">2 hours ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">
+              <span class="material-symbols-outlined">trending_up</span>
+            </div>
+            <div class="activity-content">
+              <div class="activity-action">Revenue milestone</div>
+              <div class="activity-detail">Monthly target reached 95%</div>
+              <div class="activity-time">4 hours ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">
+              <span class="material-symbols-outlined">warning</span>
+            </div>
+            <div class="activity-content">
+              <div class="activity-action">Low equipment stock</div>
+              <div class="activity-detail">Pool chemicals need reorder</div>
+              <div class="activity-time">1 day ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">
+              <span class="material-symbols-outlined">check_circle</span>
+            </div>
+            <div class="activity-content">
+              <div class="activity-action">Maintenance completed</div>
+              <div class="activity-detail">HVAC system serviced</div>
+              <div class="activity-time">3 days ago</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quick-stats">
+          <div class="quick-stats-title">Quick Metrics</div>
+          <div class="quick-stat-item">
+            <span class="quick-stat-label">Avg Member Retention</span>
+            <span class="quick-stat-value">94.2%</span>
+          </div>
+          <div class="quick-stat-item">
+            <span class="quick-stat-label">Capacity Utilization</span>
+            <span class="quick-stat-value">68%</span>
+          </div>
+          <div class="quick-stat-item">
+            <span class="quick-stat-label">Avg Class Size</span>
+            <span class="quick-stat-value">18</span>
+          </div>
+          <div class="quick-stat-item">
+            <span class="quick-stat-label">New Signups (30d)</span>
+            <span class="quick-stat-value">24</span>
+          </div>
+          <div class="quick-stat-item">
+            <span class="quick-stat-label">Equipment Uptime</span>
+            <span class="quick-stat-value">99.7%</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>

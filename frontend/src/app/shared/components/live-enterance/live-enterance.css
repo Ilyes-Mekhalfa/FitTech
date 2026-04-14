@@ -1,0 +1,88 @@
+/* LEFT LIVE PANEL */
+:host {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  display: block;
+}
+
+.live-panel {
+  background-color: var(--surface-container-lowest);
+  border-right: 1px solid var(--surface-container);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.live-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.live-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Lexend', sans-serif;
+}
+
+.live-status {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* LIST */
+.live-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+}
+
+/* ITEM */
+.live-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.live-item:hover {
+  background-color: var(--surface-container-low);
+}
+
+.live-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background-color: var(--primary-fixed);
+  color: var(--on-primary-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.live-info {
+  flex: 1;
+}
+
+.live-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.live-time {
+  font-size: 11px;
+  color: var(--secondary);
+}
+
+.live-icon {
+  font-size: 18px;
+  color: var(--primary);
+}
