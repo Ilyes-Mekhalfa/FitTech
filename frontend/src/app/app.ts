@@ -15,13 +15,13 @@ import { SideBar } from './shared/components/side-bar/side-bar';
 export class App implements OnInit {
   showSidebar = true;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        this.showSidebar = !['/login', '/reset-password'].includes(event.url);
+        this.showSidebar = !['/login', '/reset-password', 'forget-password'].includes(event.url);
       });
   }
 }
