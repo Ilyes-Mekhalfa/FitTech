@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CoachService } from '../../../core/services/coach.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-coach',
   imports: [ReactiveFormsModule],
@@ -9,7 +10,12 @@ import { CoachService } from '../../../core/services/coach.service';
 })
 export class CreateCoach {
   createCoachForm: FormGroup;
-
+  showPw = false
+  showCpw = false
+  specInput = ''
+  specialties: string[] = []
+  exp = 0
+  
   //to be continued later
   constructor(private fb: FormBuilder, private coachService: CoachService, private router: Router){
     this.createCoachForm = this.fb.group({
@@ -34,4 +40,6 @@ export class CreateCoach {
   exit(){
     this.router.navigate(['/coachs'])
   }
+
+  removeSpec(){}
 }

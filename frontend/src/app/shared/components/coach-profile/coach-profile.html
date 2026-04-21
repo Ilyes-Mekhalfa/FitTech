@@ -1,28 +1,31 @@
 <div class="panel" [class.open]="isOpen">
 
-  <!-- Empty -->
-  <div *ngIf="!coach" class="empty">
-    <span class="material-symbols-outlined">person_search</span>
-    <p>No coach selected</p>
-    <small>Click a row to view profile</small>
+  <!-- Empty state -->
+  <div *ngIf="!coach" class="empty-state">
+    <div class="empty-icon">
+      <span class="material-symbols-outlined">person_search</span>
+    </div>
+    <p class="title">No coach selected</p>
+    <p class="subtitle">Click any row to view full profile details</p>
   </div>
 
-  <!-- Filled -->
+  <!-- Filled state -->
   <ng-container *ngIf="coach as c">
 
     <!-- Banner -->
     <div class="banner">
-      <button class="close" (click)="close()">×</button>
-      <div class="avatar" [ngStyle]="{background:c.color}">
-        {{c.initials}}
+      <button class="close-btn" (click)="close()">×</button>
+
+      <div class="avatar" [ngStyle]="{ background: c.color }">
+        {{ c.initials }}
       </div>
     </div>
 
     <!-- Header -->
-    <div class="section top">
+    <div class="section header">
       <div>
-        <h3>{{c.name}}</h3>
-        <p class="email">{{c.email}}</p>
+        <h3 class="name">{{ c.name }}</h3>
+        <p class="email">{{ c.email }}</p>
       </div>
 
       <span class="badge"
@@ -30,23 +33,23 @@
           background: status[c.status].bg,
           color: status[c.status].color
         }">
-        {{status[c.status].label}}
+        {{ status[c.status].label }}
       </span>
     </div>
 
     <!-- Stats -->
     <div class="stats">
-      <div>
-        <b>{{c.clients}}</b>
+      <div class="stat">
+        <b>{{ c.clients }}</b>
         <span>Clients</span>
       </div>
-      <div>
-        <b>{{c.rating}}</b>
+      <div class="stat">
+        <b>{{ c.rating }}</b>
         <span>Rating</span>
       </div>
-      <div>
-        <b>{{c.exp}}</b>
-        <span>Exp</span>
+      <div class="stat">
+        <b>{{ c.exp }}</b>
+        <span>Exp.</span>
       </div>
     </div>
 
@@ -55,7 +58,7 @@
       <p class="label">Specialties</p>
       <div>
         <span class="pill" *ngFor="let s of c.specialties">
-          {{s}}
+          {{ s }}
         </span>
       </div>
     </div>
@@ -64,15 +67,15 @@
     <div class="section row">
       <span class="material-symbols-outlined icon">location_on</span>
       <div>
-        <p class="label">Annex</p>
-        <b>{{c.annex}}</b>
+        <p class="label">Assigned Annex</p>
+        <p class="value">{{ c.annex }}</p>
       </div>
     </div>
 
     <!-- Bio -->
     <div class="section">
       <p class="label">Biography</p>
-      <p class="bio">{{c.bio}}</p>
+      <p class="bio">{{ c.bio }}</p>
     </div>
 
     <!-- Performance -->
@@ -81,13 +84,33 @@
 
       <div class="perf" *ngFor="let p of c.perf; let i = index">
         <div class="perf-head">
-          <span>{{labels[i]}}</span>
-          <b>{{p}}%</b>
+          <span>{{ labels[i] }}</span>
+          <b>{{ p }}%</b>
         </div>
         <div class="bar">
           <div class="fill" [style.width.%]="p"></div>
         </div>
       </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="section actions">
+      <button class="primary-btn">
+        <span class="material-symbols-outlined">edit</span>
+        Edit Profile
+      </button>
+
+      <button class="icon-btn">
+        <span class="material-symbols-outlined">chat_bubble</span>
+      </button>
+
+      <button class="icon-btn">
+        <span class="material-symbols-outlined">open_in_new</span>
+      </button>
+
+      <button class="icon-btn danger">
+        <span class="material-symbols-outlined">block</span>
+      </button>
     </div>
 
   </ng-container>
