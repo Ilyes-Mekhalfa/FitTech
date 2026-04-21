@@ -54,7 +54,7 @@
           <div class="filter-group">
             <div class="filter-item">
               <label class="filter-label">Status</label>
-              <select class="filter-select">
+              <select class="filter-select" (change)="setStatusFilter($event.target.value)">
                 <option>All Status</option>
                 <option>Active</option>
                 <option>Expired</option>
@@ -62,14 +62,14 @@
             </div>
             <div class="filter-item">
               <label class="filter-label">Membership Plan</label>
-              <select class="filter-select">
+              <select class="filter-select" (change)="setPlanFilter($event.target.value)">
                 <option>All Plans</option>
                 <option>Elite Annual</option>
                 <option>Monthly</option>
               </select>
             </div>
           </div>
-          <button class="btn-apply">Apply Filters</button>
+          <button class="btn-apply" (click)="applyFilter()">Apply Filters</button>
         </div>
 
         <div class="table-card">
@@ -84,14 +84,14 @@
                   <th class="th-right">Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody *ngFor="let member of members">
                 <tr class="table-row">
                   <td>
                     <div class="member-cell">
                       <div class="member-avatar avatar--red">AC</div>
                       <div class="member-info">
-                        <span class="member-name">Alex Chen</span>
-                        <small class="member-email">alex@mail.com</small>
+                        <span class="member-name">{{member.fitapi_user.first_name + ' ' + member.fitapi_user.last_name}} </span>
+                        <small class="member-email">{{member.fitapi_user.email}}</small>
                       </div>
                     </div>
                   </td>
@@ -101,7 +101,7 @@
                       <span class="plan-name">Elite Annual</span>
                     </div>
                   </td>
-                  <td><span class="join-date">2024-01-10</span></td>
+                  <td><span class="join-date">{{member.fitapi_user.created_at}}</span></td>
                   <td class="actions-cell">
                     <div class="action-btns">
                       <button class="action-btn"><span class="material-symbols-outlined">refresh</span></button>
@@ -115,7 +115,7 @@
           </div>
 
           <div class="pagination">
-            <span class="pagination-info">Showing 1-10 of 248 members</span>
+            <span class="pagination-info">Showing 1-10 of {{members.length}} members</span>
             <div class="pagination-controls">
               <button class="page-btn page-btn--nav" disabled>
                 <span class="material-symbols-outlined">chevron_left</span>
