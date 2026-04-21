@@ -1,1 +1,94 @@
-<p>settings works!</p>
+<div class="settings-shell">
+  <header class="settings-topbar">
+    <div class="topbar-left">
+      <h2 class="page-title">Settings</h2>
+      <p class="page-subtitle">Manage your account preferences and security.</p>
+    </div>
+    <div class="topbar-right">
+      <button class="btn-secondary">Cancel</button>
+      <button class="btn-primary">
+        <span class="material-symbols-outlined">save</span> Save Changes
+      </button>
+    </div>
+  </header>
+
+  <main class="settings-content">
+    <div class="settings-container">
+      
+      <section class="settings-card">
+        <div class="card-header">
+          <span class="material-symbols-outlined">person</span>
+          <h3>Profile Information</h3>
+        </div>
+
+        <div class="form-grid">
+          <div class="input-group">
+            <label>First Name</label>
+            <input type="text" placeholder="e.g. Alex">
+          </div>
+          <div class="input-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="e.g. Chen">
+          </div>
+          <div class="input-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="alex@fittech.com">
+          </div>
+          <div class="input-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="+1 (555) 000-0000">
+          </div>
+        </div>
+      </section>
+
+      <section class="settings-card">
+        <div class="card-header">
+          <span class="material-symbols-outlined">lock</span>
+          <h3>Security & Password</h3>
+        </div>
+
+        <div class="form-single-col">
+          <div class="input-group">
+            <label>Current Password</label>
+            <input type="password" placeholder="••••••••••••">
+          </div>
+          <div class="divider"></div>
+          <div class="input-group">
+            <label>New Password</label>
+            <input type="password" placeholder="Min. 8 characters">
+          </div>
+          <div class="input-group">
+            <label>Confirm New Password</label>
+            <input type="password" placeholder="Re-type password">
+          </div>
+        </div>
+      </section>
+
+      <section class="settings-card">
+        <div class="card-header">
+          <span class="material-symbols-outlined">notifications_active</span>
+          <h3>System Notifications</h3>
+        </div>
+
+        <div class="notification-list">
+          <label class="switch-item">
+            <div class="switch-text">
+              <p class="switch-label">Email Notifications</p>
+              <p class="switch-desc">Receive weekly reports and member alerts via email.</p>
+            </div>
+            <input type="checkbox" checked>
+          </label>
+
+          <label class="switch-item">
+            <div class="switch-text">
+              <p class="switch-label">SMS Notifications</p>
+              <p class="switch-desc">Get instant alerts for emergency RFID check-ins.</p>
+            </div>
+            <input type="checkbox">
+          </label>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>

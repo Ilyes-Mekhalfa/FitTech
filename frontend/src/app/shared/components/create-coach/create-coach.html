@@ -1,0 +1,105 @@
+<div class="page">
+
+  <!-- LEFT -->
+  <div class="left">
+
+    <!-- Account -->
+    <section class="card">
+      <h3>Account Credentials</h3>
+
+      <div class="grid">
+        <input formControlName="first_name" placeholder="First Name"/>
+        <input formControlName="last_name" placeholder="Last Name"/>
+
+        <input formControlName="email" placeholder="Email"/>
+        <input formControlName="phone" placeholder="Phone"/>
+
+        <div class="pw">
+          <input [type]="showPw ? 'text':'password'" formControlName="password" placeholder="Password"/>
+          <button type="button" (click)="showPw=!showPw">👁</button>
+        </div>
+
+        <div class="pw">
+          <input [type]="showCpw ? 'text':'password'" formControlName="confirm_pw" placeholder="Confirm Password"/>
+          <button type="button" (click)="showCpw=!showCpw">👁</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Profile -->
+    <section class="card">
+
+      <!-- Specialties -->
+      <div>
+        <p class="label">Specialties</p>
+
+        <div class="tags">
+          <span>
+            football
+            <button type="button" (click)="removeSpec()">×</button>
+          </span>
+
+          <!-- <input
+            [(ngModel)]="specInput"
+            (keydown.enter)="addSpec()"
+            (keydown)="onSpecKey($event)"
+            placeholder="Add specialty"/> -->
+        </div>
+      </div>
+
+      <!-- Experience -->
+      <div class="exp">
+        <button type="button" (click)="exp=exp-1">−</button>
+        <b>{{ exp }}</b>
+        <button type="button" (click)="exp=exp+1">+</button>
+        <span>years</span>
+      </div>
+
+      <!-- Bio -->
+      <textarea formControlName="biography" placeholder="Biography"></textarea>
+    </section>
+
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+
+    <!-- Preview -->
+    <div class="preview">
+      <div class="avatar">
+        <!-- {{ initials || '👤' }} -->lll
+      </div>
+
+      <h4>
+        {{ createCoachForm.value.first_name || 'New' }}
+        {{ createCoachForm.value.last_name }}
+      </h4>
+
+      <p>{{ createCoachForm.value.email || 'coach@email.com' }}</p>
+
+      <div class="badges">
+        <span>Active</span>
+        <span>Coach</span>
+      </div>
+    </div>
+
+    <!-- Payload -->
+    <div class="payload">
+      <pre>oooo</pre>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-box">
+      <div class="progress-head">
+        <span>Progress</span>
+        <span>progress %</span>
+      </div>
+
+      <div class="bar">
+        <div ></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
