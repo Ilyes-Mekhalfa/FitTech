@@ -1,1 +1,94 @@
-<p>coach-profile works!</p>
+<div class="panel" [class.open]="isOpen">
+
+  <!-- Empty -->
+  <div *ngIf="!coach" class="empty">
+    <span class="material-symbols-outlined">person_search</span>
+    <p>No coach selected</p>
+    <small>Click a row to view profile</small>
+  </div>
+
+  <!-- Filled -->
+  <ng-container *ngIf="coach as c">
+
+    <!-- Banner -->
+    <div class="banner">
+      <button class="close" (click)="close()">×</button>
+      <div class="avatar" [ngStyle]="{background:c.color}">
+        {{c.initials}}
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div class="section top">
+      <div>
+        <h3>{{c.name}}</h3>
+        <p class="email">{{c.email}}</p>
+      </div>
+
+      <span class="badge"
+        [ngStyle]="{
+          background: status[c.status].bg,
+          color: status[c.status].color
+        }">
+        {{status[c.status].label}}
+      </span>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div>
+        <b>{{c.clients}}</b>
+        <span>Clients</span>
+      </div>
+      <div>
+        <b>{{c.rating}}</b>
+        <span>Rating</span>
+      </div>
+      <div>
+        <b>{{c.exp}}</b>
+        <span>Exp</span>
+      </div>
+    </div>
+
+    <!-- Specialties -->
+    <div class="section">
+      <p class="label">Specialties</p>
+      <div>
+        <span class="pill" *ngFor="let s of c.specialties">
+          {{s}}
+        </span>
+      </div>
+    </div>
+
+    <!-- Annex -->
+    <div class="section row">
+      <span class="material-symbols-outlined icon">location_on</span>
+      <div>
+        <p class="label">Annex</p>
+        <b>{{c.annex}}</b>
+      </div>
+    </div>
+
+    <!-- Bio -->
+    <div class="section">
+      <p class="label">Biography</p>
+      <p class="bio">{{c.bio}}</p>
+    </div>
+
+    <!-- Performance -->
+    <div class="section">
+      <p class="label">Performance</p>
+
+      <div class="perf" *ngFor="let p of c.perf; let i = index">
+        <div class="perf-head">
+          <span>{{labels[i]}}</span>
+          <b>{{p}}%</b>
+        </div>
+        <div class="bar">
+          <div class="fill" [style.width.%]="p"></div>
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+</div>
