@@ -1,40 +1,49 @@
-    <aside class="sidebar">
-      <div>
-        <div class="sidebar-header">
-          <div style="flex: 1;">
-            <div class="sidebar-logo">FitTech</div>
-            <div class="sidebar-subtitle">Annex Manager</div>
-          </div>
-        </div>
-        <nav class="sidebar-nav">
-          <div class="nav-item active">
-            <span class="material-symbols-outlined">dashboard</span>
-            <span>Dashboard</span>
-          </div>
-          <div class="nav-item">
-            <span class="material-symbols-outlined">sports_football</span>
-            <span>Coaches</span>
-          </div>
-          <div class="nav-item">
-            <span class="material-symbols-outlined">group</span>
-            <span>Members</span>
-          </div>
-          <div class="nav-item">
-            <span class="material-symbols-outlined">layers</span>
-            <span>Plans</span>
-          </div>
-          <div class="nav-item">
-            <span class="material-symbols-outlined">shopping_bag</span>
-            <span>Products</span>
-          </div>
-          <div class="nav-item">
-            <span class="material-symbols-outlined">settings</span>
-            <span>Settings</span>
-          </div>
-        </nav>
+<aside class="sidebar">
+  <div>
+    <div class="sidebar-header">
+      <div style="flex: 1;">
+        <div class="sidebar-logo">FitTech</div>
+        <div class="sidebar-subtitle">Annex Manager</div>
       </div>
-      <div class="sidebar-footer">
-        <span class="material-symbols-outlined">logout</span>
-        <span>Logout</span>
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <div class="nav-item" routerLink="/admin-dashboard" routerLinkActive="active">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Dashboard</span>
       </div>
-    </aside>
+
+      <div class="nav-item" routerLink="/coach" routerLinkActive="active">
+        <span class="material-symbols-outlined">groups</span>
+        <span>Coaches</span>
+      </div>
+
+      <div class="nav-item" routerLink="/member" routerLinkActive="active">
+        <span class="material-symbols-outlined">person</span>
+        <span>Members</span>
+      </div>
+
+      <div class="nav-item" routerLink="/plan" routerLinkActive="active">
+        <span class="material-symbols-outlined">layers</span>
+        <span>Plans</span>
+      </div>
+
+      <div class="nav-item" routerLink="/products" routerLinkActive="active">
+        <span class="material-symbols-outlined">shopping_bag</span>
+        <span>Products</span>
+      </div>
+
+      <div class="nav-item" routerLink="/settings" routerLinkActive="active">
+        <span class="material-symbols-outlined" routerLink="/settings" routerLinkActive="active">settings</span>
+        <span>Settings</span>
+      </div>
+
+    </nav>
+  </div>
+
+  <div class="sidebar-footer">
+    <span class="material-symbols-outlined">logout</span>
+    <span>Logout</span>
+  </div>
+</aside>

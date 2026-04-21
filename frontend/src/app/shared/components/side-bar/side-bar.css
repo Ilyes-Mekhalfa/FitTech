@@ -1,5 +1,4 @@
-﻿/* --- Sidebar Shell --- */
-.sidebar {
+﻿.sidebar {
    width: 64px;
   min-width: 64px;
   max-width: 64px;
@@ -167,4 +166,12 @@
 .sidebar:hover .sidebar-subtitle,
 .sidebar:hover .sidebar-footer span:last-child {
   opacity: 1;
+}
+
+.sidebar > div:first-child {
+  flex: 1; 
+}
+
+.sidebar-footer {
+  margin-top: auto; 
 }

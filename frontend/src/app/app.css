@@ -1,0 +1,13 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar is position:fixed — it takes no space in the flex flow.
+   Push content right by exactly the sidebar's collapsed width (64px). */
+.app-content {
+  flex: 1;
+  margin-left: 64px;
+  overflow: auto;
+  min-height: 100vh;
+}

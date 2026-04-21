@@ -11,14 +11,14 @@ import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 })
 export class ForgetPassword {
 
-  annexCode = new FormControl('', [Validators.required, Validators.pattern(/^ANX-\d{4}$/)])
+  email = history.state.email || '';
   constructor(private router: Router, private authService: AuthService){}
 
   sendEmail(){
-    if(this.annexCode.invalid){
-      throw new Error('invalid annexCode')
+    if(this.email.invalid){
+      throw new Error('invalid email')
     }
-    this.authService.forgetPassword(this.annexCode.value).subscribe({
+    this.authService.forgetPassword(this.email.value).subscribe({
       next: (res)=>{
         console.log('email sent successfully');
       },
