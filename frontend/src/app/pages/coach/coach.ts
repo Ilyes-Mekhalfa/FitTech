@@ -1,22 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CoachService } from '../../core/services/coach.service';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { CoachProfile } from '../../shared/components/coach-profile/coach-profile';
 @Component({
   selector: 'app-coach',
-  imports: [],
+  imports: [CommonModule ,CoachProfile],
   templateUrl: './coach.html',
   styleUrl: './coach.css',
 })
-export class Coach {
+export class Coach implements OnInit {
 
   approvalCount: number =0;
+  coachs: any;
+  selectedCoach: any ;
   constructor( private router: Router, private coachService: CoachService){}
 
+  ngOnInit(): void {
+    this.coachService.getAllCoachs().subscribe({
+      next: (res: any)=>{
+        console.log(res)
+        this.coachs = res.data
+      },
+      error: (err)=>{
+        console.log(err);
+        
+      }
+    })
+  }
   addCoach(){
     
     this.router.navigate(['coach/add'])
   }
 
+  selectCoach(coach: any){
+    this.selectedCoach = coach.id;
+  }
+  
   showCoach(){
     return 1
   }

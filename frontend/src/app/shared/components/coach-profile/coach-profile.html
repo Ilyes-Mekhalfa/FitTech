@@ -17,15 +17,15 @@
       <button class="close-btn" (click)="close()">×</button>
 
       <div class="avatar" >
-         c.initials 
+         {{coach.photo || 'C'}} 
       </div>
     </div>
 
     <!-- Header -->
     <div class="section header">
       <div>
-        <h3 class="name"> c.name </h3>
-        <p class="email"> c.email </p>
+        <h3 class="name"> {{coach.first_name + ' ' + coach.last_name}} </h3>
+        <p class="email"> {{coach.email}} </p>
       </div>
 
       <span class="badge"
@@ -37,15 +37,15 @@
     <!-- Stats -->
     <div class="stats">
       <div class="stat">
-        <b> c.clients </b>
+        <b> {{coach.clients}} </b>
         <span>Clients</span>
       </div>
       <div class="stat">
-        <b> c.rating </b>
+        <b> {{coach.rating}} </b>
         <span>Rating</span>
       </div>
       <div class="stat">
-        <b>c.exp </b>
+        <b>{{coach.experience}} </b>
         <span>Exp.</span>
       </div>
     </div>
@@ -55,7 +55,7 @@
       <p class="label">Specialties</p>
       <div>
         <span class="pill" >
-           s 
+           {{coach.specialties}} 
         </span>
       </div>
     </div>
@@ -72,7 +72,7 @@
     <!-- Bio -->
     <div class="section">
       <p class="label">Biography</p>
-      <p class="bio"> c.bio </p>
+      <p class="bio"> {{coach.biography}} </p>
     </div>
 
     <!-- Performance -->

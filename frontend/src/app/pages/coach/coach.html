@@ -1,390 +1,102 @@
-
 <main class="page-content">
-<div class="page-header">
+  <div class="page-header">
     <div>
-    <h1 class="page-title">Coaches Management</h1>
-    <p class="page-subtitle">Manage your roster of elite trainers and instructors.</p>
-  </div>
-  <button class="btn-primary" (click)="addCoach()" >
-    <span class="material-symbols-outlined" >add</span>
-    Add Coach
-  </button>
-</div>
-
-<div class="stats-grid">
-
-  <div class="stat-card">
-    <div class="stat-card__top">
-      <span class="stat-label">Total Coaches</span>
-      <span class="material-symbols-outlined stat-icon">sports_football</span>
+      <h1 class="page-title">Coaches Management</h1>
+      <p class="page-subtitle">Manage your roster of elite trainers and instructors.</p>
     </div>
-    <div class="stat-value">42</div>
-    <p class="stat-meta stat-meta--green">
-      <span class="material-symbols-outlined">trending_up</span> +4 this month
-    </p>
+    <button class="btn-primary" (click)="addCoach()">
+      <span class="material-symbols-outlined">add</span>
+      Add Coach
+    </button>
   </div>
 
-  <div class="stat-card">
-    <div class="stat-card__top">
-      <span class="stat-label">Active Classes</span>
-      <span class="material-symbols-outlined stat-icon">event_available</span>
-    </div>
-    <div class="stat-value">158</div>
-    <p class="stat-meta">Across 8 specialties</p>
-  </div>
-
-  <div class="stat-card stat-card--accent">
-    <div class="stat-card__top">
-      <span class="stat-label">Avg. Rating</span>
-      <span class="material-symbols-outlined stat-icon">star</span>
-    </div>
-    <div class="stat-value">4.8</div>
-    <p class="stat-meta">Top performance tier</p>
-  </div>
-
-  <div class="stat-card">
-    <div class="stat-card__top">
-      <span class="stat-label">Pending Apps</span>
-      <span class="live-dot"></span>
-    </div>
-    <div class="stat-value">07</div>
-    <p class="stat-meta stat-meta--alert">Requires immediate review</p>
-  </div>
-
-</div>
-
-<div class="table-card">
-
-  <div class="table-toolbar">
-    <div class="filter-group">
-
-      <div class="select-wrap">
-        <select >
-          <option value="">All Specialties</option>
-          <option ></option>
-        </select>
-        <span class="material-symbols-outlined select-chevron">expand_more</span>
+  <section class="approval-section">
+    <div class="section-header">
+      <div class="header-inner">
+        <span class="material-symbols-outlined header-icon">verified_user</span>
+        <h3 class="section-title">Pending Approvals</h3>
+        <span class="count-badge">3 New</span>
       </div>
-
-      <div class="select-wrap">
-        <select >
-          <option value="">Status: All</option>
-          <option value="approved">Approved</option>
-          <option value="pending">Pending</option>
-          <option value="suspended">Suspended</option>
-        </select>
-        <span class="material-symbols-outlined select-chevron">expand_more</span>
-      </div>
-
-      <div class="select-wrap">
-        <select >
-          <option value="">Annex: All</option>
-          <option > a </option>
-        </select>
-        <span class="material-symbols-outlined select-chevron">expand_more</span>
-      </div>
-
     </div>
-    <span class="table-count">Showing coaches</span>
-  </div>
-
-  <div class="approval-table">
-    <div class="approval-header">
-      <div class="approval-header__title">Approval Requests</div>
-      <div class="approval-header__count">{{approvalCount}}</div>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Speciality</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>John Doe</td>
-          <td>Yoga</td>
-          <td><span class="status-chip">Pending</span></td>
-          <td>
-            <button class="btn-approve" (click)="approveApproval()">Approve</button>
-            <button class="btn-reject" (click)="rejectApproval()">Reject</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-scroll">
-    <table>
-      <thead>
-        <tr>
-          <th>Coach</th>
-          <th>Specialty</th>
-          <th>Annex</th>
-          <th class="cell--center">Status</th>
-          <th class="cell--center">Rating</th>
-          <th class="cell--center">Clients</th>
-          <th class="cell--right">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-
-        <tr class="data-row">
-          <td>
-            <div class="coach-cell">
-              <img class="coach-avatar" src="https://via.placeholder.com/40" alt="Marcus" />
-              <div>
-                <div class="coach-name">Marcus Thorne</div>
-                <div class="coach-email">marcus.thorne@fittech.com</div>
+    <div class="table-card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Candidate</th>
+            <th>Specialty</th>
+            <th>Applied Date</th>
+            <th class="th-right">Decision</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-row">
+            <td>
+              <div class="user-cell">
+                <div class="user-avatar-placeholder">JD</div>
+                <div class="user-info">
+                  <span class="user-name">Jordan Davies</span>
+                  <small class="user-email">j.davies@email.com</small>
+                </div>
               </div>
-            </div>
-          </td>
-
-          <td><span class="specialty-tag">Strength & Conditioning</span></td>
-
-          <td><span class="annex-tag">Downtown Annex</span></td>
-
-          <td class="cell--center">
-            <span class="badge badge-approved">
-              <span class="material-symbols-outlined badge-icon">check_circle</span>
-              Approved
-            </span>
-          </td>
-
-          <td class="cell--center">
-            <div class="rating">
-              <span class="material-symbols-outlined star-icon">star</span>
-              4.9
-            </div>
-          </td>
-
-          <td class="cell--center">
-            <span class="clients-count">24</span>
-          </td>
-
-          <td class="cell--right">
-            <div class="action-group">
-              <button class="action-btn" title="View" (click)="showCoach()">
-                <span class="material-symbols-outlined">visibility</span>
-              </button>
-              <button class="action-btn" title="Edit" (click)="editCoach()">
-                <span class="material-symbols-outlined">edit</span>
-              </button>
-              <button class="action-btn" title="Message"(click) ="messageCoach()">
-                <span class="material-symbols-outlined">chat_bubble</span>
-              </button>
-              <button class="action-btn action-btn--danger" title="Delete" (click)="deleteCoach()">
-                <span class="material-symbols-outlined">delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-
-      </tbody>
-    </table>
-  </div>
-
-  <div class="pagination">
-    <button class="pag-btn" disabled>
-      <span class="material-symbols-outlined">chevron_left</span> Previous
-    </button>
-    <div class="pag-numbers">
-      <button class="pag-num pag-num--active">1</button>
-      <button class="pag-num">2</button>
-      <button class="pag-num">3</button>
+            </td>
+            <td><span class="specialty-tag">Yoga / Pilates</span></td>
+            <td>Oct 24, 2026</td>
+            <td class="td-right">
+              <div class="action-buttons">
+                <button class="btn-icon-approve"><span class="material-symbols-outlined">check</span></button>
+                <button class="btn-icon-reject"><span class="material-symbols-outlined">close</span></button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <button class="pag-btn">
-      Next <span class="material-symbols-outlined">chevron_right</span>
-    </button>
-  </div>
+  </section>
 
-</div>
-
-<div class="panel-backdrop"></div>
-
-<aside class="detail-panel">
-    <div class="panel-cover">
-      <img class="cover-img" src="https://via.placeholder.com/300x100" alt="cover" />
-      <div class="cover-overlay"></div>
-      <button class="panel-close-btn" >
-        <span class="material-symbols-outlined">close</span>
-      </button>
+  <div class="content-split-grid">
+    
+    <div class="main-list-area">
+      <div class="section-header">
+        <h3 class="section-title">Active Coaches</h3>
+      </div>
+      <div class="table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Coach</th>
+              <th>Status</th>
+              <th class="th-right">Experience</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-row" *ngFor= "let coach of coachs" (click)="selectCoach(coach)" [class.active-row]="selectedCoach === coach">
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar-main">MT</div>
+                  <div class="user-info">
+                    <span class="user-name">Marcus Thorne</span>
+                    <small class="user-email">m.thorne@fittech.com</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge-active">Active</span></td>
+              <td class="td-right">8 Years</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <div class="panel-avatar-row">
-      <img class="panel-avatar" src="https://via.placeholder.com/80" alt="Marcus" />
-      <span class="badge badge-approved">
-        <span class="material-symbols-outlined badge-icon">check_circle</span>
-        Approved
-      </span>
-    </div>
-
-    <div class="panel-body">
-      <div class="panel-name">Marcus Thorne</div>
-      <div class="panel-meta">Strength & Conditioning · Downtown Annex</div>
-
-      <div class="panel-stats">
-        <div class="panel-stat">
-          <div class="panel-stat__label">Clients</div>
-          <div class="panel-stat__value">24</div>
+    <aside class="profile-sidebar">
+      @if (!selectedCoach) {
+        <div class="empty-state-card">
+          <span class="material-symbols-outlined">contact_page</span>
+          <p>Select a coach to view full profile details</p>
         </div>
-        <div class="panel-stat">
-          <div class="panel-stat__label">Rating</div>
-          <div class="panel-stat__value">4.9 ★</div>
-        </div>
-        <div class="panel-stat">
-          <div class="panel-stat__label">Classes/mo</div>
-          <div class="panel-stat__value">15</div>
-        </div>
-        <div class="panel-stat">
-          <div class="panel-stat__label">Since</div>
-          <div class="panel-stat__value">2022</div>
-        </div>
-      </div>
-
-      <div class="panel-divider"></div>
-
-      <div class="panel-section-label">Weekly Schedule</div>
-      <div class="schedule-item">
-        <span class="schedule-day">Mon</span>
-        <span class="schedule-time">08:00 AM – 10:00 AM</span>
-        <span class="schedule-class">Advanced Strength</span>
-      </div>
-      <div class="schedule-item">
-        <span class="schedule-day">Wed</span>
-        <span class="schedule-time">06:00 PM – 07:30 PM</span>
-        <span class="schedule-class">HIIT Conditioning</span>
-      </div>
-
-      <div class="panel-divider"></div>
-
-      <div class="panel-section-label">Certifications</div>
-      <div class="cert-list">
-        <span class="cert-chip">NASM CPT</span>
-        <span class="cert-chip">CrossFit L2</span>
-      </div>
-
-      <div class="panel-actions">
-        <button class="panel-btn panel-btn--primary">Message Coach</button>
-        <button class="panel-btn panel-btn--secondary">Edit Profile</button>
-      </div>
-    </div>
-</aside>
-
-<div class="modal-overlay">
-  <div class="modal">
-
-    <div class="modal-header">
-      <div class="modal-title">Add New Coach</div>
-      <button class="modal-close-btn">
-        <span class="material-symbols-outlined">close</span>
-      </button>
-    </div>
-
-    <form>
-      <div class="modal-body">
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label class="form-label">First Name *</label>
-            <input class="form-input" placeholder="Marcus" />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Last Name *</label>
-            <input class="form-input" placeholder="Thorne" />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Email *</label>
-            <input class="form-input" type="email" placeholder="coach@fittech.com" />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Phone</label>
-            <input class="form-input" placeholder="+1 (555) 000-0000" />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Specialty *</label>
-            <div class="select-wrap">
-              <select class="form-input">
-                <option value="">Select specialty...</option>
-                <option value="Strength">Strength</option>
-                <option value="Cardio">Cardio</option>
-              </select>
-              <span class="material-symbols-outlined select-chevron">expand_more</span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Annex *</label>
-            <div class="select-wrap">
-              <select class="form-input">
-                <option value="">Select annex...</option>
-                <option value="Downtown">Downtown</option>
-                <option value="Uptown">Uptown</option>
-              </select>
-              <span class="material-symbols-outlined select-chevron">expand_more</span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Status</label>
-            <div class="select-wrap">
-              <select class="form-input">
-                <option value="pending">Pending</option>
-                <option value="approved">Approved</option>
-                <option value="suspended">Suspended</option>
-              </select>
-              <span class="material-symbols-outlined select-chevron">expand_more</span>
-            </div>
-          </div>
-
-          <div class="form-group form-group--full">
-            <label class="form-label">Bio / Notes</label>
-            <textarea class="form-input form-textarea"
-              placeholder="Coach background, certifications, specializations..."></textarea>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn-ghost">Cancel</button>
-        <button type="submit" class="btn-primary">
-          <span class="material-symbols-outlined">check</span>
-          Add Coach
-        </button>
-      </div>
-    </form>
+      } @else {
+        <app-coach-profile [coachId]="selectedCoach"></app-coach-profile>
+      }
+    </aside>
 
   </div>
-</div>
-
-<div class="modal-overlay">
-  <div class="confirm-box">
-    <div class="confirm-icon">
-      <span class="material-symbols-outlined">delete</span>
-    </div>
-    <div class="confirm-title">Remove Coach?</div>
-    <div class="confirm-desc">
-      This will permanently remove
-      <strong>Marcus Thorne</strong>
-      and unassign all their clients. This cannot be undone.
-    </div>
-    <div class="confirm-actions">
-      <button class="btn-cancel">Cancel</button>
-      <button class="btn-danger">Yes, Remove</button>
-    </div>
-  </div>
-</div>
-
-<div class="toast">
-  <span class="material-symbols-outlined toast-icon">
-    check_circle
-  </span>
-</div>
-
 </main>
