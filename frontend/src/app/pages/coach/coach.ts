@@ -13,7 +13,8 @@ export class Coach {
   constructor( private router: Router, private coachService: CoachService){}
 
   addCoach(){
-    this.router.navigate(['/coach/add'])
+    
+    this.router.navigate(['coach/add'])
   }
 
   showCoach(){
