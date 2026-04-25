@@ -7,6 +7,7 @@ import { Coach } from './pages/coach/coach';
 import { Member } from './pages/member/member';
 import { Plan } from './pages/plan/plan';
 import { Settings } from './pages/settings/settings';
+import { CreateMember } from './shared/components/create-member/create-member';
 export const routes: Routes = [
     {
         path: '',
@@ -37,6 +38,10 @@ export const routes: Routes = [
     {
         path: 'member',
         component: Member,
+    },
+    {
+        path: "member/add",
+        component: CreateMember,
     },
     {
         path: 'plan',

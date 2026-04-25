@@ -132,7 +132,7 @@
       </div>
 
       @if(selectMember){
-        <app-member-profile [member]="selectMember"></app-member-profile>
+        <app-member-profile [member]="selectMember" (close)="closeProfile()"></app-member-profile>
       } @else {
         <aside class="sidebar-column">
           <div class="sidebar-placeholder">
