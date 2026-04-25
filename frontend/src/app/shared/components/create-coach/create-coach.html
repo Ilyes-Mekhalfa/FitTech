@@ -1,1 +1,138 @@
-<p>create-coach works!</p>
+<div class="coach-shell">
+  <form [formGroup]="createCoachForm" class="coach-grid">
+    
+    <div class="left-pane">
+      <header class="pane-header">
+        <h2 class="pane-title">Register New Coach</h2>
+        <p class="pane-subtitle">Enter credentials and professional profile details.</p>
+      </header>
+
+      <section class="form-card">
+        <div class="section-head">
+          <span class="material-symbols-outlined">badge</span>
+          <h3>Account Credentials</h3>
+        </div>
+
+        <div class="input-grid">
+          <div class="field-wrap">
+            <label>First Name</label>
+            <input formControlName="first_name" placeholder="e.g. John" />
+          </div>
+          <div class="field-wrap">
+            <label>Last Name</label>
+            <input formControlName="last_name" placeholder="e.g. Smith" />
+          </div>
+          <div class="field-wrap">
+            <label>Email Address</label>
+            <input formControlName="email" placeholder="john.s@fittech.com" />
+          </div>
+          <div class="field-wrap">
+            <label>Phone Number</label>
+            <input formControlName="phone" placeholder="+1 (666) 666-6666" />
+          </div>
+
+          <div class="field-wrap pw-field">
+            <label>Password</label>
+            <div class="input-with-icon">
+              <input [type]="showPw ? 'text':'password'" formControlName="password" />
+              <button type="button" class="visibility-btn" (click)="showPw=!showPw">
+                <span class="material-symbols-outlined">{{ showPw ? 'visibility_off' : 'visibility' }}</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="field-wrap pw-field">
+            <label>Confirm Password</label>
+            <div class="input-with-icon">
+              <input [type]="showCpw ? 'text':'password'" formControlName="confirm_pw" />
+              <button type="button" class="visibility-btn" (click)="showCpw=!showCpw">
+                <span class="material-symbols-outlined">{{ showCpw ? 'visibility_off' : 'visibility' }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-card">
+        <div class="section-head">
+          <span class="material-symbols-outlined">workspace_premium</span>
+          <h3>Professional Profile</h3>
+        </div>
+
+        <div class="profile-rows">
+          <div class="field-wrap">
+            <label>Specialties</label>
+            <div class="tag-container">
+              <span class="spec-tag">
+                Football
+                <!-- <button type="button" class="tag-close" (click)="removeSpec()">×</button> -->
+              </span>
+              <input class="inline-input" placeholder="Add specialty..." />
+            </div>
+          </div>
+
+          <div class="experience-picker">
+            <label>Years of Experience</label>
+            <div class="counter-control">
+              <button type="button" (click)="exp=exp-1" [disabled]="exp <= 0">−</button>
+              <span class="exp-val">{{ exp }}</span>
+              <button type="button" (click)="exp=exp+1">+</button>
+              <small>Years</small>
+            </div>
+          </div>
+
+          <div class="field-wrap">
+            <label>Professional Biography</label>
+            <textarea formControlName="biography" placeholder="Describe the coach's background, certifications, and philosophy..."></textarea>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="right-pane">
+      <div class="sticky-preview">
+        
+        <div class="preview-card">
+          <div class="preview-banner"></div>
+          <div class="preview-content">
+            <div class="preview-avatar">
+              {{ (createCoachForm.value.first_name?.[0] || '') + (createCoachForm.value.last_name?.[0] || 'C') }}
+            </div>
+            <h4 class="preview-name">
+              {{ createCoachForm.value.first_name || 'New' }}
+              {{ createCoachForm.value.last_name || 'Coach' }}
+            </h4>
+            <p class="preview-email">{{ createCoachForm.value.email || 'coach@fittech.com' }}</p>
+            
+            <div class="preview-badges">
+              <span class="badge badge-active">Active</span>
+              <span class="badge badge-role">Coach</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="submission-card">
+          <div class="progress-info">
+            <div class="prog-text">
+              <span>Profile Completion</span>
+              <span class="prog-pct"> progress %</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" [style.width.%]="progress"></div>
+            </div>
+          </div>
+          
+          <button class="btn-submit" (click)="submit()">
+            Create Coach Account
+            <span class="material-symbols-outlined">chevron_right</span>
+          </button>
+        </div>
+
+        <div class="payload-debug">
+          <div class="debug-header">Payload Preview</div>
+          <pre> createCoachForm.value  json </pre>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

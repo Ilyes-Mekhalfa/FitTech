@@ -37,7 +37,7 @@
     <div class="stats-grid">
       <div class="stat-card">
         <p class="stat-card__label">Total Active Plans</p>
-        <p class="stat-card__value">12</p>
+        <p class="stat-card__value">{{plans.length}}</p>
         <p class="stat-card__meta stat-card__meta--positive">
           <span class="material-symbols-outlined">trending_up</span> +2 this quarter
         </p>
@@ -49,13 +49,13 @@
           <span class="material-symbols-outlined">arrow_upward</span> +12% from last month
         </p>
       </div>
-      <div class="stat-card stat-card--featured">
+      <!-- <div class="stat-card stat-card--featured">
         <p class="stat-card__label">Monthly Revenue</p>
         <p class="stat-card__value">$184k</p>
         <p class="stat-card__meta">
           <span class="material-symbols-outlined">payments</span> Target: $200k
         </p>
-      </div>
+      </div> -->
       <div class="stat-card">
         <p class="stat-card__label">Avg. Retention</p>
         <p class="stat-card__value">91%</p>
@@ -76,7 +76,7 @@
           </div>
           <div class="filter-sort">
             <span class="filter-sort__label">Sort by:</span>
-            <select>
+            <select (change)="filterPlans">
               <option>Newest First</option>
               <option>Price (High–Low)</option>
               <option>Popularity</option>
@@ -96,19 +96,19 @@
                 <th class="align-right">Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let plan of plans">
               <tr>
                 <td>
                   <div class="plan-name-cell">
                     <div class="plan-indicator"></div>
                     <div>
-                      <p class="plan-name">Titanium Elite</p>
+                      <p class="plan-name">{{plan.name}}</p>
                       <p class="plan-access">Full House Access</p>
                     </div>
                   </div>
                 </td>
-                <td><span class="plan-type-tag">Premium</span></td>
-                <td class="align-center"><p class="plan-price">$120 / $1,200</p></td>
+                <td><span class="plan-type-tag">{{plan.type}}</span></td>
+                <td class="align-center"><p class="plan-price">{{plan.price}}</p></td>
                 <td class="align-center"><p class="plan-members">452</p></td>
                 <td><span class="badge badge-active">Active</span></td>
                 <td class="align-right">
