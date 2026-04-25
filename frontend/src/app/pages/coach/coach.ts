@@ -36,10 +36,6 @@ export class Coach implements OnInit {
   selectCoach(coach: any){
     this.selectedCoach = coach.id;
   }
-  
-  showCoach(){
-    return 1
-  }
 
   editCoach(){
     return 1
