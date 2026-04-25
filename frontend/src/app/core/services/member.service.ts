@@ -13,4 +13,8 @@ export class MemberService {
   getAllMembers(){
     return this.http.get(`${this.APIUrl}/member/allMembers`, {withCredentials: true})
   }
+
+  getMember(id: string){
+    return this.http.get(`${this.APIUrl}/member/${id}`, {withCredentials: true})
+  }
 }

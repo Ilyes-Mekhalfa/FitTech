@@ -54,7 +54,7 @@
           <div class="filter-group">
             <div class="filter-item">
               <label class="filter-label">Status</label>
-              <select class="filter-select" (change)="setStatusFilter($event.target.value)">
+              <select class="filter-select" (change)="setStatusFilter($any($event.target).value)">
                 <option>All Status</option>
                 <option>Active</option>
                 <option>Expired</option>
@@ -62,7 +62,7 @@
             </div>
             <div class="filter-item">
               <label class="filter-label">Membership Plan</label>
-              <select class="filter-select" (change)="setPlanFilter($event.target.value)">
+              <select class="filter-select" (change)="setPlanFilter($any($event.target).value)">
                 <option>All Plans</option>
                 <option>Elite Annual</option>
                 <option>Monthly</option>
@@ -84,7 +84,7 @@
                   <th class="th-right">Actions</th>
                 </tr>
               </thead>
-              <tbody *ngFor="let member of members">
+              <tbody *ngFor="let member of members" (click)="selectedMember(member)">
                 <tr class="table-row">
                   <td>
                     <div class="member-cell">
@@ -131,13 +131,17 @@
         </div>
       </div>
 
-      <aside class="sidebar-column">
-        <div class="sidebar-placeholder">
-          <span class="material-symbols-outlined placeholder-icon">person_search</span>
-          <p class="placeholder-text">Select a member to view full profile details and history.</p>
-        </div>
-      </aside>
+      @if(selectMember){
+        <app-member-profile [member]="selectMember"></app-member-profile>
+      } @else {
+        <aside class="sidebar-column">
+          <div class="sidebar-placeholder">
+            <span class="material-symbols-outlined placeholder-icon">person_search</span>
+            <p class="placeholder-text">Select a member to view full profile details and history.</p>
+          </div>
+        </aside>
+      }
     </div>
-
+  
   </main>
 </div>
