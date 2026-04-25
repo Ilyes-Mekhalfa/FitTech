@@ -1,8 +1,8 @@
 
-  <div class="layout-grid" [class.sidebar-hidden]="!sidebarVisible">
+  <div class="layout-grid" >
+    <app-live-enterance></app-live-enterance>
     <header class="header" >
       <div class="header-actions">
-       
         <button class="notification-btn">
           <span class="material-symbols-outlined">notifications</span>
           <span class="notification-dot"></span>
@@ -31,8 +31,8 @@
           </button>
           <button class="btn btn-primary">
             <span class="material-symbols-outlined" (click)="handleAddNewMember()">add</span>
-            New Member
-          </button> 
+            New Manager
+          </button>
         </div>
       </div>
 

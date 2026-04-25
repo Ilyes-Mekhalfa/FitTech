@@ -7,7 +7,9 @@ import { Coach } from './pages/coach/coach';
 import { Member } from './pages/member/member';
 import { Plan } from './pages/plan/plan';
 import { Settings } from './pages/settings/settings';
+import { CreateCoach } from './shared/components/create-coach/create-coach';
 import { CreateMember } from './shared/components/create-member/create-member';
+import { canDeactivateGuard } from './core/guards/can-deactivate.guard';
 export const routes: Routes = [
     {
         path: '',
@@ -34,6 +36,11 @@ export const routes: Routes = [
     {
         path: 'coach',
         component: Coach,
+    },
+    {
+        path: 'coach/add',
+        canDeactivate: [canDeactivateGuard],
+        component: CreateCoach
     },
     {
         path: 'member',

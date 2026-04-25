@@ -1,1 +1,114 @@
-<p>coach-profile works!</p>
+<div class="panel" >
+
+  <!-- Empty state -->
+  <div  class="empty-state">
+    <div class="empty-icon">
+      <span class="material-symbols-outlined">person_search</span>
+    </div>
+    <p class="title">No coach selected</p>
+    <p class="subtitle">Click any row to view full profile details</p>
+  </div>
+
+  <!-- Filled state -->
+  <ng-container >
+
+    <!-- Banner -->
+    <div class="banner">
+      <button class="close-btn" (click)="close()">×</button>
+
+      <div class="avatar" >
+         {{coach.photo || 'C'}} 
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div class="section header">
+      <div>
+        <h3 class="name"> {{coach.first_name + ' ' + coach.last_name}} </h3>
+        <p class="email"> {{coach.email}} </p>
+      </div>
+
+      <span class="badge"
+        >
+         ssds
+      </span>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat">
+        <b> {{coach.clients}} </b>
+        <span>Clients</span>
+      </div>
+      <div class="stat">
+        <b> {{coach.rating}} </b>
+        <span>Rating</span>
+      </div>
+      <div class="stat">
+        <b>{{coach.experience}} </b>
+        <span>Exp.</span>
+      </div>
+    </div>
+
+    <!-- Specialties -->
+    <div class="section">
+      <p class="label">Specialties</p>
+      <div>
+        <span class="pill" >
+           {{coach.specialties}} 
+        </span>
+      </div>
+    </div>
+
+    <!-- Annex -->
+    <div class="section row">
+      <span class="material-symbols-outlined icon">location_on</span>
+      <div>
+        <p class="label">Assigned Annex</p>
+        <p class="value"> c.annex </p>
+      </div>
+    </div>
+
+    <!-- Bio -->
+    <div class="section">
+      <p class="label">Biography</p>
+      <p class="bio"> {{coach.biography}} </p>
+    </div>
+
+    <!-- Performance -->
+    <div class="section">
+      <p class="label">Performance</p>
+
+      <div class="perf" >
+        <div class="perf-head">
+          <span> labels[i] </span>
+          <b> p%</b>
+        </div>
+        <div class="bar">
+          <div class="fill" ></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="section actions">
+      <button class="primary-btn">
+        <span class="material-symbols-outlined">edit</span>
+        Edit Profile
+      </button>
+
+      <button class="icon-btn">
+        <span class="material-symbols-outlined">chat_bubble</span>
+      </button>
+
+      <button class="icon-btn">
+        <span class="material-symbols-outlined">open_in_new</span>
+      </button>
+
+      <button class="icon-btn danger">
+        <span class="material-symbols-outlined">block</span>
+      </button>
+    </div>
+
+  </ng-container>
+</div>
