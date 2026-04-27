@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-plan',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './plan.html',
   styleUrls: ['./plan.css'],
 })
