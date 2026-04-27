@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MemberService } from '../../core/services/member.service';
 import { CommonModule } from '@angular/common';
+import { MemberProfile } from '../../shared/components/member-profile/member-profile';
 @Component({
   selector: 'app-member',
-  imports: [CommonModule],
+  imports: [CommonModule, MemberProfile],
   templateUrl: './member.html',
   styleUrl: './member.css',
 })
@@ -12,10 +13,11 @@ export class Member implements OnInit {
   members: any[] = []
   planFilter: string = ''
   statusFilter: string = ''
+  selectMember: any;
   constructor(private router: Router, private memberService: MemberService) {}
 
   addMember() {
-    return 1;
+    this.router.navigate(['/member/add'])
   }
 
   ngOnInit() {
@@ -47,4 +49,12 @@ export class Member implements OnInit {
   }
 
   applyFilter(){}
+
+  selectedMember(member: any){
+    this.selectMember = member.id
+  }
+
+  closeProfile() {
+    this.selectMember = null;
+  }
 }

@@ -1,7 +1,7 @@
-<div class="panel" [class.open]="isOpen">
+<div class="panel" >
 
   <!-- Empty state -->
-  <div *ngIf="!coach" class="empty-state">
+  <div  class="empty-state">
     <div class="empty-icon">
       <span class="material-symbols-outlined">person_search</span>
     </div>
@@ -10,45 +10,42 @@
   </div>
 
   <!-- Filled state -->
-  <ng-container *ngIf="coach as c">
+  <ng-container >
 
     <!-- Banner -->
     <div class="banner">
       <button class="close-btn" (click)="close()">×</button>
 
-      <div class="avatar" [ngStyle]="{ background: c.color }">
-        {{ c.initials }}
+      <div class="avatar" >
+         {{coach.photo || 'C'}} 
       </div>
     </div>
 
     <!-- Header -->
     <div class="section header">
       <div>
-        <h3 class="name">{{ c.name }}</h3>
-        <p class="email">{{ c.email }}</p>
+        <h3 class="name"> {{coach.first_name + ' ' + coach.last_name}} </h3>
+        <p class="email"> {{coach.email}} </p>
       </div>
 
       <span class="badge"
-        [ngStyle]="{
-          background: status[c.status].bg,
-          color: status[c.status].color
-        }">
-        {{ status[c.status].label }}
+        >
+         ssds
       </span>
     </div>
 
     <!-- Stats -->
     <div class="stats">
       <div class="stat">
-        <b>{{ c.clients }}</b>
+        <b> {{coach.clients}} </b>
         <span>Clients</span>
       </div>
       <div class="stat">
-        <b>{{ c.rating }}</b>
+        <b> {{coach.rating}} </b>
         <span>Rating</span>
       </div>
       <div class="stat">
-        <b>{{ c.exp }}</b>
+        <b>{{coach.experience}} </b>
         <span>Exp.</span>
       </div>
     </div>
@@ -57,8 +54,8 @@
     <div class="section">
       <p class="label">Specialties</p>
       <div>
-        <span class="pill" *ngFor="let s of c.specialties">
-          {{ s }}
+        <span class="pill" >
+           {{coach.specialties}} 
         </span>
       </div>
     </div>
@@ -68,27 +65,27 @@
       <span class="material-symbols-outlined icon">location_on</span>
       <div>
         <p class="label">Assigned Annex</p>
-        <p class="value">{{ c.annex }}</p>
+        <p class="value"> c.annex </p>
       </div>
     </div>
 
     <!-- Bio -->
     <div class="section">
       <p class="label">Biography</p>
-      <p class="bio">{{ c.bio }}</p>
+      <p class="bio"> {{coach.biography}} </p>
     </div>
 
     <!-- Performance -->
     <div class="section">
       <p class="label">Performance</p>
 
-      <div class="perf" *ngFor="let p of c.perf; let i = index">
+      <div class="perf" >
         <div class="perf-head">
-          <span>{{ labels[i] }}</span>
-          <b>{{ p }}%</b>
+          <span> labels[i] </span>
+          <b> p%</b>
         </div>
         <div class="bar">
-          <div class="fill" [style.width.%]="p"></div>
+          <div class="fill" ></div>
         </div>
       </div>
     </div>

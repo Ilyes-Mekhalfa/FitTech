@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { PlanService } from '../../core/services/plan.service';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-plan',
   imports: [],
@@ -9,7 +11,7 @@ import { PlanService } from '../../core/services/plan.service';
 export class Plan {
   plans: any[] =[]
 
-  constructor(private planService: PlanService){}
+  constructor(private planService: PlanService, private router: Router){}
 
   ngOnInit(){
     this.planService.getAllPlans().subscribe({
@@ -25,4 +27,8 @@ export class Plan {
   }
 
   filterPlans(){}
+
+  createNewPlan(){
+    this.router.navigate(['plan/add'])
+  }
 }
