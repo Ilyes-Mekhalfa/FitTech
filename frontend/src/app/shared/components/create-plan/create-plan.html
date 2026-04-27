@@ -1,1 +1,123 @@
-<p>create-plan works!</p>
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="logo">
+    <span class="title">FitTech</span>
+    <span class="subtitle">Gym Management</span>
+  </div>
+
+  <nav>
+    <a>Dashboard</a>
+    <a>Coaches</a>
+    <a>Members</a>
+    <a class="active">Plans</a>
+    <a>Products</a>
+    <a>Equipment</a>
+    <a>Settings</a>
+  </nav>
+</aside>
+
+<!-- Topbar -->
+<header class="topbar">
+  <div class="breadcrumb">
+    <span>Plans</span> / <strong>Create Plan</strong>
+  </div>
+</header>
+
+<!-- Main -->
+<main class="main">
+
+  <div class="header">
+    <h1>Create Membership Plan</h1>
+  </div>
+
+  <div class="layout">
+
+    <!-- LEFT FORM -->
+    <div class="form">
+
+      <!-- Identity -->
+      <div class="card">
+        <h3>Plan Identity</h3>
+
+        <label>Plan Name</label>
+        <input type="text" placeholder="Titanium Elite" />
+
+        <label>Plan Type</label>
+        <div class="pill-group">
+          <button class="active">Premium</button>
+          <button>Basic</button>
+          <button>Yoga</button>
+          <button>Swimming</button>
+        </div>
+      </div>
+
+      <!-- Pricing -->
+      <div class="card">
+        <h3>Pricing</h3>
+
+        <label>Price</label>
+        <input type="number" placeholder="0.00" />
+
+        <label>Auto Renew</label>
+        <div class="toggle">
+          <div class="track">
+            <div class="thumb"></div>
+          </div>
+          <span>Disabled</span>
+        </div>
+      </div>
+
+      <!-- Sessions -->
+      <div class="card">
+        <h3>Sessions & Duration</h3>
+
+        <label>Sessions</label>
+        <input type="number" value="1" />
+
+        <label>Duration (Days)</label>
+        <input type="number" value="30" />
+
+        <div class="pill-group">
+          <button>1 Week</button>
+          <button class="active">1 Month</button>
+          <button>3 Months</button>
+          <button>1 Year</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT PREVIEW -->
+    <div class="preview">
+
+      <div class="card preview-card">
+        <h4>Live Preview</h4>
+
+        <h2>New Plan</h2>
+        <span class="badge">Premium</span>
+
+        <div class="price">$0.00</div>
+
+        <div class="stats">
+          <div>
+            <p>Sessions</p>
+            <strong>1</strong>
+          </div>
+          <div>
+            <p>Duration</p>
+            <strong>30 days</strong>
+          </div>
+        </div>
+
+        <div class="meta">
+          <p>Auto-renew: Disabled</p>
+          <p>Cost/session: —</p>
+          <p>Daily rate: —</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>

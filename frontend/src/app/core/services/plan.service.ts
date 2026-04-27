@@ -13,4 +13,8 @@ export class PlanService {
   getAllPlans(){
     return this.http.get(`${this.APIUrl}/plan/allPlans`)
   }
+
+  createPlan(plan:any){
+    return this.http.post(`${this.APIUrl}/plan/create`,plan, {withCredentials: true})
+  }
 }
