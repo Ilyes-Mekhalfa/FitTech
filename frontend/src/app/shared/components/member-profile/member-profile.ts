@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MemberService } from '../../../core/services/member.service';
 
 @Component({
@@ -9,28 +9,28 @@ import { MemberService } from '../../../core/services/member.service';
 })
 export class MemberProfile {
   @Input() member: any;
+  @Output() close = new EventEmitter<void>();
 
-  constructor(private memberService: MemberService){}
+  constructor(private memberService: MemberService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.getMemberProfile();
   }
 
-  getMemberProfile(){
+  getMemberProfile() {
     this.memberService.getMember(this.member).subscribe({
-      next: (res: any)=>{
-        console.log(res.data);
-        
+      next: (res: any) => {
+        this.member = res;
+
       },
       error: (err: any) => {
         console.log(err);
-        
+
       }
     })
   }
 
-  closeProfile(){
-    this.member = null;
-    
+  closeProfile() {
+    this.close.emit();
   }
 }

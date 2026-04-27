@@ -17,7 +17,7 @@ export class Member implements OnInit {
   constructor(private router: Router, private memberService: MemberService) {}
 
   addMember() {
-    return 1;
+    this.router.navigate(['/member/add'])
   }
 
   ngOnInit() {
@@ -52,5 +52,9 @@ export class Member implements OnInit {
 
   selectedMember(member: any){
     this.selectMember = member.id
+  }
+
+  closeProfile() {
+    this.selectMember = null;
   }
 }
