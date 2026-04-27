@@ -57,7 +57,7 @@ export const routes: Routes = [
     },
     {
         path: 'plan/add',
-        canDeactivate: [canDeactivateGuard],
+        // canDeactivate: [canDeactivateGuard],
         component: CreatePlan,
     },
     {
