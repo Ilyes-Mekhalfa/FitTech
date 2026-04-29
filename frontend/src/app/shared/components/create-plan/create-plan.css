@@ -1,5 +1,5 @@
 /* ─── Design Tokens ─────────────────────────────────── */
-:root {
+:host {
   --primary:               #b90014;
   --primary-container:     #e31b23;
   --primary-fixed:         #ffdad6;
@@ -37,17 +37,16 @@
   --shadow-btn:  0 4px 18px rgba(185,0,20,.35);
 }
 
-/* ─── Reset / Base ───────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
+:host {
+  display: block;
   font-family: 'Inter', sans-serif;
   background: var(--surface);
   color: var(--on-surface);
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── Sidebar ────────────────────────────────────────── */
 .sidebar {
   width: 220px;
   height: 100vh;
@@ -283,27 +282,34 @@ input:focus {
   letter-spacing: .08em;
   border: 1.5px solid var(--surface-container-highest);
   border-radius: var(--radius-sm);
-  background: var(--surface-container-lowest);
+  background-color: var(--surface-container-lowest);
   color: var(--secondary);
   cursor: pointer;
-  transition: all .15s;
+  transition: all .15s ease;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-.pill-group button:hover {
+.pill-group button:hover:not(.active) {
   border-color: var(--primary);
   color: var(--primary);
+  background-color: var(--surface-container-lowest);
 }
 
-/* ACTIVE — white text, red background */
-.pill-group button.active {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #ffffff;
-  box-shadow: 0 2px 10px rgba(185,0,20,.25);
+/* ACTIVE — force full red background, white text, no border tricks */
+.pill-group button.active,
+.pill-group button.active:hover,
+.pill-group button.active:focus {
+  background-color: #b90014 !important;
+  border-color: #b90014 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 12px rgba(185, 0, 20, 0.30);
 }
 
-.pill-group button:active { transform: scale(.97); }
-
+.pill-group button:active {
+  transform: scale(.97);
+}
 /* ─── Toggle ─────────────────────────────────────────── */
 .toggle {
   display: inline-flex;

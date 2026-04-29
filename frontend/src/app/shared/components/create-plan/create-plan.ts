@@ -36,4 +36,14 @@ export class CreatePlan {
     this.createPlanForm.get('planDuration')?.patchValue(days)
   }
 
+  get completionPct(): number {
+  const fields = ['planName','planType','planPrice','planSessions','planDuration'];
+  const filled = fields.filter(f => {
+    const v = this.createPlanForm.get(f)?.value;
+    return v !== null && v !== '' && v !== 0;
+  }).length;
+  return Math.round((filled / fields.length) * 100);
+}
+
+onSubmit(){}
 }

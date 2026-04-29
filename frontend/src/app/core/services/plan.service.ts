@@ -15,6 +15,14 @@ export class PlanService {
   }
 
   createPlan(plan:any){
-    return this.http.post(`${this.APIUrl}/plan/create`,plan, {withCredentials: true})
+    return this.http.post(`${this.APIUrl}/plan/create`,plan)
+  }
+
+  deletePlan(id:string){
+    return this.http.delete(`${this.APIUrl}/plan/delete/${id}`, {withCredentials: true})
+  }
+
+  updatePlan(id: string, updateDate: any){
+    return this.http.put(`${this.APIUrl}/plan/update/${id}`, updateDate, {withCredentials: true})
   }
 }

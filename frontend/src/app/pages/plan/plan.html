@@ -113,9 +113,9 @@
                 <td><span class="badge badge-active">Active</span></td>
                 <td class="align-right">
                   <div class="row-actions">
-                    <button class="btn-icon"><span class="material-symbols-outlined">edit</span></button>
+                    <button class="btn-icon"><span class="material-symbols-outlined" (click)="selectPlan(plan)">edit</span></button>
                     <button class="btn-icon"><span class="material-symbols-outlined">content_copy</span></button>
-                    <button class="btn-icon btn-icon-danger"><span class="material-symbols-outlined">delete</span></button>
+                    <button class="btn-icon btn-icon-danger"><span class="material-symbols-outlined" (click)="deletePlan(plan.id)">delete</span></button>
                   </div>
                 </td>
               </tr>
@@ -133,42 +133,59 @@
           </div>
         </div>
       </div>
+      @if(enableUpdate){
 
-      <aside class="side-panel">
-        <div class="plan-preview-card">
-          <div class="plan-preview-img">
-            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600" alt="Gym" />
-            <div class="plan-preview-img__overlay"></div>
-            <span class="plan-preview-img__badge">Selected Preview</span>
-            <h3 class="plan-preview-img__title">Titanium Elite</h3>
-          </div>
-          <div class="plan-preview-body">
-            <p class="preview-section-label">Key Features</p>
-            <ul class="feature-list">
-              <li>
-                <span class="material-symbols-outlined feature-list__icon">check_circle</span>
+        <aside class="side-panel">
+          <div class="plan-preview-card">
+            <div class="plan-preview-img">
+              <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600" alt="Gym" />
+              <div class="plan-preview-img__overlay"></div>
+              <span class="plan-preview-img__badge">Selected Preview</span>
+              <h3 class="plan-preview-img__title">{{plan.name}}</h3>
+            </div>
+            <div class="plan-preview-body">
+              <p class="preview-section-label">Plan Info</p>
+              <ul class="feature-list">
+                <li>
+                  <span class="material-symbols-outlined feature-list__icon">autorenew</span>
+                  <div>
+                    <p class="feature-list__name">Auto Renew</p>
+                    <p class="feature-list__desc">{{plan.auto_renew ? 'Enabled' : 'Disabled'}}</p>
+                  </div>
+                </li>
+              </ul>
+              <div class="plan-metrics">
                 <div>
-                  <p class="feature-list__name">24/7 Priority Access</p>
-                  <p class="feature-list__desc">Enter any FitTech location worldwide.</p>
+                  <p class="plan-metric__label">Sessions</p>
+                  <p class="plan-metric__value">{{plan.sessions_count}}</p>
                 </div>
-              </li>
-            </ul>
-            <div class="plan-metrics">
-              <div>
-                <p class="plan-metric__label">Churn Rate</p>
-                <p class="plan-metric__value">2.4%</p>
+                <div>
+                  <p class="plan-metric__label">Duration</p>
+                  <p class="plan-metric__value">{{plan.duration_days}} Days</p>
+                </div>
               </div>
-              <div>
-                <p class="plan-metric__label">Growth</p>
-                <p class="plan-metric__value plan-metric__value--positive">+18%</p>
+              <div class="plan-metrics" style="margin-top: 16px;">
+                <div>
+                  <p class="plan-metric__label">Price</p>
+                  <p class="plan-metric__value">{{plan.price}}</p>
+                </div>
+                <div>
+                  <p class="plan-metric__label">Type</p>
+                  <p class="plan-metric__value" style="text-transform: capitalize;">{{plan.type}}</p>
+                </div>
               </div>
-            </div>
-            <div class="plan-actions">
-              <button class="btn btn-secondary">Edit Full Plan</button>
+              <div class="plan-actions">
+                <button class="btn btn-secondary" (click)="updatePlan()">save changes</button>
+              </div>
             </div>
           </div>
+        </aside>
+      } @else{
+        <div class="empty-state-card">
+          <span class="material-symbols-outlined">contact_page</span>
+          <p>Select a plan to edit plan details</p>
         </div>
-      </aside>
+      }
     </div>
   </div>
 </main>
