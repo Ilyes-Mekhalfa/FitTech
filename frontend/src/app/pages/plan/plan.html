@@ -49,13 +49,7 @@
           <span class="material-symbols-outlined">arrow_upward</span> +12% from last month
         </p>
       </div>
-      <!-- <div class="stat-card stat-card--featured">
-        <p class="stat-card__label">Monthly Revenue</p>
-        <p class="stat-card__value">$184k</p>
-        <p class="stat-card__meta">
-          <span class="material-symbols-outlined">payments</span> Target: $200k
-        </p>
-      </div> -->
+     
       <div class="stat-card">
         <p class="stat-card__label">Avg. Retention</p>
         <p class="stat-card__value">91%</p>
@@ -69,17 +63,17 @@
       <div class="main-column">
         <div class="filter-bar">
           <div class="filter-tabs">
-            <button class="filter-tab active">All Plans</button>
-            <button class="filter-tab">Active</button>
-            <button class="filter-tab">Inactive</button>
-            <button class="filter-tab">Archived</button>
+            <button class="filter-tab" [class.active]="currentFilter === 'all'" (click)="filterPlan('all')">All Plans</button>
+            <button class="filter-tab" [class.active]="currentFilter === 'weekly'" (click)="filterPlan('weekly')">Weekly</button>
+            <button class="filter-tab" [class.active]="currentFilter === 'monthly'" (click)="filterPlan('monthly')">Monthly</button>
+            <button class="filter-tab" [class.active]="currentFilter === 'yearly'" (click)="filterPlan('yearly')">Yearly</button>
           </div>
           <div class="filter-sort">
             <span class="filter-sort__label">Sort by:</span>
-            <select (change)="filterPlans()">
-              <option>Newest First</option>
-              <option>Price (High–Low)</option>
-              <option>Popularity</option>
+            <select (change)="SortPlans($event)">
+              <option value="newest">Newest First</option>
+              <option value="price">Price (High–Low)</option>
+              <option value="popularity">Popularity</option>
             </select>
           </div>
         </div>
