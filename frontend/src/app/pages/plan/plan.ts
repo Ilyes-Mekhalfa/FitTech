@@ -11,7 +11,9 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./plan.css'],
 })
 export class Plan {
-  plans: any[] =[]
+  allPlans: any[] = []; // for fetching
+  plans: any[] = []; //for displaying
+  currentFilter: string = 'all';
   enableUpdate: boolean = false;
   selectedPlan: any = null;
   panelMode: 'view' | 'edit' = 'view';
@@ -29,7 +31,8 @@ export class Plan {
   ngOnInit(){
     this.planService.getAllPlans().subscribe({
       next: (res: any)=>{
-        this.plans = res
+        this.allPlans = res;
+        this.plans = [...this.allPlans];
         console.log(res);
         
       },
@@ -40,8 +43,7 @@ export class Plan {
     })
   }
 
-  filterPlans(){}
-
+  //plan operations
   createNewPlan(){
     this.router.navigate(['plan/add'])
   }
@@ -50,6 +52,7 @@ export class Plan {
     this.planService.deletePlan(id).subscribe({
       next: (res: any)=>{
         console.log(res);
+        this.allPlans = this.allPlans.filter(plan => plan.id !== id);
         this.plans = this.plans.filter(plan => plan.id !== id); //for deleting the plan from the list when deleted in the database
         this.selectedPlan = null;
         this.panelMode = 'view';
@@ -107,6 +110,10 @@ export class Plan {
         if (index !== -1) {
           this.plans[index] = { ...this.plans[index], ...this.editPlanForm.value };
         }
+        const allIndex = this.allPlans.findIndex(p => p.id === this.selectedPlan.id);
+        if (allIndex !== -1) {
+          this.allPlans[allIndex] = { ...this.allPlans[allIndex], ...this.editPlanForm.value };
+        }
         this.selectedPlan = { ...this.selectedPlan, ...this.editPlanForm.value };
         this.panelMode = 'view';
       },
@@ -115,4 +122,32 @@ export class Plan {
       }
     });
   }
+
+  //filtering operations
+    SortPlans(e: any){
+      if(e.target.value === 'newest'){
+        this.plans.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        this.allPlans.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      }else if(e.target.value === 'price'){
+        this.plans.sort((a, b) => b.price - a.price);
+        this.allPlans.sort((a, b) => b.price - a.price);
+      } //till we see what to do with this
+      // }else if(e.target.value === 'popularity'){
+      //   this.plans.sort((a, b) => b.subscribers - a.subscribers);
+      // }
+      
+    }
+
+    filterPlan(type:  string) {
+      this.currentFilter = type;
+      if(type === 'all') {
+        this.plans = [...this.allPlans];
+      } else if(type === 'weekly'){
+        this.plans = this.allPlans.filter(plan => plan.duration_days === 7);
+      }else if(type === 'monthly'){
+        this.plans = this.allPlans.filter(plan => plan.duration_days === 30);
+      }else if(type === 'yearly'){
+        this.plans = this.allPlans.filter(plan => plan.duration_days === 365);
+      }
+    }
 }
