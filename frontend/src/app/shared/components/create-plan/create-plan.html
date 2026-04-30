@@ -30,23 +30,23 @@
         <div class="field-grid">
           <div class="field full">
             <label>Plan Name</label>
-            <input type="text" placeholder="e.g. Titanium Elite" formControlName="planName" />
+            <input type="text" placeholder="e.g. Titanium Elite" formControlName="name" />
           </div>
 
           <div class="field full">
             <label>Plan Type</label>
             <div class="pill-group">
               <button type="button"
-                [class.active]="createPlanForm.get('planType')?.value === 'Premium'"
+                [class.active]="createPlanForm.get('type')?.value === 'Premium'"
                 (click)="setPlanType('Premium')">Premium</button>
               <button type="button"
-                [class.active]="createPlanForm.get('planType')?.value === 'Basic'"
+                [class.active]="createPlanForm.get('type')?.value === 'Basic'"
                 (click)="setPlanType('Basic')">Basic</button>
               <button type="button"
-                [class.active]="createPlanForm.get('planType')?.value === 'Yoga'"
+                [class.active]="createPlanForm.get('type')?.value === 'Yoga'"
                 (click)="setPlanType('Yoga')">Yoga</button>
               <button type="button"
-                [class.active]="createPlanForm.get('planType')?.value === 'Swimming'"
+                [class.active]="createPlanForm.get('type')?.value === 'Swimming'"
                 (click)="setPlanType('Swimming')">Swimming</button>
             </div>
           </div>
@@ -65,19 +65,19 @@
         <div class="field-grid">
           <div class="field">
             <label>Price (USD)</label>
-            <input type="number" placeholder="0.00" formControlName="planPrice" />
+            <input type="number" placeholder="0.00" formControlName="price" />
           </div>
 
           <div class="field">
             <label>Auto Renew</label>
             <div class="toggle"
               (click)="toggleAutoRenew()"
-              [class.active]="createPlanForm.get('autoRenew')?.value">
+              [class.active]="createPlanForm.get('auto_renew')?.value">
               <div class="track"
-                [class.active]="createPlanForm.get('autoRenew')?.value">
+                [class.active]="createPlanForm.get('auto_renew')?.value">
                 <div class="thumb"></div>
               </div>
-              <span>{{ createPlanForm.get('autoRenew')?.value ? 'Enabled' : 'Disabled' }}</span>
+              <span>{{ createPlanForm.get('auto_renew')?.value ? 'Enabled' : 'Disabled' }}</span>
             </div>
           </div>
         </div>
@@ -95,22 +95,22 @@
         <div class="field-grid">
           <div class="field">
             <label>Sessions Count</label>
-            <input type="number" placeholder="1" formControlName="planSessions" />
+            <input type="number" placeholder="1" formControlName="sessions_count" />
           </div>
 
           <div class="field">
             <label>Duration (Days)</label>
-            <input type="number" placeholder="30" formControlName="planDuration" />
+            <input type="number" placeholder="30" formControlName="duration_days" />
           </div>
 
           <div class="field full">
             <label>Quick Presets</label>
             <div class="pill-group">
               <button type="button"
-                [class.active]="createPlanForm.get('planDuration')?.value == 7"
+                [class.active]="createPlanForm.get('duration_days')?.value == 7"
                 (click)="setDuration(7)">1 Week</button>
               <button type="button"
-                [class.active]="createPlanForm.get('planDuration')?.value == 30"
+                [class.active]="createPlanForm.get('duration_days')?.value == 30"
                 (click)="setDuration(30)">1 Month</button>
               <button type="button"
                 [class.active]="createPlanForm.get('planDuration')?.value == 90"

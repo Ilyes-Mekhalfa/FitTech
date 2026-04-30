@@ -19,8 +19,7 @@ export class Coach implements OnInit {
   ngOnInit(): void {
     this.coachService.getAllCoachs().subscribe({
       next: (res: any)=>{
-        console.log(res)
-        this.coachs = res.data
+        this.coachs = res
       },
       error: (err)=>{
         console.log(err);
