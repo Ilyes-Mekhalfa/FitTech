@@ -15,14 +15,14 @@ export class PlanService {
   }
 
   createPlan(plan:any){
-    return this.http.post(`${this.APIUrl}/plan/create`,plan)
+    return this.http.post(`${this.APIUrl}/plan/add`,plan)
   }
 
   deletePlan(id:string){
-    return this.http.delete(`${this.APIUrl}/plan/delete/${id}`, {withCredentials: true})
+    return this.http.delete(`${this.APIUrl}/plan/${id}`, {withCredentials: true})
   }
 
   updatePlan(id: string, updateDate: any){
-    return this.http.put(`${this.APIUrl}/plan/update/${id}`, updateDate, {withCredentials: true})
+    return this.http.patch(`${this.APIUrl}/plan/${id}`, updateDate, {withCredentials: true})
   }
 }
