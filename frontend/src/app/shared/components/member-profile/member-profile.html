@@ -1,24 +1,160 @@
 <aside class="sidebar-column">
   <div class="profile-preview-card">
-    <div class="preview-header">
-      <img src="https://i.pravatar.cc/150?u=ac" class="preview-avatar">
-      <h3>{{ member?.fitapi_user?.first_name || 'Alex' }} {{ member?.fitapi_user?.last_name || 'Chen' }}</h3>
-      <span class="badge badge--active">Active Member</span>
-    </div>
-    
-    <div class="preview-body">
-      <div class="info-row">
-        <span class="info-label">Email</span>
-        <span class="info-value">{{ member?.fitapi_user?.email || 'N/A' }}</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">Join Date</span>
-        <span class="info-value">{{ member?.fitapi_user?.created_at || 'Today' }}</span>
-      </div>
-      
-      <button class="btn-primary" (click)="closeProfile()">
-        Close
+    <!-- Mode Toggle Header -->
+    <div class="mode-toggle-header">
+      <button 
+        class="mode-btn" 
+        [class.active]="!editMode"
+        (click)="editMode = false">
+        View
+      </button>
+      <button 
+        class="mode-btn" 
+        [class.active]="editMode"
+        (click)="toggleEditMode()">
+        Edit
       </button>
     </div>
+
+    <!-- View Mode -->
+    <ng-container *ngIf="!editMode">
+      <div class="profile-preview-card__view">
+        <div class="preview-header">
+          <img src="https://i.pravatar.cc/150?u=ac" class="preview-avatar">
+          <h3>{{ member?.fitapi_user?.first_name || 'Alex' }} {{ member?.fitapi_user?.last_name || 'Chen' }}</h3>
+          <span class="badge" [ngClass]="member?.subscription_status === 'active' ? 'badge--active' : 'badge--inactive'">
+            {{ member?.subscription_status === 'active' ? 'Active' : 'Inactive' }} Member
+          </span>
+        </div>
+        
+        <div class="preview-body">
+          <div class="info-row">
+            <span class="info-label">Email</span>
+            <span class="info-value">{{ member?.fitapi_user?.email || 'N/A' }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Subscription Status</span>
+            <span class="info-value">{{ member?.subscription_status || 'N/A' }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Subscription End Date</span>
+            <span class="info-value">{{ member?.subscription_end_date || 'N/A' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn--close" (click)="closeProfile()">
+        Close
+      </button>
+    </ng-container>
+
+    <!-- Edit Mode -->
+    <ng-container *ngIf="editMode">
+      <div class="profile-preview-card__edit">
+        <!-- Profile Edit Section -->
+        <div class="edit-section">
+          <div class="edit-header">
+            <h4>Edit Profile Information</h4>
+          </div>
+
+          <div class="edit-form">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input 
+                type="text" 
+                class="form-input" 
+                [(ngModel)]="editFormData.first_name"
+                placeholder="First name">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input 
+                type="text" 
+                class="form-input" 
+                [(ngModel)]="editFormData.last_name"
+                placeholder="Last name">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input 
+                type="email" 
+                class="form-input" 
+                [(ngModel)]="editFormData.email"
+                placeholder="Email address">
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn--primary" (click)="saveProfile()">
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subscription Edit Section -->
+        <div class="edit-section subscription-edit-section">
+          <div class="edit-header">
+            <h4>Update Subscription</h4>
+          </div>
+
+          <div class="edit-form">
+            <div class="form-group">
+              <label class="form-label">Select Plan</label>
+              <select 
+                class="form-input form-select" 
+                [(ngModel)]="subscriptionFormData.plan">
+                <option value="">Choose a plan...</option>
+                <option *ngFor="let plan of availablePlans" [value]="plan.id">
+                  {{ plan.name }} - ${{ plan.price }}/month
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Number of Sessions</label>
+              <input 
+                type="number" 
+                class="form-input" 
+                [(ngModel)]="subscriptionFormData.sessions"
+                min="1"
+                placeholder="Number of sessions">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Payment Method</label>
+              <div class="payment-options">
+                <label class="payment-option">
+                  <input 
+                    type="radio" 
+                    name="payment-method" 
+                    value="cash"
+                    [(ngModel)]="subscriptionFormData.paymentMethod">
+                  <span>Cash</span>
+                </label>
+                <label class="payment-option">
+                  <input 
+                    type="radio" 
+                    name="payment-method" 
+                    value="credit-card"
+                    [(ngModel)]="subscriptionFormData.paymentMethod">
+                  <span>Credit Card</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn--primary" (click)="updateSubscription()">
+                Apply Changes
+              </button>
+              <button class="btn btn--secondary" (click)="toggleEditMode()">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </aside>

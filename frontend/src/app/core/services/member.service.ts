@@ -17,7 +17,20 @@ export class MemberService {
   addMember(data: any){
     return this.http.post(`${this.APIUrl}/member/add`, data, {withCredentials: true})
   }
+  
   getMember(id: string){
     return this.http.get(`${this.APIUrl}/member/${id}`, {withCredentials: true})
+  }
+
+  updateMember(id: string, data: any){
+    return this.http.put(`${this.APIUrl}/member/${id}`, data, {withCredentials: true})
+  }
+
+  getAvailablePlans(){
+    return this.http.get(`${this.APIUrl}/subscription/plans`, {withCredentials: true})
+  }
+
+  updateSubscription(memberId: string, data: any){
+    return this.http.put(`${this.APIUrl}/member/${memberId}/subscription`, data, {withCredentials: true})
   }
 }
