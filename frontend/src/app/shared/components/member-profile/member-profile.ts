@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MemberService } from '../../../core/services/member.service';
+import { PlanService } from '../../../core/services/plan.service';
 
 @Component({
   selector: 'app-member-profile',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './member-profile.html',
   styleUrl: './member-profile.css',
 })
@@ -14,83 +15,82 @@ export class MemberProfile {
   @Output() close = new EventEmitter<void>();
 
   editMode = false;
-  editFormData: any = {};
-  subscriptionFormData: any = {
-    plan: '',
-    sessions: 1,
-    paymentMethod: 'credit-card'
-  };
+  editFormData: FormGroup;
+  subscriptionFormData: FormGroup;
   availablePlans: any[] = [];
+  originalFormData: any = {};
 
-  constructor(private memberService: MemberService) { }
+  constructor(private memberService: MemberService, private planService: PlanService, private fb: FormBuilder) {
+    this.editFormData = this.fb.group({
+      first_name: [''],
+      last_name: [''],
+      email: [''],
+    });
+
+    this.subscriptionFormData = this.fb.group({
+      plan: [''],
+      sessions: [1],
+      paymentMethod: ['']
+    })
+   }
 
   ngOnInit() {
-    this.getMemberProfile();
     this.getAvailablePlans();
   }
 
-  getMemberProfile() {
-    this.memberService.getMember(this.member).subscribe({
-      next: (res: any) => {
-        this.member = res;
-        this.initEditForm();
+  toggleEditMode() {
+    this.editMode = !this.editMode;
+    if(this.editMode){
+      this.editFormData.patchValue({
+        first_name: this.member?.fitapi_user?.first_name,
+        last_name: this.member?.fitapi_user?.last_name,
+        email: this.member?.fitapi_user?.email
+      });
+      this.originalFormData = { ...this.editFormData.value };
+    }
+  }
+
+  getAvailablePlans() {
+    this.planService.getAllPlans().subscribe({
+      next: (res: any)=>{
+        this.availablePlans = res
       },
-      error: (err: any) => {
+      error: (err)=>{
         console.log(err);
       }
     })
   }
 
-  getAvailablePlans() {
-    this.memberService.getAvailablePlans().subscribe({
-      next: (res: any) => {
-        this.availablePlans = res;
-        if (this.availablePlans.length > 0) {
-          this.subscriptionFormData.plan = this.availablePlans[0].id;
-        }
-      },
-      error: (err: any) => {
-        console.log('Error fetching plans:', err);
-        this.availablePlans = [];
+  private getChangedFields(): any {
+    const changedFields: any = {};
+    const formControls = this.editFormData.controls;
+
+    Object.keys(formControls).forEach(key => {
+      const control = formControls[key];
+      const currentValue = control.value;
+      const originalValue = this.originalFormData[key];
+
+      // Check if field is dirty AND value is different from original
+      if (control.dirty && currentValue !== originalValue) {
+        changedFields[key] = currentValue;
       }
     });
-  }
 
-  initEditForm() {
-    this.editFormData = {
-      first_name: this.member?.fitapi_user?.first_name,
-      last_name: this.member?.fitapi_user?.last_name,
-      email: this.member?.fitapi_user?.email,
-    };
-    
-    this.subscriptionFormData = {
-      plan: this.member?.subscription_plan_id || '',
-      sessions: this.member?.subscription_sessions || 1,
-      paymentMethod: this.member?.payment_method || 'credit-card'
-    };
-  }
-
-  toggleEditMode() {
-    this.editMode = !this.editMode;
-    if (!this.editMode) {
-      this.initEditForm();
-    }
+    return changedFields;
   }
 
   saveProfile() {
-    const updateData = {
-      first_name: this.editFormData.first_name,
-      last_name: this.editFormData.last_name,
-      email: this.editFormData.email,
-    };
+    const changedData = this.getChangedFields();
 
-    this.memberService.updateMember(this.member.id, updateData).subscribe({
+    if (Object.keys(changedData).length === 0) {
+      return;
+    }
+
+    this.memberService.updateMember(this.member.fitapi_user.id, changedData).subscribe({
       next: (res: any) => {
-        this.member.fitapi_user = {
-          ...this.member.fitapi_user,
-          ...updateData
-        };
-        console.log('Profile updated successfully');
+        this.member.fitapi_user = { ...this.member.fitapi_user, ...changedData };
+        this.editFormData.reset(this.editFormData.value);
+        this.toggleEditMode();
       },
       error: (err: any) => {
         console.log('Error updating member:', err);
