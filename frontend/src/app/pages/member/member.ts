@@ -51,7 +51,7 @@ export class Member implements OnInit {
   applyFilter(){}
 
   selectedMember(member: any){
-    this.selectMember = member.id
+    this.selectMember = member
   }
 
   closeProfile() {

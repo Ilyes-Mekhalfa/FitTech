@@ -52,7 +52,7 @@
     <ng-container *ngIf="editMode">
       <div class="profile-preview-card__edit">
         <!-- Profile Edit Section -->
-        <div class="edit-section">
+        <div class="edit-section" [formGroup]="editFormData">
           <div class="edit-header">
             <h4>Edit Profile Information</h4>
           </div>
@@ -63,8 +63,8 @@
               <input 
                 type="text" 
                 class="form-input" 
-                [(ngModel)]="editFormData.first_name"
-                placeholder="First name">
+                formControlName="first_name"
+                >
             </div>
 
             <div class="form-group">
@@ -72,8 +72,7 @@
               <input 
                 type="text" 
                 class="form-input" 
-                [(ngModel)]="editFormData.last_name"
-                placeholder="Last name">
+                formControlName="last_name">
             </div>
 
             <div class="form-group">
@@ -81,8 +80,7 @@
               <input 
                 type="email" 
                 class="form-input" 
-                [(ngModel)]="editFormData.email"
-                placeholder="Email address">
+                formControlName="email">
             </div>
 
             <div class="form-actions">
@@ -99,15 +97,15 @@
             <h4>Update Subscription</h4>
           </div>
 
-          <div class="edit-form">
+          <div class="edit-form" [formGroup]="subscriptionFormData">
             <div class="form-group">
               <label class="form-label">Select Plan</label>
               <select 
                 class="form-input form-select" 
-                [(ngModel)]="subscriptionFormData.plan">
+                formControlName="plan">
                 <option value="">Choose a plan...</option>
                 <option *ngFor="let plan of availablePlans" [value]="plan.id">
-                  {{ plan.name }} - ${{ plan.price }}/month
+                  {{ plan.name }}
                 </option>
               </select>
             </div>
@@ -117,9 +115,8 @@
               <input 
                 type="number" 
                 class="form-input" 
-                [(ngModel)]="subscriptionFormData.sessions"
                 min="1"
-                placeholder="Number of sessions">
+                formControlName="sessions">
             </div>
 
             <div class="form-group">
@@ -128,17 +125,15 @@
                 <label class="payment-option">
                   <input 
                     type="radio" 
-                    name="payment-method" 
                     value="cash"
-                    [(ngModel)]="subscriptionFormData.paymentMethod">
+                    formControlName="paymentMethod">
                   <span>Cash</span>
                 </label>
                 <label class="payment-option">
                   <input 
                     type="radio" 
-                    name="payment-method" 
                     value="credit-card"
-                    [(ngModel)]="subscriptionFormData.paymentMethod">
+                    formControlName="paymentMethod">
                   <span>Credit Card</span>
                 </label>
               </div>
