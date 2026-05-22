@@ -23,11 +23,11 @@ export class MemberService {
   }
 
   updateMember(id: string, data: any){
-    return this.http.put(`${this.APIUrl}/member/${id}`, data, {withCredentials: true})
+    return this.http.patch(`${this.APIUrl}/member/updateMember/${id}`, data, {withCredentials: true})
   }
 
-  getAvailablePlans(){
-    return this.http.get(`${this.APIUrl}/subscription/plans`, {withCredentials: true})
+  deleteMember(id: string){
+    return this.http.delete(`${this.APIUrl}/member/deleteMember/${id}`, {withCredentials: true})
   }
 
   updateSubscription(memberId: string, data: any){

@@ -18,10 +18,11 @@ export class MemberProfile {
   editFormData: FormGroup;
   subscriptionFormData: FormGroup;
   availablePlans: any[] = [];
+  originalFormData: any = {};
 
   constructor(private memberService: MemberService, private planService: PlanService, private fb: FormBuilder) {
     this.editFormData = this.fb.group({
-      first_name: [this.member?.fitapi_user?.first_name],
+      first_name: [''],
       last_name: [''],
       email: [''],
     });
@@ -37,8 +38,6 @@ export class MemberProfile {
     this.getAvailablePlans();
   }
 
-  
-
   toggleEditMode() {
     this.editMode = !this.editMode;
     if(this.editMode){
@@ -46,7 +45,8 @@ export class MemberProfile {
         first_name: this.member?.fitapi_user?.first_name,
         last_name: this.member?.fitapi_user?.last_name,
         email: this.member?.fitapi_user?.email
-      })
+      });
+      this.originalFormData = { ...this.editFormData.value };
     }
   }
 
@@ -57,19 +57,40 @@ export class MemberProfile {
       },
       error: (err)=>{
         console.log(err);
-        
       }
     })
   }
 
+  private getChangedFields(): any {
+    const changedFields: any = {};
+    const formControls = this.editFormData.controls;
+
+    Object.keys(formControls).forEach(key => {
+      const control = formControls[key];
+      const currentValue = control.value;
+      const originalValue = this.originalFormData[key];
+
+      // Check if field is dirty AND value is different from original
+      if (control.dirty && currentValue !== originalValue) {
+        changedFields[key] = currentValue;
+      }
+    });
+
+    return changedFields;
+  }
+
   saveProfile() {
-    this.memberService.updateMember(this.member.id, this.editFormData).subscribe({
+    const changedData = this.getChangedFields();
+
+    if (Object.keys(changedData).length === 0) {
+      return;
+    }
+
+    this.memberService.updateMember(this.member.fitapi_user.id, changedData).subscribe({
       next: (res: any) => {
-        this.member.fitapi_user = {
-          ...this.member.fitapi_user,
-          ...this.editFormData
-        };
-        console.log('Profile updated successfully');
+        this.member.fitapi_user = { ...this.member.fitapi_user, ...changedData };
+        this.editFormData.reset(this.editFormData.value);
+        this.toggleEditMode();
       },
       error: (err: any) => {
         console.log('Error updating member:', err);

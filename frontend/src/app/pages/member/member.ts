@@ -57,4 +57,12 @@ export class Member implements OnInit {
   closeProfile() {
     this.selectMember = null;
   }
+
+  deleteMember(member: any){
+    this.memberService.deleteMember(member.id).subscribe({
+      next:(res)=>{
+        
+      }
+    })
+  }
 }
