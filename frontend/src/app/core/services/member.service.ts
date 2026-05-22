@@ -29,7 +29,10 @@ export class MemberService {
   deleteMember(id: string){
     return this.http.delete(`${this.APIUrl}/member/deleteMember/${id}`, {withCredentials: true})
   }
-
+  
+  archiveMember(id: string){
+    return this.http.patch(`${this.APIUrl}/member/archiveMember/${id}`,{},{withCredentials: true})
+  }
   updateSubscription(memberId: string, data: any){
     return this.http.put(`${this.APIUrl}/member/${memberId}/subscription`, data, {withCredentials: true})
   }
