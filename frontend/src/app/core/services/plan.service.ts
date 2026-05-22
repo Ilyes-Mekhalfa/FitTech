@@ -13,4 +13,16 @@ export class PlanService {
   getAllPlans(){
     return this.http.get(`${this.APIUrl}/plan/allPlans`)
   }
+
+  createPlan(plan:any){
+    return this.http.post(`${this.APIUrl}/plan/add`,plan)
+  }
+
+  deletePlan(id:string){
+    return this.http.delete(`${this.APIUrl}/plan/${id}`, {withCredentials: true})
+  }
+
+  updatePlan(id: string, updateDate: any){
+    return this.http.patch(`${this.APIUrl}/plan/${id}`, updateDate, {withCredentials: true})
+  }
 }

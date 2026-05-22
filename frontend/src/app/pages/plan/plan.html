@@ -29,7 +29,7 @@
         <h1 class="page-header__title">Membership Plans</h1>
         <p class="page-header__subtitle">Configure and manage membership tiers for your elite athletes.</p>
       </div>
-      <button class="btn btn-primary">
+      <button class="btn btn-primary" (click)="createNewPlan()">
         <span class="material-symbols-outlined">add</span> Create New Plan
       </button>
     </div>
@@ -49,13 +49,7 @@
           <span class="material-symbols-outlined">arrow_upward</span> +12% from last month
         </p>
       </div>
-      <!-- <div class="stat-card stat-card--featured">
-        <p class="stat-card__label">Monthly Revenue</p>
-        <p class="stat-card__value">$184k</p>
-        <p class="stat-card__meta">
-          <span class="material-symbols-outlined">payments</span> Target: $200k
-        </p>
-      </div> -->
+     
       <div class="stat-card">
         <p class="stat-card__label">Avg. Retention</p>
         <p class="stat-card__value">91%</p>
@@ -69,17 +63,17 @@
       <div class="main-column">
         <div class="filter-bar">
           <div class="filter-tabs">
-            <button class="filter-tab active">All Plans</button>
-            <button class="filter-tab">Active</button>
-            <button class="filter-tab">Inactive</button>
-            <button class="filter-tab">Archived</button>
+            <button class="filter-tab" [class.active]="currentFilter === 'all'" (click)="filterPlan('all')">All Plans</button>
+            <button class="filter-tab" [class.active]="currentFilter === 'weekly'" (click)="filterPlan('weekly')">Weekly</button>
+            <button class="filter-tab" [class.active]="currentFilter === 'monthly'" (click)="filterPlan('monthly')">Monthly</button>
+            <button class="filter-tab" [class.active]="currentFilter === 'yearly'" (click)="filterPlan('yearly')">Yearly</button>
           </div>
           <div class="filter-sort">
             <span class="filter-sort__label">Sort by:</span>
-            <select (change)="filterPlans">
-              <option>Newest First</option>
-              <option>Price (High–Low)</option>
-              <option>Popularity</option>
+            <select (change)="SortPlans($event)">
+              <option value="newest">Newest First</option>
+              <option value="price">Price (High–Low)</option>
+              <option value="popularity">Popularity</option>
             </select>
           </div>
         </div>
@@ -96,7 +90,7 @@
                 <th class="align-right">Actions</th>
               </tr>
             </thead>
-            <tbody *ngFor="let plan of plans">
+            <tbody *ngFor="let plan of plans" (click)="selectPlan(plan)">
               <tr>
                 <td>
                   <div class="plan-name-cell">
@@ -113,9 +107,7 @@
                 <td><span class="badge badge-active">Active</span></td>
                 <td class="align-right">
                   <div class="row-actions">
-                    <button class="btn-icon"><span class="material-symbols-outlined">edit</span></button>
-                    <button class="btn-icon"><span class="material-symbols-outlined">content_copy</span></button>
-                    <button class="btn-icon btn-icon-danger"><span class="material-symbols-outlined">delete</span></button>
+                    <button class="btn-icon btn-icon-danger"><span class="material-symbols-outlined" (click)="deletePlan(plan.id)">delete</span></button>
                   </div>
                 </td>
               </tr>
@@ -133,42 +125,125 @@
           </div>
         </div>
       </div>
+      @if(selectedPlan){
+        <div class="side-panel">
+          <div class="panel-banner">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600" alt="Plan" />
+            <span class="panel-banner-label">Selected Preview</span>
+            <h2>{{ selectedPlan.name }}</h2>
+          </div>
 
-      <aside class="side-panel">
-        <div class="plan-preview-card">
-          <div class="plan-preview-img">
-            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600" alt="Gym" />
-            <div class="plan-preview-img__overlay"></div>
-            <span class="plan-preview-img__badge">Selected Preview</span>
-            <h3 class="plan-preview-img__title">Titanium Elite</h3>
+          <div class="panel-mode-tabs">
+            <button [class.active]="panelMode === 'view'"
+                    (click)="panelMode = 'view'">Plan Info</button>
+            <button [class.active]="panelMode === 'edit'"
+                    (click)="switchToEdit()">Edit Plan</button>
           </div>
-          <div class="plan-preview-body">
-            <p class="preview-section-label">Key Features</p>
-            <ul class="feature-list">
-              <li>
-                <span class="material-symbols-outlined feature-list__icon">check_circle</span>
-                <div>
-                  <p class="feature-list__name">24/7 Priority Access</p>
-                  <p class="feature-list__desc">Enter any FitTech location worldwide.</p>
+
+          <!-- view mode -->
+          <div class="panel-body" *ngIf="panelMode === 'view'">
+            <div class="panel-meta-row">
+              <div class="panel-meta-item">
+                <span class="panel-meta-label">
+                  <span class="material-symbols-outlined">autorenew</span>
+                  Auto Renew
+                </span>
+                <span class="panel-meta-value">
+                  {{ selectedPlan.auto_renew ? 'Enabled' : 'Disabled' }}
+                </span>
+              </div>
+            </div>
+
+            <div class="panel-stats-grid">
+              <div>
+                <p>Sessions</p>
+                <strong>{{ selectedPlan.sessions_count }}</strong>
+              </div>
+              <div>
+                <p>Duration</p>
+                <strong>{{ selectedPlan.duration_days }} Days</strong>
+              </div>
+              <div>
+                <p>Price</p>
+                <strong>{{ selectedPlan.price }}</strong>
+              </div>
+              <div>
+                <p>Type</p>
+                <strong style="text-transform: capitalize;">{{ selectedPlan.type }}</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- edit mode -->
+          <div class="panel-body" *ngIf="panelMode === 'edit'"
+               [formGroup]="editPlanForm">
+
+            <div class="panel-field">
+              <label>Plan Name</label>
+              <input type="text" formControlName="name" />
+            </div>
+
+            <div class="panel-field">
+              <label>Type</label>
+              <div class="pill-group">
+                <button type="button"
+                  [class.active]="editPlanForm.get('type')?.value === 'monthly'"
+                  (click)="setEditType('monthly')">Monthly</button>
+                <button type="button"
+                  [class.active]="editPlanForm.get('type')?.value === 'yearly'"
+                  (click)="setEditType('yearly')">Yearly</button>
+              </div>
+            </div>
+
+            <div class="panel-field-row">
+              <div class="panel-field">
+                <label>Price</label>
+                <input type="number" formControlName="price" />
+              </div>
+              <div class="panel-field">
+                <label>Sessions</label>
+                <input type="number" formControlName="sessions_count" />
+              </div>
+            </div>
+
+            <div class="panel-field">
+              <label>Duration (Days)</label>
+              <input type="number" formControlName="duration_days" />
+            </div>
+
+            <div class="panel-field">
+              <label>Auto Renew</label>
+              <div class="toggle"
+                (click)="toggleEditAutoRenew()"
+                [class.active]="editPlanForm.get('auto_renew')?.value">
+                <div class="track"
+                  [class.active]="editPlanForm.get('auto_renew')?.value">
+                  <div class="thumb"></div>
                 </div>
-              </li>
-            </ul>
-            <div class="plan-metrics">
-              <div>
-                <p class="plan-metric__label">Churn Rate</p>
-                <p class="plan-metric__value">2.4%</p>
-              </div>
-              <div>
-                <p class="plan-metric__label">Growth</p>
-                <p class="plan-metric__value plan-metric__value--positive">+18%</p>
+                <span>{{ editPlanForm.get('auto_renew')?.value ? 'Enabled' : 'Disabled' }}</span>
               </div>
             </div>
-            <div class="plan-actions">
-              <button class="btn btn-secondary">Edit Full Plan</button>
+
+            <div class="panel-actions">
+              <button class="btn btn-ghost" type="button" (click)="panelMode = 'view'">
+                Cancel
+              </button>
+              <button class="btn btn-primary" type="button" (click)="saveEdit()">
+                Save Changes
+              </button>
             </div>
+
           </div>
+
         </div>
-      </aside>
+      } @else{
+        <aside class="sidebar-column">
+          <div class="sidebar-placeholder">
+            <span class="material-symbols-outlined placeholder-icon">inventory_2</span>
+            <p class="placeholder-text">Select a plan to view full plan details and history.</p>
+          </div>
+        </aside>
+      }
     </div>
   </div>
 </main>

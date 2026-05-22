@@ -1,1 +1,181 @@
-<p>create-plan works!</p>
+<!-- Topbar -->
+<header class="topbar">
+  <div class="breadcrumb">
+    <span>Plans</span> / <strong>Create Plan</strong>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Page Header -->
+  <div class="header">
+    <h1>Create Membership Plan</h1>
+    <p>Configure and publish a new subscription tier for your athletes.</p>
+  </div>
+
+  <div class="layout">
+
+    <!-- ── LEFT FORM ── -->
+    <div class="form" [formGroup]="createPlanForm">
+
+      <!-- Identity Card -->
+      <div class="card">
+        <h3>
+          <span class="section-icon">
+            <span class="material-symbols-outlined" style="font-size:18px;">badge</span>
+          </span>
+          Plan Identity
+        </h3>
+
+        <div class="field-grid">
+          <div class="field full">
+            <label>Plan Name</label>
+            <input type="text" placeholder="e.g. Titanium Elite" formControlName="name" />
+          </div>
+
+          <div class="field full">
+            <label>Plan Type</label>
+            <div class="pill-group">
+              <button type="button"
+                [class.active]="createPlanForm.get('type')?.value === 'Premium'"
+                (click)="setPlanType('Premium')">Premium</button>
+              <button type="button"
+                [class.active]="createPlanForm.get('type')?.value === 'Basic'"
+                (click)="setPlanType('Basic')">Basic</button>
+              <button type="button"
+                [class.active]="createPlanForm.get('type')?.value === 'Yoga'"
+                (click)="setPlanType('Yoga')">Yoga</button>
+              <button type="button"
+                [class.active]="createPlanForm.get('type')?.value === 'Swimming'"
+                (click)="setPlanType('Swimming')">Swimming</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing Card -->
+      <div class="card">
+        <h3>
+          <span class="section-icon">
+            <span class="material-symbols-outlined" style="font-size:18px;">payments</span>
+          </span>
+          Pricing
+        </h3>
+
+        <div class="field-grid">
+          <div class="field">
+            <label>Price (USD)</label>
+            <input type="number" placeholder="0.00" formControlName="price" />
+          </div>
+
+          <div class="field">
+            <label>Auto Renew</label>
+            <div class="toggle"
+              (click)="toggleAutoRenew()"
+              [class.active]="createPlanForm.get('auto_renew')?.value">
+              <div class="track"
+                [class.active]="createPlanForm.get('auto_renew')?.value">
+                <div class="thumb"></div>
+              </div>
+              <span>{{ createPlanForm.get('auto_renew')?.value ? 'Enabled' : 'Disabled' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sessions Card -->
+      <div class="card">
+        <h3>
+          <span class="section-icon">
+            <span class="material-symbols-outlined" style="font-size:18px;">event_available</span>
+          </span>
+          Sessions & Duration
+        </h3>
+
+        <div class="field-grid">
+          <div class="field">
+            <label>Sessions Count</label>
+            <input type="number" placeholder="1" formControlName="sessions_count" />
+          </div>
+
+          <div class="field">
+            <label>Duration (Days)</label>
+            <input type="number" placeholder="30" formControlName="duration_days" />
+          </div>
+
+          <div class="field full">
+            <label>Quick Presets</label>
+            <div class="pill-group">
+              <button type="button"
+                [class.active]="createPlanForm.get('duration_days')?.value == 7"
+                (click)="setDuration(7)">1 Week</button>
+              <button type="button"
+                [class.active]="createPlanForm.get('duration_days')?.value == 30"
+                (click)="setDuration(30)">1 Month</button>
+              <button type="button"
+                [class.active]="createPlanForm.get('planDuration')?.value == 90"
+                (click)="setDuration(90)">3 Months</button>
+              <button type="button"
+                [class.active]="createPlanForm.get('planDuration')?.value == 365"
+                (click)="setDuration(365)">1 Year</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── RIGHT PREVIEW ── -->
+    <div class="preview">
+
+      <!-- Profile card -->
+      <div class="preview-card">
+        <div class="preview-banner">
+          <div class="preview-avatar">
+            {{ (createPlanForm.get('planName')?.value?.[0] || 'P') | uppercase }}
+          </div>
+        </div>
+        <div class="preview-body">
+          <div class="preview-name">
+            {{ createPlanForm.get('planName')?.value || 'New Plan' }}
+          </div>
+          <div class="preview-email">plan&#64;fittech.com</div>
+          <div class="preview-badges">
+            <span class="preview-badge active">Active</span>
+            <span class="preview-badge type">
+              {{ createPlanForm.get('planType')?.value || 'Plan' }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="preview-progress">
+        <div class="progress-header">
+          <span>Profile Completion</span>
+          <strong>{{ completionPct }}%</strong>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" [style.width.%]="completionPct"></div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="preview-cta">
+        <button type="button" (click)="onSubmit()">
+          Create Plan
+          <span class="material-symbols-outlined" style="font-size:18px;">chevron_right</span>
+        </button>
+      </div>
+
+      <!-- Payload panel -->
+      <div class="payload-panel">
+        <div class="payload-label">Payload Preview</div>
+        <pre>{{ createPlanForm.value | json }}</pre>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
