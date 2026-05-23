@@ -122,7 +122,7 @@
           <p>Select a coach to view full profile details</p>
         </div>
       } @else {
-        <app-coach-profile [coachId]="selectedCoach"></app-coach-profile>
+        <app-coach-profile [coach]="selectedCoach" [close]="closeProfile"></app-coach-profile>
       }
     </aside>
 

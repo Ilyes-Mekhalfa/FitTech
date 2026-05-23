@@ -36,9 +36,6 @@ export class Coach implements OnInit {
     this.selectedCoach = coach.id;
   }
 
-  editCoach(){
-    return 1
-  }
   
   deleteCoach(){
     return 1
@@ -52,5 +49,9 @@ export class Coach implements OnInit {
   }
   rejectApproval(){
     return 1
+  }
+
+  closeProfile(){
+    this.selectedCoach = null;
   }
 }
