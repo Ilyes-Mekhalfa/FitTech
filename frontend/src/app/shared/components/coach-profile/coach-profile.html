@@ -1,7 +1,7 @@
-<div class="panel" >
+<div class="panel">
 
   <!-- Empty state -->
-  <div  class="empty-state">
+  <div class="empty-state">
     <div class="empty-icon">
       <span class="material-symbols-outlined">person_search</span>
     </div>
@@ -10,105 +10,222 @@
   </div>
 
   <!-- Filled state -->
-  <ng-container >
+  <ng-container *ngIf="coach">
 
-    <!-- Banner -->
-    <div class="banner">
-      <button class="close-btn" (click)="close()">×</button>
-
-      <div class="avatar" >
-         {{coach.photo || 'C'}} 
-      </div>
+    <!-- Mode Toggle Header -->
+    <div class="mode-toggle-header">
+      <button 
+        class="mode-btn" 
+        [class.active]="!editMode"
+        (click)="editMode = false">
+        View
+      </button>
+      <button 
+        class="mode-btn" 
+        [class.active]="editMode"
+        (click)="editMode = true">
+        Edit
+      </button>
     </div>
 
-    <!-- Header -->
-    <div class="section header">
-      <div>
-        <h3 class="name"> {{coach.first_name + ' ' + coach.last_name}} </h3>
-        <p class="email"> {{coach.email}} </p>
-      </div>
-
-      <span class="badge"
-        >
-         ssds
-      </span>
-    </div>
-
-    <!-- Stats -->
-    <div class="stats">
-      <div class="stat">
-        <b> {{coach.clients}} </b>
-        <span>Clients</span>
-      </div>
-      <div class="stat">
-        <b> {{coach.rating}} </b>
-        <span>Rating</span>
-      </div>
-      <div class="stat">
-        <b>{{coach.experience}} </b>
-        <span>Exp.</span>
-      </div>
-    </div>
-
-    <!-- Specialties -->
-    <div class="section">
-      <p class="label">Specialties</p>
-      <div>
-        <span class="pill" >
-           {{coach.specialties}} 
-        </span>
-      </div>
-    </div>
-
-    <!-- Annex -->
-    <div class="section row">
-      <span class="material-symbols-outlined icon">location_on</span>
-      <div>
-        <p class="label">Assigned Annex</p>
-        <p class="value"> c.annex </p>
-      </div>
-    </div>
-
-    <!-- Bio -->
-    <div class="section">
-      <p class="label">Biography</p>
-      <p class="bio"> {{coach.biography}} </p>
-    </div>
-
-    <!-- Performance -->
-    <div class="section">
-      <p class="label">Performance</p>
-
-      <div class="perf" >
-        <div class="perf-head">
-          <span> labels[i] </span>
-          <b> p%</b>
-        </div>
-        <div class="bar">
-          <div class="fill" ></div>
+    <!-- VIEW MODE -->
+    <ng-container *ngIf="!editMode">
+      <!-- Banner -->
+      <div class="banner">
+        <div class="avatar">
+          {{coach.photo || 'C'}}
         </div>
       </div>
-    </div>
 
-    <!-- Actions -->
-    <div class="section actions">
-      <button class="primary-btn">
-        <span class="material-symbols-outlined">edit</span>
-        Edit Profile
-      </button>
+      <!-- Header -->
+      <div class="section header">
+        <div>
+          <h3 class="name">{{coach.first_name + ' ' + coach.last_name}}</h3>
+          <p class="email">{{coach.email}}</p>
+        </div>
+        <span class="badge">Active</span>
+      </div>
 
-      <button class="icon-btn">
-        <span class="material-symbols-outlined">chat_bubble</span>
-      </button>
+      <!-- Stats -->
+      <div class="stats">
+        <div class="stat">
+          <b>{{coach.clients}}</b>
+          <span>Clients</span>
+        </div>
+        <div class="stat">
+          <b>{{coach.rating}}</b>
+          <span>Rating</span>
+        </div>
+        <div class="stat">
+          <b>{{coach.experience}}</b>
+          <span>Exp.</span>
+        </div>
+      </div>
 
-      <button class="icon-btn">
-        <span class="material-symbols-outlined">open_in_new</span>
-      </button>
+      <!-- Specialties -->
+      <div class="section">
+        <p class="label">Specialties</p>
+        <div>
+          <span class="pill">{{coach.specialties}}</span>
+        </div>
+      </div>
 
-      <button class="icon-btn danger">
-        <span class="material-symbols-outlined">block</span>
-      </button>
-    </div>
+      <!-- Bio -->
+      <div class="section">
+        <p class="label">Biography</p>
+        <p class="bio">{{coach.biography}}</p>
+      </div>
+
+      <!-- Performance -->
+      <div class="section">
+        <p class="label">Performance</p>
+        <div class="perf">
+          <div class="perf-head">
+            <span>Performance</span>
+            <b>85%</b>
+          </div>
+          <div class="bar">
+            <div class="fill" style="width: 85%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Close Button -->
+      <div class="section actions">
+        <button class="primary-btn" (click)="close()">
+          <span class="material-symbols-outlined">close</span>
+          Close
+        </button>
+      </div>
+    </ng-container>
+
+    <!-- EDIT MODE -->
+    <ng-container *ngIf="editMode">
+      <div class="edit-container">
+        
+        <!-- Profile Edit Section -->
+        <div class="edit-section">
+          <div class="edit-header">
+            <h4>Edit Coach Profile</h4>
+          </div>
+
+          <div class="edit-form">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input 
+                type="text" 
+                class="form-input" 
+                [value]="coach.first_name"
+                placeholder="First name">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input 
+                type="text" 
+                class="form-input" 
+                [value]="coach.last_name"
+                placeholder="Last name">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input 
+                type="email" 
+                class="form-input" 
+                [value]="coach.email"
+                placeholder="Email address">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Specialties</label>
+              <input 
+                type="text" 
+                class="form-input" 
+                [value]="coach.specialties"
+                placeholder="e.g., Yoga, Pilates, CrossFit">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Biography</label>
+              <textarea 
+                class="form-input form-textarea" 
+                rows="4"
+                placeholder="Coach biography">{{coach.biography}}</textarea>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn--primary">
+                Save Profile
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add Program Section -->
+        <div class="edit-section program-edit-section">
+          <div class="edit-header">
+            <h4>Add New Program</h4>
+          </div>
+
+          <div class="edit-form">
+            <div class="form-group">
+              <label class="form-label">Program Name</label>
+              <input 
+                type="text" 
+                class="form-input" 
+                placeholder="e.g., 12-Week Fitness Challenge">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Description</label>
+              <textarea 
+                class="form-input form-textarea" 
+                rows="3"
+                placeholder="Program description"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Difficulty Level</label>
+              <select class="form-input form-select">
+                <option value="">Choose difficulty...</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Duration (weeks)</label>
+              <input 
+                type="number" 
+                class="form-input" 
+                min="1"
+                placeholder="Number of weeks">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Max Participants</label>
+              <input 
+                type="number" 
+                class="form-input" 
+                min="1"
+                placeholder="Maximum number of participants">
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn--primary">
+                Create Program
+              </button>
+              <button class="btn btn--secondary" (click)="editMode = false">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </ng-container>
 
   </ng-container>
 </div>
