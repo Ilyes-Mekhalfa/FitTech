@@ -97,18 +97,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="table-row" *ngFor= "let coach of coachs" (click)="selectCoach(coach)" [class.active-row]="selectedCoach === coach">
+            <tr class="table-row" *ngFor= "let coach of coachs" (click)="selectCoach(coach)">
               <td>
                 <div class="user-cell">
-                  <div class="user-avatar-main">MT</div>
+                  <div class="user-avatar-main">{{coach.fitapi_user?.first_name?.charAt(0)}}{{coach.fitapi_user?.last_name?.charAt(0)}}</div>
                   <div class="user-info">
-                    <span class="user-name">Marcus Thorne</span>
-                    <small class="user-email">m.thorne@fittech.com</small>
+                    <span class="user-name">{{coach.fitapi_user?.first_name}} {{coach.fitapi_user?.last_name}}</span>
+                    <small class="user-email">{{coach.fitapi_user?.email}}</small>
                   </div>
                 </div>
               </td>
               <td><span class="badge-active">Active</span></td>
-              <td class="td-right">8 Years</td>
+              <td class="td-right">{{coach.years_of_experience}} Years</td>
             </tr>
           </tbody>
         </table>
@@ -116,13 +116,13 @@
     </div>
 
     <aside class="profile-sidebar">
-      @if (!selectedCoach) {
+      @if (selectedCoach) {
+        <app-coach-profile [coach]="selectedCoach" (close)="closeProfile()"></app-coach-profile>
+      } @else {
         <div class="empty-state-card">
           <span class="material-symbols-outlined">contact_page</span>
           <p>Select a coach to view full profile details</p>
         </div>
-      } @else {
-        <app-coach-profile [coach]="selectedCoach" [close]="closeProfile"></app-coach-profile>
       }
     </aside>
 

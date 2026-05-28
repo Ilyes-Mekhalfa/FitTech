@@ -1,49 +1,65 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { CoachService } from '../../../core/services/coach.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup } from '@angular/forms';
+
 @Component({
   selector: 'app-coach-profile',
+  standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './coach-profile.html',
-  styleUrl: './coach-profile.css',
+  styleUrls: ['./coach-profile.css'],
 })
-export class CoachProfile {
+export class CoachProfile implements OnInit {
   @Input() coach: any;
   @Output() close = new EventEmitter<void>();
+
   editMode = false;
-  editFormData: FormGroup;
-  originalFormData: any = {};
+  editFormData!: FormGroup;
+  private originalFormData: any = {};
+
   constructor(
     private coachService: CoachService,
     private fb: FormBuilder,
   ) {
-    this.editFormData = fb.group({
+    this.initForm();
+  }
+
+  ngOnInit() {
+    if (this.coach) {
+      console.log('Coach data initialized:', this.coach);
+      this.syncOriginalData();
+    }
+  }
+
+  private initForm() {
+    this.editFormData = this.fb.group({
       first_name: [''],
       last_name: [''],
       email: [''],
       specialty: [''],
+      biography: [''] // Added missing biography control
     });
   }
 
-  onInit() {}
+  // Flattens nested object structure for accurate dirty/change checking
+  private syncOriginalData() {
+    this.originalFormData = {
+      first_name: this.coach?.fitapi_user?.first_name || '',
+      last_name: this.coach?.fitapi_user?.last_name || '',
+      email: this.coach?.fitapi_user?.email || '',
+      specialty: this.coach?.specialties || '',
+      biography: this.coach?.biography || ''
+    };
+  }
 
   toggleEditMode() {
     this.editMode = !this.editMode;
     if (this.editMode) {
-      this.editFormData.patchValue({
-        first_name: this.coach?.fitapi_user?.first_name,
-        last_name: this.coach?.fitapi_user?.last_name,
-        email: this.coach?.fitapi_user?.email,
-        specialty: this.coach?.specialties,
-      });
+      this.editFormData.patchValue(this.originalFormData);
     }
-    //storing the original data in variable to compare it later with the updated data
-    this.originalFormData = { ...this.originalFormData };
   }
 
-  //filtering the changed fields from the unchanged fields
   private getChangedFields(): any {
     const changedFields: any = {};
     const formControls = this.editFormData.controls;
@@ -53,7 +69,6 @@ export class CoachProfile {
       const currentValue = control.value;
       const originalValue = this.originalFormData[key];
 
-      // Check if field is dirty AND value is different from original
       if (control.dirty && currentValue !== originalValue) {
         changedFields[key] = currentValue;
       }
@@ -61,22 +76,30 @@ export class CoachProfile {
     return changedFields;
   }
 
-  //saving the profile after updating
   saveProfile() {
+    if (this.editFormData.invalid) return;
+
     const changedData = this.getChangedFields();
 
-    if (Object.keys(changedData).length == 0) {
+    if (Object.keys(changedData).length === 0) {
+      this.editMode = false;
       return;
     }
 
     this.coachService.updateCoach(this.coach.fitapi_user.id, changedData).subscribe({
       next: (res) => {
-        console.log('coach updated successfully');
+        console.log('Coach updated successfully');
         this.coach = res;
+        this.syncOriginalData();
+        this.editMode = false;
       },
       error: (err) => {
-        console.log('error updating the coach', err);
+        console.error('Error updating the coach', err);
       },
     });
+  }
+
+  closeProfile() {
+    this.close.emit();
   }
 }
