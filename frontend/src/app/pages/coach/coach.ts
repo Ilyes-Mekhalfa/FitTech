@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { CoachProfile } from '../../shared/components/coach-profile/coach-profile';
 @Component({
   selector: 'app-coach',
-  imports: [CommonModule ,CoachProfile],
+  imports: [CommonModule , CoachProfile],
   templateUrl: './coach.html',
   styleUrl: './coach.css',
 })
@@ -17,7 +17,7 @@ export class Coach implements OnInit {
   constructor( private router: Router, private coachService: CoachService){}
 
   ngOnInit(): void {
-    this.coachService.getAllCoachs().subscribe({
+    this.coachService.getAllCoaches().subscribe({
       next: (res: any)=>{
         this.coachs = res
       },
@@ -33,7 +33,7 @@ export class Coach implements OnInit {
   }
 
   selectCoach(coach: any){
-    this.selectedCoach = coach.id;
+    this.selectedCoach = coach;
   }
 
   

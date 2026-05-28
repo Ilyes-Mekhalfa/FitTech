@@ -14,7 +14,7 @@ export class CoachService {
     return this.http.post<any>(`${this.APIUrl}/coach/add`, coach, {withCredentials: true})
   }
 
-  getAllCoachs(){
+  getAllCoaches(){
     return this.http.get(`${this.APIUrl}/coach/allCoachs`, {withCredentials: true})
   }
 
