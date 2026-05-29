@@ -122,7 +122,7 @@ export class CoachProfile implements OnInit, OnChanges {
 
   addNewCourse() {
     if(!this.addCourse.valid){
-      throw new Error('form invalid');
+      console.log('form invalid', this.addCourse.errors);
     }
 
     this.coachService.addCourse(this.coach.id, this.addCourse.value).subscribe({
