@@ -13,13 +13,16 @@ export class Coach implements OnInit {
 
   approvalCount: number =0;
   coachs: any;
+  pendingRequests: any;
   selectedCoach: any ;
   constructor( private router: Router, private coachService: CoachService){}
 
   ngOnInit(): void {
     this.coachService.getAllCoaches().subscribe({
       next: (res: any)=>{
-        this.coachs = res
+        console.log(res);
+        this.coachs = res.coaches;
+        this.pendingRequests =  res.pendingRequests;
       },
       error: (err)=>{
         console.log(err);
@@ -37,18 +40,57 @@ export class Coach implements OnInit {
   }
 
   
-  deleteCoach(){
-    return 1
+  deleteCoach(coach: any){
+    alert('are you sure to delete this coach?')
+    this.coachService.deleteCoach(coach.fitapi_user.id).subscribe({
+      next: (res)=>{
+        console.log('coach deleted successfully');
+        
+      },
+      error: (err)=>{
+        console.log('error deleting coach', err);
+        
+      }
+    })
   }
-  messageCoach(){
-    return 1
+  archiveCoach(coach: any){
+    alert('are you sure you want to archive this coach?')
+    this.coachService.archiveCoach(coach.id).subscribe({
+      next: (res: any)=>{
+        console.log('coach archived successfully');
+        
+      },
+      error: (err: any)=>{
+        console.log('error archiving coach', err);
+        
+      }
+    })
   }
 
-  approveApproval(){
-    return 1
+  approveApproval(req: any){
+    this.coachService.updateCoach(req.fitapi_coach?.id, {is_active: true}).subscribe({
+      next: (res)=>{
+        console.log(res);        
+      },
+      error: (err)=>{
+        console.log(err);      
+      }
+    })
   }
-  rejectApproval(){
-    return 1
+
+  rejectApproval(req: any){
+    alert('hitting this button will delete the coach permanently')
+    this.coachService.deleteCoach(req.fitapi_coach?.id).subscribe({
+      next: (res)=>{
+        console.log('coach deleted successfully',res);
+        
+      },
+      error: (err)=>{
+        console.log('error deleting coach', err);
+        
+      }
+    })
+    
   }
 
   closeProfile(){

@@ -441,6 +441,36 @@
   min-width: 0;
 }
 
+.actions-cell { text-align: right; }
+
+.action-btns {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.action-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+  font-size: 18px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.action-btn:hover {
+  background: var(--surface-low);
+  color: var(--primary);
+}
+
+
 .profile-sidebar {
   width: 360px;
   flex-shrink: 0;
