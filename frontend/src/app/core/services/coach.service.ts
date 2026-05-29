@@ -30,6 +30,10 @@ export class CoachService {
     return this.http.delete(`${this.APIUrl}/coach/deleteCoach/${id}`, {withCredentials: true})
   }
 
+  archiveCoach(id: string){
+    return this.http.patch(`${this.APIUrl}/coach/archiveCoach/${id}`,{},{withCredentials: true})
+  }
+
   addCourse(coachId: string, courseData: any){
     return this.http.post(`${this.APIUrl}/coach/addCourse/${coachId}`, courseData, {withCredentials: true})
   }
