@@ -67,11 +67,11 @@ export class CoachProfile implements OnInit, OnChanges {
   // Flattens nested object structure for accurate dirty/change checking
   private syncOriginalData() {
     this.originalFormData = {
-      first_name: this.coach?.fitapi_user?.first_name || '',
-      last_name: this.coach?.fitapi_user?.last_name || '',
-      email: this.coach?.fitapi_user?.email || '',
-      specialties: this.coach?.specialties || '',
-      biography: this.coach?.biography || '',
+      first_name: this.coach?.first_name || '',
+      last_name: this.coach?.last_name || '',
+      email: this.coach?.email || '',
+      specialties: this.coach?.fitapi_coach?.specialties || '',
+      biography: this.coach?.fitapi_coach?.biography || '',
     };
   }
 

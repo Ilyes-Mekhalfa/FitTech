@@ -42,7 +42,7 @@ export class Coach implements OnInit {
   
   deleteCoach(coach: any){
     alert('are you sure to delete this coach?')
-    this.coachService.deleteCoach(coach.fitapi_user.id).subscribe({
+    this.coachService.deleteCoach(coach.id).subscribe({
       next: (res)=>{
         console.log('coach deleted successfully');
         
