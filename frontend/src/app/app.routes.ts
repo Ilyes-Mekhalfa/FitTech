@@ -11,6 +11,7 @@ import { CreateCoach } from './shared/components/create-coach/create-coach';
 import { CreateMember } from './shared/components/create-member/create-member';
 import { canDeactivateGuard } from './core/guards/can-deactivate.guard';
 import { CreatePlan } from './shared/components/create-plan/create-plan';
+import { Machine} from './pages/machine/machine';
 export const routes: Routes = [
     {
         path: '',
@@ -59,6 +60,10 @@ export const routes: Routes = [
         path: 'plan/add',
         // canDeactivate: [canDeactivateGuard],
         component: CreatePlan,
+    },
+    {
+        path: 'machine',
+        component: Machine,
     },
     {
         path: 'settings',

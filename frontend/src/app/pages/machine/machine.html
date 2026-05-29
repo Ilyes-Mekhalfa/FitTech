@@ -1,0 +1,108 @@
+<div class="equipment-page">
+  <!-- LEFT CONTENT -->
+  <div class="content-area">
+
+    <div class="topbar">
+      <div>
+        <h1>Equipment Management</h1>
+        <p>Manage and monitor gym machines</p>
+      </div>
+
+      <button class="add-btn">
+        <i class="ti ti-plus"></i>
+        Add Machine
+      </button>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter active">All</button>
+      <button class="filter">Operational</button>
+      <button class="filter">Maintenance</button>
+      <button class="filter">Idle</button>
+
+      <div class="search-box">
+        <i class="ti ti-search"></i>
+        <input type="text" placeholder="Search machine..." />
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Machine</th>
+            <th>type</th>
+            <th>add date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr class="table-row" *ngFor="let machine of machines" (click)="selectMachine(machine)">
+            <td>
+              <div class="machine-cell">
+                  <div class="machine-icon">
+                    <span class="material-symbols-outlined">{{ machine.type === 'machine' ? 'directions_run' : 'fitness_center' }}</span>
+                  </div>
+
+                <div>
+                  <div class="machine-name">
+                    {{ machine.name}}
+                  </div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <span class="status operational">
+                {{machine.type}}
+              </span>
+            </td>
+
+            <td>{{ machine.addDate }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- RIGHT PREVIEW -->
+  <aside class="preview-panel">
+  @if (selectedMachine){
+
+    <div class="preview-image">
+      <i class="ti ti-barbell"></i>
+    </div>
+
+    <div class="preview-content">
+
+      <div class="preview-header">
+        <h2>{{selectedMachine.name}}</h2>
+      </div>
+
+      <div class="preview-status operational">
+        {{selectedMachine.type}}
+      </div>
+
+      <div class="preview-section">
+        <label>Description</label>
+        <p>{{selectedMachine.description}}</p>
+      </div>
+
+
+      <div class="preview-actions">
+        <button class="primary-btn" (click)="closePreview()">
+          Close Machine
+        </button>
+      </div>
+
+    </div>
+  }
+  @else {
+    <div class="empty-state-card">
+      <span class="material-symbols-outlined">fitness_center</span>
+      <p>Select a machine to view full details</p>
+    </div>
+  }
+</aside>
+</div>
