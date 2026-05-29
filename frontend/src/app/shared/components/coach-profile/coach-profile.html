@@ -21,27 +21,27 @@
             <div class="preview-avatar-circle">
               <img *ngIf="coach.fitapi_user?.profile_picture" [src]="coach.fitapi_user.profile_picture" alt="Avatar">
               <span *ngIf="!coach.fitapi_user?.profile_picture">
-                {{ coach.fitapi_user?.first_name?.charAt(0) || 'C' }}
+                {{ coach.first_name?.charAt(0) || 'C' }}
               </span>
             </div>
 
             <h2 class="profile-name">
-              {{ coach.fitapi_user?.first_name }} {{ coach.fitapi_user?.last_name }}
+              {{ coach.first_name }} {{ coach.last_name }}
             </h2>
 
             <span class="badge badge--inactive">
-              Inactive Member
+              {{ coach.fitapi_coach?.specialties || 'No specialties listed' }} 
             </span>
           </div>
 
           <div class="preview-body section">
             <div class="info-row">
               <span class="info-label">Email</span>
-              <span class="info-value text-bold">{{ coach.fitapi_user?.email }}</span>
+              <span class="info-value text-bold">{{ coach.email }}</span>
             </div>
             <div class="info-row">
-              <span class="info-label">Subscription Status</span>
-              <span class="info-value text-bold">N/A</span>
+              <span class="info-label">Phone </span>
+              <span class="info-value text-bold">{{coach.phone}}</span>
             </div>
             <div class="info-row">
               <span class="info-label">Subscription End Date</span>
