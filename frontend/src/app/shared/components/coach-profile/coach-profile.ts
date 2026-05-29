@@ -30,7 +30,8 @@ export class CoachProfile implements OnInit, OnChanges {
       description: ['', Validators.required],
       maxParticipants: [0, [Validators.required, Validators.min(0)]],
       duration: [0, [Validators.required, Validators.min(1)]],
-      levelRequired: ['', Validators.required],
+      date: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}T(?:(?:[01]\d|2[0-3]):[0-5]\d|(?:0?[1-9]|1[0-2]):[0-5]\d\s?(?:AM|PM))$/i)]],
+      level_required: ['', Validators.required],
     });
   }
 
