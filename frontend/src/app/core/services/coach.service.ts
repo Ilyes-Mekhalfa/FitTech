@@ -23,11 +23,15 @@ export class CoachService {
   }
 
   updateCoach(id: any, updatedDAata:any){
-    return this.http.put(`${this.APIUrl}/coach/updateCoach/${id}`, updatedDAata, {withCredentials: true})
+    return this.http.patch(`${this.APIUrl}/coach/updateCoach/${id}`, updatedDAata, {withCredentials: true})
   }
 
   deleteCoach(id: any){
     return this.http.delete(`${this.APIUrl}/coach/deleteCoach/${id}`, {withCredentials: true})
+  }
+
+  addCourse(coachId: string, courseData: any){
+    return this.http.post(`${this.APIUrl}/coach/addCourse/${coachId}`, courseData, {withCredentials: true})
   }
 
 }

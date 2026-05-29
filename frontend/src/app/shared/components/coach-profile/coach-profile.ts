@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CoachService } from '../../../core/services/coach.service';
-import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,12 +10,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './coach-profile.html',
   styleUrls: ['./coach-profile.css'],
 })
-export class CoachProfile implements OnInit {
+export class CoachProfile implements OnInit, OnChanges {
   @Input() coach: any;
   @Output() close = new EventEmitter<void>();
 
   editMode = false;
   editFormData!: FormGroup;
+  addCourse: FormGroup;
   private originalFormData: any = {};
 
   constructor(
@@ -23,12 +24,32 @@ export class CoachProfile implements OnInit {
     private fb: FormBuilder,
   ) {
     this.initForm();
+
+    this.addCourse = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(3)]],
+      description: ['', Validators.required],
+      maxParticipants: [0, [Validators.required, Validators.min(0)]],
+      duration: [0, [Validators.required, Validators.min(1)]],
+      levelRequired: ['', Validators.required],
+    });
   }
 
   ngOnInit() {
+    this.editMode = false;
     if (this.coach) {
       console.log('Coach data initialized:', this.coach);
       this.syncOriginalData();
+    }
+  }
+  
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['coach'] && !changes['coach'].firstChange) {
+      this.editMode = false;
+      if (this.coach) {
+        this.syncOriginalData();
+        this.editFormData.reset();
+        this.addCourse.reset();
+      }
     }
   }
 
@@ -37,8 +58,8 @@ export class CoachProfile implements OnInit {
       first_name: [''],
       last_name: [''],
       email: [''],
-      specialty: [''],
-      biography: [''] // Added missing biography control
+      specialties: [''],
+      biography: [''], 
     });
   }
 
@@ -48,16 +69,15 @@ export class CoachProfile implements OnInit {
       first_name: this.coach?.fitapi_user?.first_name || '',
       last_name: this.coach?.fitapi_user?.last_name || '',
       email: this.coach?.fitapi_user?.email || '',
-      specialty: this.coach?.specialties || '',
-      biography: this.coach?.biography || ''
+      specialties: this.coach?.specialties || '',
+      biography: this.coach?.biography || '',
     };
   }
 
   toggleEditMode() {
     this.editMode = !this.editMode;
-    if (this.editMode) {
-      this.editFormData.patchValue(this.originalFormData);
-    }
+    this.editFormData.patchValue(this.originalFormData);
+
   }
 
   private getChangedFields(): any {
@@ -86,7 +106,7 @@ export class CoachProfile implements OnInit {
       return;
     }
 
-    this.coachService.updateCoach(this.coach.fitapi_user.id, changedData).subscribe({
+    this.coachService.updateCoach(this.coach.id, changedData).subscribe({
       next: (res) => {
         console.log('Coach updated successfully');
         this.coach = res;
@@ -99,6 +119,21 @@ export class CoachProfile implements OnInit {
     });
   }
 
+  addNewCourse() {
+    if(!this.addCourse.valid){
+      throw new Error('form invalid');
+    }
+
+    this.coachService.addCourse(this.coach.id, this.addCourse.value).subscribe({
+      next: (res: any)=>{
+        console.log(res);
+      },
+      error: (err:any)=>{
+        console.log('error happened', err);
+        
+      }
+    })
+  }
   closeProfile() {
     this.close.emit();
   }
