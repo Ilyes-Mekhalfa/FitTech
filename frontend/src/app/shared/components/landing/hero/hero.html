@@ -1,0 +1,48 @@
+<section class="hero">
+  <div class="hero__overlay"></div>
+
+  <div class="hero__content">
+    <div class="hero__left">
+      <span class="hero__badge">
+        <span class="hero__dot"></span>
+        24/7 NOW ENROLLING
+      </span>
+
+      <h1 class="hero__title">
+        Push Your Limits
+        <span>don't live here.</span>
+      </h1>
+
+      <p class="hero__description">
+        train hard or go home. Join our fitness community
+      </p>
+
+      <div class="hero__actions">
+        <button class="btn btn-primary" (click)="login()">
+          Start Your Journey
+        </button>
+
+        <button class="btn btn-outline">
+          Explore Plans
+        </button>
+      </div>
+    </div>
+
+    <div class="hero__stats">
+      <div class="stat-card">
+        <h3>{{data?.members}}</h3>
+        <span>Subscribed Members</span>
+      </div>
+
+      <div class="stat-card">
+        <h3>{{data?.coaches}}</h3>
+        <span>Elite Coaches</span>
+      </div>
+
+      <div class="stat-card">
+        <h3>{{data?.plans}}</h3>
+        <span>Plans Available</span>
+      </div>
+    </div>
+  </div>
+</section>

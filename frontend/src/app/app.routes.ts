@@ -12,10 +12,11 @@ import { CreateMember } from './shared/components/create-member/create-member';
 import { canDeactivateGuard } from './core/guards/can-deactivate.guard';
 import { CreatePlan } from './shared/components/create-plan/create-plan';
 import { Machine} from './pages/machine/machine';
+import { LandingPage } from './pages/landing-page/landing-page';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'login',
+        component: LandingPage,
 
         pathMatch: 'full'
     },
