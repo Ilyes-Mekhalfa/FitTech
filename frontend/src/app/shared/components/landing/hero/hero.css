@@ -1,0 +1,138 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #0a0a0a 0%,
+    #1a0005 50%,
+    #0a0a0a 100%
+  );
+  display: flex;
+  align-items: center;
+  padding: 0 5rem;
+  overflow: hidden;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      160deg,
+      rgba(185, 0, 20, 0.25),
+      transparent 50%
+    ),
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.7),
+      transparent
+    );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  width: 100%;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 5rem;
+  align-items: center;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .6rem 1rem;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 999px;
+  color: rgba(255,255,255,.8);
+  font-size: .75rem;
+  letter-spacing: .15em;
+  margin-bottom: 2rem;
+}
+
+.hero__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1ee31b;
+}
+
+.hero__title {
+  color: white;
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+
+.hero__title span {
+  display: block;
+  color: #e31b23;
+}
+
+.hero__description {
+  max-width: 600px;
+  color: rgba(255,255,255,.7);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: .25s;
+}
+
+.btn-primary {
+  background: #b90014;
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255,255,255,.25);
+}
+
+.hero__stats {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.stat-card {
+  padding: 1.5rem;
+  background: rgba(255,255,255,.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.stat-card h3 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: .25rem;
+}
+
+.stat-card span {
+  color: rgba(255,255,255,.6);
+  font-size: .85rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
