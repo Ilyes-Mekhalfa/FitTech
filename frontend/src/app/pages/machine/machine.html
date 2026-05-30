@@ -16,12 +16,12 @@
 
     <div class="filter-bar" >
       <button class="filter active" [class.active]="currentFilter === 'all'" (click)="filterMachine('all')">All</button>
-      <button class="filter active" [class.active]="currentFilter === 'free'" (click)="filterMachine('free')">free_weight</button>
-      <button class="filter active" [class.active]="currentFilter === 'machines'" (click)="filterMachine('machines')">machine</button>
+      <button class="filter active" [class.active]="currentFilter === 'free_weight'" (click)="filterMachine('free_weight')">free_weight</button>
+      <button class="filter active" [class.active]="currentFilter === 'machine'" (click)="filterMachine('machine')">machine</button>
 
       <div class="search-box">
-        <i class="ti ti-search"></i>
-        <input type="text" placeholder="Search machine..." />
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input type="text" placeholder="Search machine..." (input)="searchMachine($event)"/>
       </div>
     </div>
 
