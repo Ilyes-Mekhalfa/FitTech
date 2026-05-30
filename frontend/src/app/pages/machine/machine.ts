@@ -89,6 +89,11 @@ export class Machine {
       this.machines = this.originalList.filter((e:any)=> e.type === 'machine')
     }
   }
+  searchMachine(event: any){
+    const value = (event.target as HTMLInputElement).value;
+    this.machines = this.originalList.filter((e:any)=> e.name.toLowerCase().includes(value.toLowerCase()) && (this.currentFilter == 'all' || e.type == this.currentFilter))
+    
+  }
   closePreview() {
     this.selectedMachine = null;
   }
