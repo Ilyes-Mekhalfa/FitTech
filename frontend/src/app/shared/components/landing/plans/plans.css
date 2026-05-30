@@ -1,0 +1,148 @@
+.plans {
+  padding: 6rem 5rem;
+  background: #fff;
+}
+
+.plans-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 4rem;
+}
+
+.plan-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #ececec;
+  padding-bottom: 0.5rem;
+}
+
+.filter-pill {
+  border: none;
+  background: transparent;
+  color: #777;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  border-bottom: 3px solid transparent;
+}
+
+.filter-pill:hover {
+  color: #111;
+}
+
+.filter-pill.active {
+  color: #b90014;
+  border-bottom-color: #b90014;
+}
+
+.section-label {
+  display: block;
+  color: #e31b23;
+  font-size: .75rem;
+  letter-spacing: .2em;
+  margin-bottom: 1rem;
+}
+
+.plans-header h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.plans-header p {
+  color: #666;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.plan-card {
+  position: relative;
+  padding: 2rem;
+  background: #f8f8f8;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+.featured {
+  background: #111;
+  color: white;
+  transform: translateY(-10px);
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #e31b23;
+  color: white;
+  padding: .5rem 1rem;
+  font-size: .7rem;
+}
+
+.plan-tier {
+  font-size: .75rem;
+  letter-spacing: .15em;
+  color: #888;
+}
+
+.featured .plan-tier {
+  color: rgba(255,255,255,.6);
+}
+
+.plan-card h3 {
+  margin: 1rem 0;
+  font-size: 2rem;
+}
+
+.price {
+  margin-bottom: 2rem;
+}
+
+.tier-tag {
+  background: var(--surface-high);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #e31b23 ;
+}
+.amount {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.period {
+  color: #888;
+}
+
+.plan-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  flex: 1;
+}
+
+.plan-card li {
+  margin-bottom: 1rem;
+}
+
+.plan-card button {
+  padding: 1rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.featured button {
+  background: #e31b23;
+  color: white;
+}

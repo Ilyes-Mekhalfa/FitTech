@@ -16,4 +16,8 @@ export class LandingService {
   getCoachData(){
     return this.http.get(`${this.APIUrl}/landing/coach`)
   }
+
+  getPlansData(){
+    return this.http.get(`${this.APIUrl}/landing/plans`,{withCredentials: true})
+  }
 }
