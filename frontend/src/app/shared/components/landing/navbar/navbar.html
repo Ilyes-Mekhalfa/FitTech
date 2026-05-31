@@ -1,0 +1,16 @@
+<nav class="nav"  [class.nav--scrolled]="isScrolled">
+  <a routerLink="/" class="nav__logo">
+    <span>FitTech</span>
+  </a>
+
+  <ul class="nav__links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#coaches">Coaches</a></li>
+    <li><a href="#plans">Membership</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <div class="nav__actions" (click)="login()">
+    <button>Join Now</button>
+  </div>
+</nav>

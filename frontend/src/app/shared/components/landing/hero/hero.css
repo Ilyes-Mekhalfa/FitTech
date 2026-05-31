@@ -1,0 +1,480 @@
+/* ============================================
+   HERO SECTION — FitTech Kinetic Gallery
+   Dark cinematic shell — inverse surface world
+   Primary: #b90014 | Inverse surface: #2f3131
+   Lexend for display type, Inter for body
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+/* ---- Section Shell ---- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background-color: #0d0d0d;
+  display: flex;
+  align-items: center;
+  padding: 0 80px;
+  overflow: hidden;
+}
+
+/* ============================================
+   BACKGROUND SYSTEM — Three layered gradients
+   1. Base dark cinematic tone
+   2. Red kinetic bloom — top-left origin
+   3. Bottom scrim — content protection
+   ============================================ */
+
+/* Layer 1 — Dark base with warm undertone */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 20% 40%,
+      rgba(185, 0, 20, 0.18) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 60% 80% at 80% 20%,
+      rgba(185, 0, 20, 0.06) 0%,
+      transparent 60%
+    ),
+    linear-gradient(
+      160deg,
+      #0d0d0d 0%,
+      #1a0005 45%,
+      #0d0d0d 100%
+    );
+  z-index: 0;
+}
+
+/* Layer 2 — Kinetic geometric grid texture */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Layer 3 — Bottom content protection scrim */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.6) 0%,
+      transparent 40%
+    ),
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.3) 0%,
+      transparent 60%
+    );
+  z-index: 1;
+}
+
+/* ---- Main Content Grid ---- */
+.hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 80px;
+  align-items: center;
+  padding: 120px 0 80px; /* top offset for nav */
+}
+
+/* ============================================
+   BADGE — Live enrollment indicator
+   Frosted glass pill — "Glass & Gradient" rule
+   ============================================ */
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px 8px 12px;
+
+  /* Frosted glass — floating element rule */
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  /* Ghost border — 15% opacity compliance */
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;             /* Label-SM */
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 32px;
+
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.hero__badge:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(185, 0, 20, 0.4);
+}
+
+/* Live pulse dot */
+.hero__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;              /* green — live indicator */
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Pulse ring animation */
+.hero__dot::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(34, 197, 94, 0.4);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+.hero__dot::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(34, 197, 94, 0.15);
+  animation: pulse-ring 2s ease-out 0.4s infinite;
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2);   opacity: 0; }
+}
+
+/* ============================================
+   HERO TITLE — Display-LG Lexend
+   Largest typographic element in the system
+   ============================================ */
+.hero__title {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(3.25rem, 7vw, 5.5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  margin: 0 0 24px;
+
+  /* Editorial word spacing */
+  word-spacing: -0.02em;
+}
+
+/* Kinetic red line — the "money" phrase */
+.hero__title span {
+  display: block;
+  /* Gradient text — primary to primary-container */
+  background: linear-gradient(
+    135deg,
+    #e31b23 0%,
+    #b90014 50%,
+    #ff6b6b 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  /* Slight indent — asymmetric editorial weight */
+  padding-left: 4px;
+  margin-top: 4px;
+
+  /* Subtle text shadow underneath gradient — depth */
+  filter: drop-shadow(0 0 40px rgba(185, 0, 20, 0.4));
+}
+
+/* ---- Description ---- */
+.hero__description {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 480px;
+  margin: 0 0 40px;
+  letter-spacing: 0.01em;
+}
+
+/* ============================================
+   ACTION BUTTONS — CTA pair
+   Primary: kinetic gradient per design system
+   Outline: frosted glass secondary
+   ============================================ */
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Base button reset */
+.btn {
+  font-family: 'Lexend', sans-serif;   /* headline for CTA */
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 15px 32px;
+  border: none;
+  border-radius: 2px;                   /* lg — geometric */
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition:
+    transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.97) !important;
+}
+
+/* Primary — "Money Action" per design system */
+.btn-primary {
+  background: linear-gradient(135deg, #e31b23 0%, #b90014 100%);
+  color: #ffffff;                       /* on-primary */
+  box-shadow:
+    0 8px 24px rgba(185, 0, 20, 0.35),
+    0 2px 8px rgba(185, 0, 20, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 16px 40px rgba(185, 0, 20, 0.45),
+    0 4px 12px rgba(185, 0, 20, 0.3);
+  background: linear-gradient(135deg, #ff2530 0%, #e31b23 100%);
+}
+
+/* Outline — frosted glass secondary */
+.btn-outline {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+/* ============================================
+   STATS PANEL — Right column bento
+   Frosted glass cards — stacked vertically
+   Kinetic geometry: no rounded corners
+   ============================================ */
+.hero__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;                             /* 3px gap = tonal separation */
+  position: relative;
+}
+
+/* Decorative vertical red line — left edge accent */
+.hero__stats::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 10%;
+  bottom: 10%;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #b90014 30%,
+    #b90014 70%,
+    transparent
+  );
+  opacity: 0.6;
+}
+
+/* ---- Stat Card ---- */
+.stat-card {
+  padding: 28px 28px 24px;
+
+  /* Frosted glass — floating element rule */
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  /* Ghost border — 15% opacity rule */
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 2px;                   /* sm — geometric */
+
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+  cursor: default;
+}
+
+.stat-card:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(185, 0, 20, 0.25);
+  transform: translateX(4px);           /* horizontal lift — editorial */
+}
+
+/* Red accent bar — left edge on hover */
+.stat-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  background: #b90014;
+  border-radius: 0 2px 2px 0;
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.25s ease;
+}
+
+.stat-card:hover::before {
+  transform: scaleY(1);
+}
+
+/* Ambient glow on hover */
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse at left center,
+    rgba(185, 0, 20, 0.06) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.stat-card:hover::after {
+  opacity: 1;
+}
+
+/* Stat number — Display-LG Lexend per design system */
+.stat-card h3 {
+  font-family: 'Lexend', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 6px;
+  letter-spacing: -0.04em;
+  line-height: 1;
+
+  /* Numbers are the hero — counter animation ready */
+  position: relative;
+  z-index: 1;
+}
+
+/* Stat label — Label-SM per design system */
+.stat-card span {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;             /* Label-SM */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.4);
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+@media (max-width: 1024px) {
+  .hero {
+    padding: 0 40px;
+  }
+
+  .hero__content {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding: 140px 0 80px;
+  }
+
+  .hero__stats {
+    flex-direction: row;
+    gap: 3px;
+  }
+
+  .hero__stats::before {
+    display: none;
+  }
+
+  .stat-card {
+    flex: 1;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 0 24px;
+  }
+
+  .hero__content {
+    padding: 120px 0 64px;
+    gap: 48px;
+  }
+
+  .hero__stats {
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .hero__title {
+    font-size: clamp(2.75rem, 10vw, 3.5rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 0 20px;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn {
+    justify-content: center;
+    padding: 16px 24px;
+  }
+}
