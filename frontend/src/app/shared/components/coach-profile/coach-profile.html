@@ -36,16 +36,16 @@
 
           <div class="preview-body section">
             <div class="info-row">
-              <span class="info-label">Email</span>
-              <span class="info-value text-bold">{{ coach.email }}</span>
+              <span class="info-label">Course's number</span>
+              <span class="info-value text-bold">{{ coach.fitapi_coach?.fitapi_course.length || 0 }}</span>
             </div>
             <div class="info-row">
-              <span class="info-label">Phone </span>
-              <span class="info-value text-bold">{{coach.phone}}</span>
+              <span class="info-label">certificate's number </span>
+              <span class="info-value text-bold">{{coach.fitapi_coach?.fitapi_coachcertificate.length || 0}}</span>
             </div>
             <div class="info-row">
-              <span class="info-label">Subscription End Date</span>
-              <span class="info-value text-bold">N/A</span>
+              <span class="info-label">reviews</span>
+              <span class="info-value text-bold">{{coach.fitapi_coach?.fitapi_coachreview.length || 0}}</span>
             </div>
           </div>
 
