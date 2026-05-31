@@ -11,8 +11,8 @@ import { MemberProfile } from '../../shared/components/member-profile/member-pro
 })
 export class Member implements OnInit {
   members: any[] = [];
-  planFilter: string = '';
-  statusFilter: string = '';
+  originalList: any;
+  currentFilter: 'all' | 'active' | 'expired' | 'pending_payment' = 'all';
   selectMember: any;
   constructor(
     private router: Router,
@@ -27,7 +27,7 @@ export class Member implements OnInit {
     this.memberService.getAllMembers().subscribe({
       next: (res: any) => {
         console.log(res);
-
+        this.originalList = res;
         this.members = res;
       },
       error: (err) => {
@@ -36,24 +36,26 @@ export class Member implements OnInit {
     });
   }
 
-  setPlanFilter(e: string) {
-    this.planFilter = e;
-    console.log(this.planFilter);
+  applyFilter(filter: any) {
+    this.currentFilter = filter;
+    if (filter == 'all') {
+      this.members = this.originalList;
+      return;
+    }
+    this.members = this.originalList.filter((e: any) => {
+      const subs = e.fitapi_membresubscription ?? [];
+      const stat = subs.length > 0 ? subs[subs.length - 1].status : 'expired';
+
+      return stat == filter;
+    });
   }
-
-  setStatusFilter(e: string) {
-    this.statusFilter = e;
-    console.log(this.statusFilter);
-
-    // this.members = this.members.filter((member:any)=> {
-    //   return this.members.fitapi_user.status == this.statusFilter
-    // })
-  }
-
-  applyFilter() {}
 
   selectedMember(member: any) {
-    this.selectMember = member;
+    if (!this.selectMember) {
+      this.selectMember = member;
+    } else {
+      this.selectMember = null;
+    }
   }
 
   closeProfile() {
@@ -80,5 +82,14 @@ export class Member implements OnInit {
         console.log('error archiving user', err);
       },
     });
+  }
+
+  searchMember(event: any) {
+    const value = (event.target as HTMLInputElement).value;
+    this.members = this.originalList.filter(
+      (e: any) =>
+        e.fitapi_user.first_name.toLowerCase().includes(value.toLowerCase()) ||
+        e.fitapi_user.last_name.toLowerCase().includes(value.toLowerCase()),
+    );
   }
 }
