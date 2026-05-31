@@ -9,23 +9,46 @@
     <div class="carousel-track">
 
       <div class="coach-card" *ngFor="let coach of coaches">
-        <img [src]="coach.image" [alt]="coach.name">
+        <img [src]="coach.image" [alt]="coach.fitapi_user.first_name">
 
         <div class="coach-card__overlay">
-          <span>{{ coach.specialty }}</span>
-          <h3>{{ coach.name }}</h3>
-          <p>⭐ {{ coach.rating }}</p>
+          <span>{{ coach.specialties }}</span>
+          <h3>{{ coach.fitapi_user.first_name }} {{coach.fitapi_user.last_name}}</h3>
+          <p>{{coach.biography}}</p>
+          <div>
+            <span>{{ coach.fitapi_coachcertificate.length }}</span>
+            <span class="material-symbols-outlined">
+              workspace_premium
+            </span>
+          </div>
+          <div>
+            <span>{{ coach.fitapi_coachreview.length }}</span>
+            <span class="material-symbols-outlined">
+              star
+            </span>
+          </div>
         </div>
       </div>
 
-      <!-- duplicate for infinite loop -->
+      <!-- infinite loop -->
       <div class="coach-card" *ngFor="let coach of coaches">
-        <img [src]="coach.image" [alt]="coach.name">
+        <img [src]="coach.image" [alt]="coach.fitapi_user.first_name">
 
         <div class="coach-card__overlay">
-          <span>{{ coach.specialty }}</span>
-          <h3>{{ coach.name }}</h3>
-          <p>⭐ {{ coach.rating }}</p>
+          <span>{{ coach.specialties }}</span>
+          <h3>{{ coach.fitapi_user.first_name }} {{coach.fitapi_user.last_name}}</h3>
+          <div>
+            <span>{{ coach.fitapi_coachcertificate.length }}</span>
+            <span class="material-symbols-outlined">
+              workspace_premium
+            </span>
+          </div>
+          <div>
+            <span>{{ coach.fitapi_coachreview.length }}</span>
+            <span class="material-symbols-outlined">
+              star
+            </span>
+          </div>
         </div>
       </div>
 

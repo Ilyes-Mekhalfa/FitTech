@@ -1,30 +1,316 @@
+/* ============================================
+   COACHES SECTION — FitTech Kinetic Gallery
+   Design System: Lexend headlines, Inter body
+   Color: Primary #b90014, Surface #f9f9f9
+   Rule: No borders, tonal layering only
+   ============================================ */
+
+/* Google Fonts — add to your index.html if not global */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+/* ---- Section Shell ---- */
+.coaches {
+  padding: 96px 0 80px;
+  background-color: #f3f3f3;          /* surface-container-low */
+  overflow: hidden;
+  position: relative;
+}
+
+/* Subtle ambient glow — "kinetic" backdrop per design system */
+.coaches::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -80px;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(185, 0, 20, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Section Header ---- */
+.section-header {
+  padding: 0 48px 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-header h2 {
+  font-family: 'Lexend', sans-serif;
+  font-size: 2.5rem;           /* ~40px — Headline scale */
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #1a1c1c;              /* on-surface */
+  margin: 0;
+  line-height: 1.1;
+
+  /* Geometric red accent under the title — no border rule compliant */
+  display: inline-block;
+  position: relative;
+}
+
+.section-header h2::after {
+  content: '';
+  display: block;
+  margin-top: 10px;
+  width: 48px;
+  height: 4px;
+  background: #b90014;         /* primary */
+  border-radius: 2px;
+}
+
+/* ---- Carousel Shell ---- */
+/* Edge fade masks — premium editorial feel */
 .carousel {
   overflow: hidden;
   width: 100%;
+  position: relative;
+  z-index: 1;
+
+  /* Left & right fade-out edges */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
 }
 
+/* ---- Carousel Track ---- */
 .carousel-track {
   display: flex;
-  gap: 1rem;
+  gap: 20px;
   width: max-content;
-  animation: scroll 25s linear infinite;
+  padding: 16px 24px 24px;    /* breathing room for card shadows */
+  animation: scroll 30s linear infinite;
 }
 
+/* Pause on hover — already in your code */
 .carousel:hover .carousel-track {
   animation-play-state: paused;
 }
 
+/* ---- Scroll Keyframe ---- */
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50%)); }
+}
+
+/* ============================================
+   COACH CARD — Core Component
+   Architecture: surface-container-lowest base
+   Hover: lifts with ambient shadow
+   ============================================ */
 .coach-card {
   width: 280px;
   flex-shrink: 0;
+  border-radius: 4px;               /* lg = 0.25rem per design system */
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background-color: #ffffff;        /* surface-container-lowest */
+
+  /* Ambient shadow — only on floating elements per DESIGN.md */
+  box-shadow: 0 20px 40px rgba(26, 28, 28, 0.06);
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.35s ease;
 }
 
-@keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
+.coach-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 32px 56px rgba(26, 28, 28, 0.12),
+              0 0 0 1px rgba(185, 0, 20, 0.08); /* ghost border fallback */
+}
 
-  to {
-    transform: translateX(calc(-50%));
-  }
+/* ---- Coach Image ---- */
+.coach-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+
+  /* Grayscale → color on hover (matches coaches table pattern) */
+  filter: grayscale(30%);
+  transition: filter 0.4s ease, transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.coach-card:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.04);           /* subtle Ken Burns */
+}
+
+/* ============================================
+   OVERLAY — Gradient-lifted info panel
+   Tonal layering: dark scrim → readable text
+   ============================================ */
+.coach-card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  /* Gradient scrim — surface to transparent */
+  background: linear-gradient(
+    to top,
+    rgba(26, 28, 28, 0.95) 0%,
+    rgba(26, 28, 28, 0.80) 50%,
+    transparent 100%
+  );
+
+  padding: 48px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  /* Slide up slightly on hover */
+  transform: translateY(0);
+  transition: transform 0.35s ease;
+}
+
+.coach-card:hover .coach-card__overlay {
+  transform: translateY(-4px);
+}
+
+/* ---- Specialty Tag (Label-SM per design system) ---- */
+.coach-card__overlay > span:first-child {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;            /* Label-SM */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #b90014;                  /* primary — draws the eye */
+  background-color: rgba(255, 218, 214, 0.15); /* primary-fixed tint */
+  padding: 3px 8px;
+  border-radius: 2px;              /* sm — near square, geometric */
+  width: fit-content;
+}
+
+/* ---- Coach Name (Headline Lexend) ---- */
+.coach-card__overlay h3 {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.25rem;              /* Title-MD scale */
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Biography Excerpt ---- */
+.coach-card__overlay p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+  line-height: 1.5;
+
+  /* Clamp to 2 lines — editorial discipline */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---- Stats Row (Certifications + Reviews) ---- */
+.coach-card__overlay > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Lexend', sans-serif;  /* Numbers = Lexend per design system */
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Stats wrapper — flex row for both badges */
+.coach-card__overlay > div:nth-last-child(-n+2) {
+  /* Group the two stat divs side by side */
+  flex-direction: row;
+}
+
+/* Wrap both stat rows together */
+.coach-card__overlay div + div {
+  /* Both stats on same line */
+  display: inline-flex;
+}
+
+/* Restyle: put both stats in a single flex row */
+.coach-card__overlay {
+  /* Override: use a pseudo-wrapper approach via CSS grid */
+}
+
+/* Stats container — both cert + review on one line */
+.coach-card__overlay > div {
+  color: rgba(255, 255, 255, 0.90);
+}
+
+/* Material icon inside stats */
+.coach-card__overlay > div .material-symbols-outlined {
+  font-size: 1rem;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+  vertical-align: middle;
+}
+
+/* Cert icon — gold accent */
+.coach-card__overlay > div:nth-last-child(2) .material-symbols-outlined {
+  color: #f59e0b;                  /* amber — workspace_premium */
+}
+
+/* Star icon — gold accent */
+.coach-card__overlay > div:last-child .material-symbols-outlined {
+  color: #f59e0b;                  /* amber — star rating */
+}
+
+/* Stats row wrapper — align both on one line */
+.coach-card__overlay > div:nth-last-child(2),
+.coach-card__overlay > div:last-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.08);  /* frosted micro-badge */
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+/* Put the two stat badges side by side */
+.coach-card__overlay > div:nth-last-child(2) {
+  margin-top: 8px;
+  margin-right: 6px;
+}
+
+.coach-card__overlay > div:last-child {
+  margin-top: 8px;
+}
+
+/* Flex-wrap the overlay to allow stat row side by side */
+.coach-card__overlay {
+  flex-wrap: wrap;
+}
+
+/* Force the two stat divs onto the same row */
+.coach-card__overlay > div:nth-last-child(2),
+.coach-card__overlay > div:last-child {
+  flex: 0 0 auto;
+}
+
+/* The specialty span + h3 + p take full width */
+.coach-card__overlay > span:first-child,
+.coach-card__overlay h3,
+.coach-card__overlay p {
+  width: 100%;
 }
