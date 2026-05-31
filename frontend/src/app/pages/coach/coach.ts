@@ -13,6 +13,7 @@ export class Coach implements OnInit {
 
   approvalCount: number =0;
   coachs: any;
+  originalList: any;
   pendingRequests: any;
   selectedCoach: any ;
   constructor( private router: Router, private coachService: CoachService){}
@@ -22,6 +23,7 @@ export class Coach implements OnInit {
       next: (res: any)=>{
         console.log(res);
         this.coachs = res.coaches;
+        this.originalList = res.coaches;
         this.pendingRequests =  res.pendingRequests;
       },
       error: (err)=>{
@@ -93,6 +95,10 @@ export class Coach implements OnInit {
     
   }
 
+  searchCoach(event: any){
+    console.log(event.data);
+    this.coachs = this.originalList.filter((e: any)=> e.first_name.toLowerCase().includes(event.data.toLowerCase()) || e.last_name.toLowerCase().includes(event.data.toLowerCase()))  
+  }
   closeProfile(){
     this.selectedCoach = null;
   }
