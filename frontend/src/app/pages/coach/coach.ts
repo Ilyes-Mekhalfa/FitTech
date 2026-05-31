@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { CoachProfile } from '../../shared/components/coach-profile/coach-profile';
 @Component({
   selector: 'app-coach',
-  imports: [CommonModule ,CoachProfile],
+  imports: [CommonModule , CoachProfile],
   templateUrl: './coach.html',
   styleUrl: './coach.css',
 })
@@ -13,13 +13,18 @@ export class Coach implements OnInit {
 
   approvalCount: number =0;
   coachs: any;
+  originalList: any;
+  pendingRequests: any;
   selectedCoach: any ;
   constructor( private router: Router, private coachService: CoachService){}
 
   ngOnInit(): void {
-    this.coachService.getAllCoachs().subscribe({
+    this.coachService.getAllCoaches().subscribe({
       next: (res: any)=>{
-        this.coachs = res
+        console.log(res);
+        this.coachs = res.coaches;
+        this.originalList = res.coaches;
+        this.pendingRequests =  res.pendingRequests;
       },
       error: (err)=>{
         console.log(err);
@@ -33,24 +38,68 @@ export class Coach implements OnInit {
   }
 
   selectCoach(coach: any){
-    this.selectedCoach = coach.id;
+    this.selectedCoach = coach;
   }
 
-  editCoach(){
-    return 1
-  }
   
-  deleteCoach(){
-    return 1
+  deleteCoach(coach: any){
+    alert('are you sure to delete this coach?')
+    this.coachService.deleteCoach(coach.id).subscribe({
+      next: (res)=>{
+        console.log('coach deleted successfully');
+        
+      },
+      error: (err)=>{
+        console.log('error deleting coach', err);
+        
+      }
+    })
   }
-  messageCoach(){
-    return 1
+  archiveCoach(coach: any){
+    alert('are you sure you want to archive this coach?')
+    this.coachService.archiveCoach(coach.id).subscribe({
+      next: (res: any)=>{
+        console.log('coach archived successfully');
+        
+      },
+      error: (err: any)=>{
+        console.log('error archiving coach', err);
+        
+      }
+    })
   }
 
-  approveApproval(){
-    return 1
+  approveApproval(req: any){
+    this.coachService.updateCoach(req.fitapi_coach?.id, {is_active: true}).subscribe({
+      next: (res)=>{
+        console.log(res);        
+      },
+      error: (err)=>{
+        console.log(err);      
+      }
+    })
   }
-  rejectApproval(){
-    return 1
+
+  rejectApproval(req: any){
+    alert('hitting this button will delete the coach permanently')
+    this.coachService.deleteCoach(req.fitapi_coach?.id).subscribe({
+      next: (res)=>{
+        console.log('coach deleted successfully',res);
+        
+      },
+      error: (err)=>{
+        console.log('error deleting coach', err);
+        
+      }
+    })
+    
+  }
+
+  searchCoach(event: any){
+    console.log(event.data);
+    this.coachs = this.originalList.filter((e: any)=> e.first_name.toLowerCase().includes(event.data.toLowerCase()) || e.last_name.toLowerCase().includes(event.data.toLowerCase()))  
+  }
+  closeProfile(){
+    this.selectedCoach = null;
   }
 }

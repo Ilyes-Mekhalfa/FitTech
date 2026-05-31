@@ -18,4 +18,6 @@ export class DashboardService {
    exportData(){
     return this.http.get<string>(`${this.APIUrl}/dashboard/exportData`)
    }
+
+   
 }

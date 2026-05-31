@@ -14,7 +14,7 @@ export class CoachService {
     return this.http.post<any>(`${this.APIUrl}/coach/add`, coach, {withCredentials: true})
   }
 
-  getAllCoachs(){
+  getAllCoaches(){
     return this.http.get(`${this.APIUrl}/coach/allCoachs`, {withCredentials: true})
   }
 
@@ -23,11 +23,19 @@ export class CoachService {
   }
 
   updateCoach(id: any, updatedDAata:any){
-    return this.http.put(`${this.APIUrl}/coach/updateCoach/${id}`, updatedDAata, {withCredentials: true})
+    return this.http.patch(`${this.APIUrl}/coach/updateCoach/${id}`, updatedDAata, {withCredentials: true})
   }
 
   deleteCoach(id: any){
     return this.http.delete(`${this.APIUrl}/coach/deleteCoach/${id}`, {withCredentials: true})
+  }
+
+  archiveCoach(id: string){
+    return this.http.patch(`${this.APIUrl}/coach/archiveCoach/${id}`,{},{withCredentials: true})
+  }
+
+  addCourse(coachId: string, courseData: any){
+    return this.http.post(`${this.APIUrl}/coach/addCourse/${coachId}`, courseData, {withCredentials: true})
   }
 
 }
