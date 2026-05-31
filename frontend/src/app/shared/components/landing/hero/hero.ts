@@ -7,7 +7,6 @@ import { LandingService} from '../../../../core/services/landing.service'
   styleUrl: './hero.css',
 })
 export class Hero {
-
   data: any
   constructor(private landingService: LandingService){}
 
@@ -22,6 +21,9 @@ export class Hero {
     })
   }
 
+  scroll(){
+    document.getElementById('plans')?.scrollIntoView({behavior: 'smooth', block: 'start' })
+  }
   login(){
     alert('app link to be added later')
   }
