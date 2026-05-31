@@ -17,7 +17,6 @@ export class Plans {
   ngOnInit() {
     this.landingService.getPlansData().subscribe({
       next: (res: any) => {
-        console.log(res);
         
         this.allPlans =  res;
         this.setPlanFilter('monthly')

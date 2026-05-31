@@ -1,64 +1,36 @@
 <section class="coaches">
+
   <div class="section-header">
-    <div>
-      <span class="section-label">OUR COACHES</span>
-      <h2>Train With The Best</h2>
-    </div>
-
-    <a href="#">View All Coaches →</a>
+    <h2>Our Coaches</h2>
   </div>
 
-  <div class="coaches-grid">
-    <div class="coach-card">
-      <img src="https://placehold.co/300x400" alt="Coach">
+  <div class="carousel">
 
-      <div class="coach-card__overlay">
-        <span class="coach-specialty">STRENGTH</span>
-        <h3>Alex Carter</h3>
+    <div class="carousel-track">
 
-        <div class="coach-rating">
-          ⭐ 4.9
+      <div class="coach-card" *ngFor="let coach of coaches">
+        <img [src]="coach.image" [alt]="coach.name">
+
+        <div class="coach-card__overlay">
+          <span>{{ coach.specialty }}</span>
+          <h3>{{ coach.name }}</h3>
+          <p>⭐ {{ coach.rating }}</p>
         </div>
       </div>
-    </div>
 
-    <div class="coach-card">
-      <img src="https://placehold.co/300x400" alt="Coach">
+      <!-- duplicate for infinite loop -->
+      <div class="coach-card" *ngFor="let coach of coaches">
+        <img [src]="coach.image" [alt]="coach.name">
 
-      <div class="coach-card__overlay">
-        <span class="coach-specialty">CROSSFIT</span>
-        <h3>Sarah Johnson</h3>
-
-        <div class="coach-rating">
-          ⭐ 4.8
+        <div class="coach-card__overlay">
+          <span>{{ coach.specialty }}</span>
+          <h3>{{ coach.name }}</h3>
+          <p>⭐ {{ coach.rating }}</p>
         </div>
       </div>
+
     </div>
 
-    <div class="coach-card">
-      <img src="https://placehold.co/300x400" alt="Coach">
-
-      <div class="coach-card__overlay">
-        <span class="coach-specialty">YOGA</span>
-        <h3>Emma Wilson</h3>
-
-        <div class="coach-rating">
-          ⭐ 4.9
-        </div>
-      </div>
-    </div>
-
-    <div class="coach-card">
-      <img src="https://placehold.co/300x400" alt="Coach">
-
-      <div class="coach-card__overlay">
-        <span class="coach-specialty">NUTRITION</span>
-        <h3>Michael Brown</h3>
-
-        <div class="coach-rating">
-          ⭐ 5.0
-        </div>
-      </div>
-    </div>
   </div>
+
 </section>
