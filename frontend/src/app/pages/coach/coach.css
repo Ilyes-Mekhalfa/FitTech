@@ -580,3 +580,69 @@
 .btn-full-width:hover {
   background: var(--surface-highest);
 }
+
+.filter-bar {
+  background: #fff;
+  padding: 16px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filter {
+  border: none;
+  background: #f0f0f0;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #555;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.filter:hover {
+  background: #e4e4e4;
+}
+
+.filter.active {
+  background: #b90014;
+  color: #fff;
+}
+
+.search-box {
+  margin-left: auto;       /* pushes search to the right */
+  position: relative;
+  min-width: 260px;
+}
+
+.search-box .search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 20px;
+  pointer-events: none;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 16px 12px 46px;
+  border: none;
+  outline: none;
+  background: #f3f3f3;
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-box input:focus {
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(185, 0, 20, 0.12);
+}
