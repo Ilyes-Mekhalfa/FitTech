@@ -104,9 +104,12 @@
                   <td><span class="join-date">{{member.fitapi_user.created_at}}</span></td>
                   <td class="actions-cell">
                     <div class="action-btns">
-                      <button class="action-btn"><span class="material-symbols-outlined">refresh</span></button>
-                      <button class="action-btn"><span class="material-symbols-outlined">stat_1</span></button>
-                      <button class="action-btn"><span class="material-symbols-outlined">more_vert</span></button>
+                      <button class="action-btn" (click)="deleteMember(member)">
+                        <span class="material-symbols-outlined">delete</span>
+                      </button>
+                      <button class="action-btn" (click)="archiveMember(member)">
+                        <span class="material-symbols-outlined">archive</span>
+                      </button>
                     </div>
                   </td>
                 </tr>
