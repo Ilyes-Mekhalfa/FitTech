@@ -56,24 +56,18 @@
         </table>
       </div>
     </section>
-    <div style="display:flex; align-items:center; gap:5px;">
-    <div class="filter-bar" style="margin-bottom:0; flex:1;">
 
-      <button class="filter" [class.active]="currentFilter === 'all'" (click)="filterCoach('all')">All</button>
+    <div class="filter-bar" >
+      <button class="filter active" [class.active]="currentFilter === 'all'" (click)="filterCoach('all')">All</button>
+      <button class="filter active" [class.active]="currentFilter === 'FITNESS'" (click)="filterCoach('FITNESS')">FITNESS</button>
+      <button class="filter active" [class.active]="currentFilter === 'MMA'" (click)="filterCoach('MMA')">MMA</button>
+      <button class="filter active" [class.active]="currentFilter === 'BODY BUILDER'" (click)="filterCoach('BODY BUILDER')">BODY BUILDER</button>
 
-      <button class="filter" [class.active]="currentFilter === 'FITNESS'"
-        (click)="filterCoach('FITNESS')">FITNESS</button>
-
-      <button class="filter" [class.active]="currentFilter === 'MMA'" (click)="filterCoach('MMA')">MMA</button>
-
-      <button class="filter" [class.active]="currentFilter === 'BODY BUILDER'"
-        (click)="filterCoach('BODY BUILDER')">BODY BUILDER</button>
+      <div class="search-box">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input type="text" placeholder="Search machine..." (input)="searchCoach($event)"/>
+      </div>
     </div>
-    <div class="search-box">
-      <span class="material-symbols-outlined search-icon">search</span>
-      <input type="text" placeholder="Search coaches..." (input)="searchCoach($event)" />
-    </div>
-</div>
     <div class="content-split-grid">
 
       <div class="main-list-area">
