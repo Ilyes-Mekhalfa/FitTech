@@ -1,0 +1,80 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* CARD BASE */
+.stat-card {
+  background: var(--surface-container-lowest);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 150px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+/* HOVER EFFECT */
+.stat-card:hover {
+  border-bottom-color: var(--primary);
+}
+
+/* LABEL */
+.stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--secondary);
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+/* VALUE */
+.stat-value {
+  font-size: 34px;
+  font-weight: 800;
+  font-family: 'Lexend', sans-serif;
+  margin-bottom: 10px;
+  color: var(--on-surface);
+}
+
+/* CHANGE TEXT */
+.stat-change {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tertiary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* FEATURED CARD (Revenue) */
+.stat-card.featured {
+  background: linear-gradient(
+    135deg,
+    var(--primary-container),
+    var(--primary)
+  );
+  color: var(--on-primary);
+}
+
+.stat-card.featured .stat-label {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.stat-card.featured .stat-value {
+  color: white;
+}
+
+.stat-card.featured .stat-change {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ICON ALIGNMENT */
+.material-symbols-outlined {
+  font-size: 18px;
+  vertical-align: middle;
+}

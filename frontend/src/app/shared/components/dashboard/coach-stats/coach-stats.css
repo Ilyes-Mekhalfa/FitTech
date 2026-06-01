@@ -1,0 +1,36 @@
+.coach-stats {
+  margin-bottom: 40px;
+}
+
+/* Optional small visual distinction from general stats */
+.coach-stats .stat-card {
+  background: var(--surface-container-lowest);
+}
+
+/* Featured coach metric (rating) */
+.coach-stats .stat-card.featured {
+  background: linear-gradient(
+    135deg,
+    var(--tertiary-container),
+    var(--tertiary)
+  );
+  color: var(--on-primary);
+}
+
+.coach-stats .stat-card.featured .stat-label {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.coach-stats .stat-card.featured .stat-value {
+  color: white;
+}
+
+.coach-stats .stat-card.featured .stat-change {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* icon alignment */
+.coach-stats .material-symbols-outlined {
+  font-size: 18px;
+  vertical-align: middle;
+}

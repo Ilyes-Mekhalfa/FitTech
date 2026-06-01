@@ -1,0 +1,61 @@
+<div class="stats-grid member-stats">
+
+  <div class="stat-card">
+    <div class="stat-label">Total Members</div>
+    <div class="stat-value">{{memberStats.total}}</div>
+    <div class="stat-change">
+      <span class="material-symbols-outlined">groups</span>
+      <span>All registered members</span>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-label">Active Members</div>
+    <div class="stat-value">{{memberStats.active}}</div>
+    <div class="stat-change">
+      <span class="material-symbols-outlined">bolt</span>
+      <span>Currently active</span>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-label">New Members</div>
+    <div class="stat-value">{{memberStats.new}}</div>
+    <div class="stat-change">
+      <span class="material-symbols-outlined">person_add</span>
+      <span>Last 30 days</span>
+    </div>
+  </div>
+
+  <div class="stat-card featured">
+    <div class="stat-label">Retention Rate</div>
+    <div class="stat-value">{{memberStats.retention}}%</div>
+    <div class="stat-change">
+      <span class="material-symbols-outlined">trending_up</span>
+      <span>Member loyalty score</span>
+    </div>
+  </div>
+
+  <div class="chart-card">
+
+  <div class="chart-header">
+    <div>
+      <div class="chart-title">Member Growth</div>
+      <div class="chart-subtitle">New registrations over time</div>
+    </div>
+  </div>
+
+  <div class="chart-body">
+    <svg viewBox="0 0 400 200" class="chart-svg">
+
+      <path
+        d="M 20 180 L 80 140 L 140 120 L 200 100 L 260 80 L 320 60 L 380 40"
+        class="chart-line primary"
+      />
+
+    </svg>
+  </div>
+
+</div>
+
+</div>

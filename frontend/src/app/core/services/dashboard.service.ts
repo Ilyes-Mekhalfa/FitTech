@@ -11,12 +11,20 @@ export class DashboardService {
 
    constructor(private http: HttpClient){}
 
-   dashboard(){
-    return this.http.get<DashboardDTO>(`${this.APIUrl}/dashboard`)
+   generalStats(){
+    return this.http.get<string>(`${this.APIUrl}/dashboard/stats`)
    }
 
-   exportData(){
-    return this.http.get<string>(`${this.APIUrl}/dashboard/exportData`)
+   coachStats(){
+    return this.http.get<string>(`${this.APIUrl}/dashboard/coachStats`)
+   }
+
+   memberStats(){
+    return this.http.get<string>(`${this.APIUrl}/dashboard/memberStats`)
+   }
+
+   planStats(){
+    return this.http.get<string>(`${this.APIUrl}/dashboard/planStats`)
    }
 
    dailyToken(){
