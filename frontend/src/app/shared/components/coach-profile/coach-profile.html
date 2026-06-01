@@ -1,0 +1,161 @@
+<aside class="panel sidebar-column" [class.open]="coach">
+
+  <div class="profile-preview-card">
+
+    <ng-container *ngIf="coach">
+
+      <div class="mode-toggle-tabs">
+        <button class="tab-btn" [class.active]="!editMode" (click)="editMode = false">
+          View
+        </button>
+        <button class="tab-btn" [class.active]="editMode" (click)="toggleEditMode()">
+          Edit
+        </button>
+      </div>
+
+      <ng-container *ngIf="!editMode">
+
+        <div class="profile-preview-card__view">
+
+          <div class="preview-header-centered section">
+            <div class="preview-avatar-circle">
+              <img *ngIf="coach.fitapi_user?.profile_picture" [src]="coach.fitapi_user.profile_picture" alt="Avatar">
+              <span *ngIf="!coach.fitapi_user?.profile_picture">
+                {{ coach.first_name?.charAt(0) || 'C' }}
+              </span>
+            </div>
+
+            <h2 class="profile-name">
+              {{ coach.first_name }} {{ coach.last_name }}
+            </h2>
+
+            <span class="badge badge--inactive">
+              {{ coach.fitapi_coach?.specialties || 'No specialties listed' }} 
+            </span>
+          </div>
+
+          <div class="preview-body section">
+            <div class="info-row">
+              <span class="info-label">Course's number</span>
+              <span class="info-value text-bold">{{ coach.fitapi_coach?.fitapi_course.length || 0 }}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">certificate's number </span>
+              <span class="info-value text-bold">{{coach.fitapi_coach?.fitapi_coachcertificate.length || 0}}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">reviews</span>
+              <span class="info-value text-bold">{{coach.fitapi_coach?.fitapi_coachreview.length || 0}}</span>
+            </div>
+          </div>
+
+          <div class="footer-actions">
+            <button class="btn btn--close" (click)="closeProfile()">
+              Close
+            </button>
+          </div>
+        </div>
+
+      </ng-container>
+
+      <ng-container *ngIf="editMode">
+        <form class="edit-container" [formGroup]="editFormData">
+          <div class="edit-section">
+            <div class="edit-header">
+              <h4>Edit Coach Profile</h4>
+            </div>
+
+            <div class="edit-form">
+              <div class="form-group">
+                <label class="form-label">First Name</label>
+                <input type="text" class="form-input" formControlName="first_name">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Last Name</label>
+                <input type="text" class="form-input" formControlName="last_name">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" formControlName="email">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Specialties</label>
+                <input type="text" class="form-input" formControlName="specialties">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Biography</label>
+                <textarea rows="4" class="form-input form-textarea" formControlName="biography"></textarea>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" class="btn btn--primary" (click)="saveProfile()">
+                  Save Profile
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <!-- add course form -->
+
+        <form class="edit-container" [formGroup]="addCourse">
+          <div class="edit-section subscription-edit-section">
+            <div class="edit-header">
+              <h4>Add New Course</h4>
+            </div>
+
+            <div class="edit-form">
+              <div class="form-group">
+                <label class="form-label">Course title</label>
+                <input type="text" class="form-input" formControlName="title">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Course Description</label>
+                <input type="text" class="form-input" formControlName="description">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Date</label>
+                <input type="datetime-local" class="form-input" formControlName="date">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Session Duration</label>
+                <input type="number" class="form-input" formControlName="duration">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Max Participants</label>
+                <input type="number" class="form-input" formControlName="maxParticipants">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Level required</label>
+                <select class="form-input" formControlName="level_required">
+                  <option value="">Select Level</option>
+                  <option value="beginner">Beginner</option>
+                  <option value="intermediate">Intermediate</option>
+                  <option value="advanced">Advanced</option>
+                </select>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" class="btn btn--primary" (click)="addNewCourse()">
+                  Save Course
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </ng-container>
+
+    </ng-container>
+
+  </div>
+
+</aside>

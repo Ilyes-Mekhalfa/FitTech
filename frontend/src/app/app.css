@@ -1,13 +1,11 @@
-.app-layout {
-  display: flex;
-  height: 100vh;
+main.with-sidebar {
+  margin-left: 64px;          
+  min-height: 100vh;
+  transition: margin-left 0.3s ease;
 }
 
-app-side-bar {
-  width: 250px; /* or your sidebar width */
-}
-
-.app-content {
-  flex: 1;
-  overflow: auto;
+/* Full bleed — landing & auth pages */
+main:not(.with-sidebar) {
+  margin-left: 0;
+  width: 100%;
 }

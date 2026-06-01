@@ -18,4 +18,9 @@ export class DashboardService {
    exportData(){
     return this.http.get<string>(`${this.APIUrl}/dashboard/exportData`)
    }
+
+   dailyToken(){
+    return this.http.get(`${this.APIUrl}/admin/dailyToken`)
+   }
+   
 }

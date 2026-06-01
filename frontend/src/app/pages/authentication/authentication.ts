@@ -14,34 +14,39 @@ export class LoginComponent {
   loginForm: FormGroup;
   showPassword: boolean = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
-    })
+      password: ['', [Validators.required, Validators.minLength(8)]],
+    });
   }
 
   handleShowPassword() {
-    this.showPassword = !this.showPassword
+    this.showPassword = !this.showPassword;
   }
 
   forgetPassword() {
-    this.router.navigate(['/forget-password'])
+    const email = this.loginForm.get('email')?.value;
+    this.router.navigate(['/forget-password'], {
+      state: { email },
+    });
   }
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      throw new Error('form invalid')
+      throw new Error('form invalid');
     }
     this.authService.login(this.loginForm.value).subscribe({
       next: (res) => {
-        this.router.navigate(['/admin-dashboard'])
+        this.router.navigate(['/admin-dashboard']);
       },
       error: (err) => {
-        throw new Error(err.error.message)
-      }
+        throw new Error(err.error.message);
+      },
     });
   }
-
-
 }

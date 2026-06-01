@@ -1,31 +1,5 @@
 <div class="members-shell">
 
-  <header class="members-topbar">
-    <div class="topbar-left">
-      <div class="search-wrap">
-        <span class="material-symbols-outlined search-icon">search</span>
-        <input class="search-input" type="text" placeholder="Search members..." />
-      </div>
-    </div>
-
-    <div class="topbar-right">
-      <button class="topbar-icon-btn">
-        <span class="material-symbols-outlined">notifications</span>
-        <span class="notif-dot"></span>
-      </button>
-      <div class="topbar-divider"></div>
-      <div class="topbar-user">
-        <div class="user-meta">
-          <span class="user-name">Admin</span>
-          <span class="user-role">Superuser</span>
-        </div>
-        <div class="user-avatar-wrap">
-          <img src="https://i.pravatar.cc/40" class="user-avatar" alt="Admin" />
-        </div>
-      </div>
-    </div>
-  </header>
-
   <main class="members-content">
 
     <div class="page-header">
@@ -50,27 +24,17 @@
     <div class="members-grid">
       <div class="members-main">
 
-        <div class="filter-bar">
-          <div class="filter-group">
-            <div class="filter-item">
-              <label class="filter-label">Status</label>
-              <select class="filter-select">
-                <option>All Status</option>
-                <option>Active</option>
-                <option>Expired</option>
-              </select>
-            </div>
-            <div class="filter-item">
-              <label class="filter-label">Membership Plan</label>
-              <select class="filter-select">
-                <option>All Plans</option>
-                <option>Elite Annual</option>
-                <option>Monthly</option>
-              </select>
-            </div>
-          </div>
-          <button class="btn-apply">Apply Filters</button>
-        </div>
+        <div class="filter-bar" >
+      <button class="filter active" [class.active]="currentFilter === 'all'" (click)="applyFilter('all')">All</button>
+      <button class="filter active" [class.active]="currentFilter === 'expired'" (click)="applyFilter('expired')">expired</button>
+      <button class="filter active" [class.active]="currentFilter === 'active'" (click)="applyFilter('active')">active</button>
+      <button class="filter active" [class.active]="currentFilter === 'pending_payment'" (click)="applyFilter('pending_payment')">pending_payment</button>
+
+      <div class="search-box">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input type="text" placeholder="Search member..." (input)="searchMember($event)"/>
+      </div>
+    </div>
 
         <div class="table-card">
           <div class="table-scroll">
@@ -79,34 +43,34 @@
                 <tr>
                   <th>Name</th>
                   <th>Status</th>
-                  <th>Plan</th>
                   <th>Join Date</th>
                   <th class="th-right">Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody *ngFor="let member of members" (click)="selectedMember(member)">
                 <tr class="table-row">
                   <td>
                     <div class="member-cell">
                       <div class="member-avatar avatar--red">AC</div>
                       <div class="member-info">
-                        <span class="member-name">Alex Chen</span>
-                        <small class="member-email">alex@mail.com</small>
+                        <span class="member-name">{{member.fitapi_user.first_name + ' ' + member.fitapi_user.last_name}}
+                        </span>
+                        <small class="member-email">{{member.fitapi_user.email}}</small>
                       </div>
                     </div>
                   </td>
-                  <td><span class="badge badge--active">Active</span></td>
-                  <td>
-                    <div class="plan-cell">
-                      <span class="plan-name">Elite Annual</span>
-                    </div>
-                  </td>
-                  <td><span class="join-date">2024-01-10</span></td>
+                  <td><span class="badge badge--active">{{member?.fitapi_membresubscription?.length
+                      ? member.fitapi_membresubscription[member.fitapi_membresubscription.length - 1].status
+                      : 'expired' }}</span></td>
+                  <td><span class="join-date">{{member.fitapi_user.created_at}}</span></td>
                   <td class="actions-cell">
                     <div class="action-btns">
-                      <button class="action-btn"><span class="material-symbols-outlined">refresh</span></button>
-                      <button class="action-btn"><span class="material-symbols-outlined">stat_1</span></button>
-                      <button class="action-btn"><span class="material-symbols-outlined">more_vert</span></button>
+                      <button class="action-btn" (click)="deleteMember(member)">
+                        <span class="material-symbols-outlined">delete</span>
+                      </button>
+                      <button class="action-btn" (click)="archiveMember(member)">
+                        <span class="material-symbols-outlined">archive</span>
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -115,7 +79,7 @@
           </div>
 
           <div class="pagination">
-            <span class="pagination-info">Showing 1-10 of 248 members</span>
+            <span class="pagination-info">Showing 1-10 of {{members.length}} members</span>
             <div class="pagination-controls">
               <button class="page-btn page-btn--nav" disabled>
                 <span class="material-symbols-outlined">chevron_left</span>
@@ -131,12 +95,16 @@
         </div>
       </div>
 
+      @if(selectMember){
+      <app-member-profile [member]="selectMember" (close)="closeProfile()"></app-member-profile>
+      } @else {
       <aside class="sidebar-column">
         <div class="sidebar-placeholder">
           <span class="material-symbols-outlined placeholder-icon">person_search</span>
           <p class="placeholder-text">Select a member to view full profile details and history.</p>
         </div>
       </aside>
+      }
     </div>
 
   </main>

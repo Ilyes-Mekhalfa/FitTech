@@ -1,0 +1,160 @@
+<div class="equipment-page">
+  <!-- LEFT CONTENT -->
+  <div class="content-area">
+
+    <div class="topbar">
+      <div>
+        <h1>Equipment Management</h1>
+        <p>Manage and monitor gym machines</p>
+      </div>
+
+      <button class="add-btn" (click)="addMachine()">
+        <span class="material-symbols-outlined">add</span>
+        Add Machine
+      </button>
+    </div>
+
+    <div class="filter-bar" >
+      <button class="filter active" [class.active]="currentFilter === 'all'" (click)="filterMachine('all')">All</button>
+      <button class="filter active" [class.active]="currentFilter === 'free_weight'" (click)="filterMachine('free_weight')">free_weight</button>
+      <button class="filter active" [class.active]="currentFilter === 'machine'" (click)="filterMachine('machine')">machine</button>
+
+      <div class="search-box">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input type="text" placeholder="Search machine..." (input)="searchMachine($event)"/>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Machine</th>
+            <th>type</th>
+            <th>add date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr class="table-row" *ngFor="let machine of machines" (click)="selectMachine(machine)">
+            <td>
+              <div class="machine-cell">
+                  <div class="machine-icon">
+                    <span class="material-symbols-outlined">{{ machine.type === 'machine' ? 'directions_run' : 'fitness_center' }}</span>
+                  </div>
+
+                <div>
+                  <div class="machine-name">
+                    {{ machine.name}}
+                  </div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <span class="status operational">
+                {{machine.type}}
+              </span>
+            </td>
+
+            <td>{{ machine.addDate }}</td>
+            <td>
+              <button class="action-btn" (click)="deleteMachine(machine)">
+                      <span class="material-symbols-outlined">delete</span>
+                    </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- RIGHT PREVIEW -->
+  <aside class="preview-panel">
+  @if (selectedMachine){
+
+    <div class="preview-image">
+      <i class="ti ti-barbell"></i>
+    </div>
+
+    <div class="preview-content">
+
+      <div class="preview-header">
+        <h2>{{selectedMachine.name}}</h2>
+      </div>
+
+      <div class="preview-status operational">
+        {{selectedMachine.type}}
+      </div>
+
+      <div class="preview-section">
+        <label>Description</label>
+        <p>{{selectedMachine.description}}</p>
+      </div>
+
+
+      <div class="preview-actions">
+        <button class="primary-btn" (click)="closePreview()">
+          Close Machine
+        </button>
+      </div>
+
+    </div>
+  }
+  @else if (newMachine){
+    <div class="form-card-wrapper">
+      <div class="form-header">
+        <h2>New Machine</h2>
+        <p>Enter machine details and specifications</p>
+      </div>
+
+      <form [formGroup]="addMachineData" class="machine-form">
+        <section class="form-card">
+          <div class="section-head">
+            <span class="material-symbols-outlined">fitness_center</span>
+            <h3>Machine Details</h3>
+          </div>
+
+          <div class="input-grid">
+            <div class="field-wrap">
+              <label>Machine Name</label>
+              <input type="text" placeholder="e.g. Treadmill" formControlName="name" />
+            </div>
+          </div>
+          <div class="input-grid">
+            <div class="field-wrap">
+              <label>Type</label>
+              <input type="text" placeholder="e.g. Cardio" formControlName="type" />
+            </div>
+          </div>
+        </section>
+
+        <section class="form-card">
+          <div class="section-head">
+            <span class="material-symbols-outlined">description</span>
+            <h3>Description</h3>
+          </div>
+
+          <div class="field-wrap">
+            <label>Machine Description</label>
+            <textarea placeholder="Describe the machine's features and purpose..." formControlName="description"></textarea>
+          </div>
+        </section>
+
+        <div class="form-actions">
+          <button type="button" class="btn-cancel" (click)="cancelAddMachine()">Cancel</button>
+          <button type="button" class="btn-submit" (click)="submitMachine()" [disabled]="!addMachineData.valid">Add Machine</button>
+        </div>
+      </form>
+    </div>
+  }
+  @else {
+    <div class="empty-state-card">
+      <span class="material-symbols-outlined">fitness_center</span>
+      <p>Add or preview machine</p>
+    </div>
+  }
+</aside>
+</div>

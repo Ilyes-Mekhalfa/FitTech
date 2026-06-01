@@ -1,0 +1,212 @@
+<!-- MAIN PAGE ─────────────────────────────────────────────────────────────── -->
+<div class="page-shell">
+
+    <!-- Page Header ─────────────────────────────────────────────────────────── -->
+    <div class="page-header">
+        <div class="page-header-left">
+            <div class="breadcrumb">
+                <span class="material-symbols-outlined breadcrumb-icon">group</span>
+                <a class="breadcrumb-link" href="#">Members</a>
+                <span class="material-symbols-outlined breadcrumb-sep">chevron_right</span>
+                <span class="breadcrumb-current">Add New Member</span>
+            </div>
+            <h1 class="page-title">New Member Registration</h1>
+            <p class="page-subtitle">Complete all three steps to onboard a new FitTech athlete.</p>
+        </div>
+        <div class="page-header-right">
+            <!-- Live progress indicator in header -->
+            <div class="header-progress">
+                <span class="header-progress-label">Step {{ currentStep }} of 3</span>
+                <div class="header-progress-bar">
+                    <div class="header-progress-fill" [style.width.%]="(currentStep / 3) * 100"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step Indicator ───────────────────────────────────────────────────────── -->
+    <div class="step-track">
+        <!-- Step 1 -->
+        <button class="step-node" [class.step-node--active]="currentStep === 1" aria-label="Go to Personal Info">
+            <div class="step-node-circle">
+                <span class="material-symbols-outlined step-node-icon">person</span>
+            </div>
+            <div class="step-node-meta">
+                <span class="step-node-number">Step 1</span>
+                <span class="step-node-label">Personal Info</span>
+            </div>
+        </button>
+        
+        <div class="step-connector"></div>
+
+        <!-- Step 2 -->
+        <button class="step-node" [class.step-node--active]="currentStep === 2" aria-label="Go to Account">
+            <div class="step-node-circle">
+                <span class="material-symbols-outlined step-node-icon">lock</span>
+            </div>
+            <div class="step-node-meta">
+                <span class="step-node-number">Step 2</span>
+                <span class="step-node-label">Account Setup</span>
+            </div>
+        </button>
+
+        <div class="step-connector"></div>
+
+        <!-- Step 3 -->
+        <button class="step-node" [class.step-node--active]="currentStep === 3" aria-label="Go to Health">
+            <div class="step-node-circle">
+                <span class="material-symbols-outlined step-node-icon">favorite</span>
+            </div>
+            <div class="step-node-meta">
+                <span class="step-node-number">Step 3</span>
+                <span class="step-node-label">Health Profile</span>
+            </div>
+        </button>
+    </div>
+
+    <!-- Main Two-Column Layout ───────────────────────────────────────────────── -->
+    <div class="content-grid">
+
+        <!-- ── LEFT COLUMN: Form Panel ─────────────────────────────────────────── -->
+        <div class="form-panel">
+
+            @if(currentStep === 1) {
+                <!-- STEP 1 — PERSONAL INFORMATION -->
+                <div class="step-content">
+                    <div class="step-content-header">
+                        <span class="step-content-badge">01</span>
+                        <div>
+                            <h2 class="step-content-title">Personal Information</h2>
+                            <p class="step-content-desc">Basic identity details for the new member.</p>
+                        </div>
+                    </div>
+
+                    <form [formGroup]="stepOne">
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label class="field-label" formControlName="firstName">First Name</label>
+                                <div class="field-input-wrap">
+                                    <span class="material-symbols-outlined field-icon">badge</span>
+                                    <input id="first_name" type="text" class="field-input" placeholder="e.g. Marcus" formControlName="firstName" />
+                                </div>
+                            </div>
+
+                            <div class="field-group">
+                                <label class="field-label" formControlName="lastName">Last Name</label>
+                                <div class="field-input-wrap">
+                                    <span class="material-symbols-outlined field-icon">badge</span>
+                                    <input id="last_name" type="text" class="field-input" placeholder="e.g. Aurelius" formControlName="lastName" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="field-group">
+                            <label class="field-label" formControlName="email">Email Address</label>
+                            <div class="field-input-wrap">
+                                <span class="material-symbols-outlined field-icon">mail</span>
+                                <input id="email" type="email" class="field-input" placeholder="member@fittech.com" formControlName="email" />
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="field-group">
+                            <label class="field-label" for="phone">Phone Number</label>
+                            <div class="field-input-wrap">
+                                <span class="material-symbols-outlined field-icon">phone</span>
+                                <input id="phone" type="tel" class="field-input" placeholder="+1 (555) 000-0000" formControlName="phone" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            }@else if(currentStep === 2) {
+                <!-- STEP 2 — ACCOUNT SETUP -->
+                <div class="step-content">
+                    <div class="step-content-header">
+                        <span class="step-content-badge">02</span>
+                        <div>
+                            <h2 class="step-content-title">Account Setup</h2>
+                            <p class="step-content-desc">Credentials the member will use to log in.</p>
+                        </div>
+                    </div>
+
+                    <form [formGroup]="stepTwo">
+                        <div class="field-group">
+                            <label class="field-label" for="password">Password</label>
+                            <div class="field-input-wrap">
+                                <span class="material-symbols-outlined field-icon">lock</span>
+                                <input id="password" type="password" class="field-input" placeholder="Min 8 characters" formControlName="password" />
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="confirm_password">Confirm Password</label>
+                            <div class="field-input-wrap">
+                                <span class="material-symbols-outlined field-icon">lock_reset</span>
+                                <input id="confirm_password" type="password" class="field-input" placeholder="Repeat password" formControlName="confirm_password" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            }@else if(currentStep === 3) {
+                <!-- STEP 3 — HEALTH PROFILE -->
+                <div class="step-content">
+                    <div class="step-content-header">
+                        <span class="step-content-badge">03</span>
+                        <div>
+                            <h2 class="step-content-title">Health Profile</h2>
+                            <p class="step-content-desc">Performance goals and medical considerations.</p>
+                        </div>
+                    </div>
+
+                    <form [formGroup]="stepThree">
+                        <div class="field-group">
+                            <label class="field-label" for="date_of_birth">Date of Birth</label>
+                            <div class="field-input-wrap">
+                                <span class="material-symbols-outlined field-icon">cake</span>
+                                <input id="date_of_birth" type="date" class="field-input" formControlName="date_of_birth" />
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="health_goal">Primary Health Goal</label>
+                            <div class="field-input-wrap">
+                                <span class="material-symbols-outlined field-icon">fitness_center</span>
+                                <input id="health_goal" type="text" class="field-input" placeholder="e.g. Build Muscle" formControlName="health_goal" />
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="medical_restrictions">Medical Restrictions</label>
+                            <div class="field-input-wrap">
+                                <span class="material-symbols-outlined field-icon">healing</span>
+                                <input id="medical_restrictions" type="text" class="field-input" placeholder="Optional" formControlName="medical_restrictions" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            }
+
+            <!-- ── Navigation Footer ──────────────────────────────────────────────── -->
+            <div class="form-footer">
+                <button class="btn-ghost" type="button" [disabled]="currentStep === 1" (click)="back()">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    Back
+                </button>
+
+                <div class="footer-right">
+                    <button class="btn-primary" type="button" (click)="nextStep()">
+                        @if(currentStep === 3) {
+                            Submit
+                            <span class="material-symbols-outlined">check</span>
+                        } @else {
+                            Continue
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        }
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

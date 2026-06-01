@@ -1,10 +1,10 @@
 <div class="app-layout">
 
   <app-side-bar *ngIf="showSidebar"></app-side-bar>
+  <app-loader></app-loader>
 
-  <div class="app-content">
-    <app-loader></app-loader>
-    <router-outlet></router-outlet>
-  </div>
+  <main [class.with-sidebar]="showSidebar">
+  <router-outlet></router-outlet>
+</main>
 
 </div>

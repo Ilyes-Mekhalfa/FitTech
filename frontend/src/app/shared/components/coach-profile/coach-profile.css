@@ -1,0 +1,294 @@
+.panel {
+  width: 380px;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: 0.25s ease-in-out;
+  transform: translateX(12px);
+  opacity: 0;
+}
+
+.panel.open {
+  transform: none;
+  opacity: 1;
+}
+
+.sidebar-column {
+  position: sticky;
+  top: 40px;
+  height: fit-content;
+}
+
+/* =========================
+   CARD PROFILE
+========================= */
+.profile-preview-card {
+  background: #fff;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   MODE TOGGLE FULL WIDTH TABS
+========================= */
+.mode-toggle-tabs {
+  display: flex;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.tab-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #777;
+  padding: 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.tab-btn:hover {
+  color: #111;
+}
+
+.tab-btn.active {
+  background: #ffffff;
+  color: #b90014;
+  border-bottom: 3px solid #b90014;
+  font-weight: 700;
+}
+
+/* =========================
+   GLOBAL SECTIONS
+========================= */
+.section {
+  padding: 24px;
+}
+
+.preview-header-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 14px;
+  padding-top: 32px;
+}
+
+/* =========================
+   AVATAR (IMAGE & FALLBACK)
+========================= */
+.preview-avatar-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: #e31b23;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 32px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  border: 4px solid #fff;
+  overflow: hidden;
+}
+
+.preview-avatar-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Typography styles */
+.profile-name {
+  margin: 4px 0 0 0;
+  font-size: 26px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.5px;
+}
+
+/* =========================
+   BADGES
+========================= */
+.badge {
+  font-size: 11px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.badge--inactive {
+  background: #fde8e8;
+  color: #4a1010;
+}
+
+.badge--active {
+  background: #e7f8ee;
+  color: #14804a;
+}
+
+/* =========================
+   INFO LIST DISPLAY
+========================= */
+.preview-body {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 32px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 13px;
+  color: #777;
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 14px;
+  color: #111;
+  text-align: right;
+  word-break: break-word;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+/* =========================
+   ACTIONS / FORM BUTTONS
+========================= */
+.footer-actions {
+  padding: 0 24px 24px 24px;
+}
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s ease, opacity 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn--close {
+  background: #b90014;
+  color: #fff;
+}
+
+.btn--close:hover {
+  background: #a00011;
+}
+
+.btn--primary {
+  background: #b90014;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.btn--secondary {
+  background: #f1f1f1;
+  color: #333;
+}
+
+/* =========================
+   EDIT MODE FORM STYLING
+========================= */
+.edit-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-section {
+  padding: 24px;
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.edit-section:last-child {
+  border-bottom: none;
+}
+
+.subscription-edit-section {
+  background: #f9f9f9;
+}
+
+.edit-header h4 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  color: #111;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #444;
+}
+
+.form-input {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  color: #222;
+  outline: none;
+  transition: 0.2s;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  border-color: #b90014;
+  box-shadow: 0 0 0 3px rgba(185, 0, 20, 0.08);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}

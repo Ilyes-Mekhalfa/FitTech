@@ -1,0 +1,47 @@
+<section class="plans">
+  <div class="plans-header">
+    <span class="section-label">MEMBERSHIP</span>
+
+    <h2>Choose Your Plan</h2>
+
+    <p>
+      Flexible memberships designed for every fitness level.
+    </p>
+  </div>
+
+  <div class="plan-filters">
+    <button class="filter-pill" [class.active]="activeFilter === 'daily'" (click)="setPlanFilter('daily')">Daily</button>
+    <button class="filter-pill" [class.active]="activeFilter === 'monthly'" (click)="setPlanFilter('monthly')">Monthly</button>
+    <button class="filter-pill" [class.active]="activeFilter === 'quarterly'" (click)="setPlanFilter('quarterly')">Quarterly</button>
+    <button class="filter-pill" [class.active]="activeFilter === 'yearly'" (click)="setPlanFilter('yearly')">Yearly</button>
+  </div>
+
+  <div class="plans-grid" *ngIf="filteredPlans.length > 0; else emptyState">
+    <div class="plan-card" *ngFor="let plan of filteredPlans">
+<span class="tier-tag">{{plan.tier}}</span>
+      <h3>{{plan.name}}</h3>
+
+      <div class="price">
+        <span class="amount">{{plan.price}} DA</span>
+        <span class="period">/{{plan.type}}</span>
+      </div>
+
+      <ul>
+        <li>{{plan.sessions_count > 30? '✓' : '✕'}} unlimited Access </li>
+        <li>{{plan.auto_renew?'✓':'✕'}} auto-renew</li>
+        <li>{{plan.includes_coach_chat? '✓':'✕'}} Coach Chat</li>
+        <li>{{plan.type == 'quarterly' || plan.type == 'yearly' ? '✓' : '✕'}} Personal coaching</li>
+        <li>{{plan.tier == 'full' || plan.tier == 'advanced'?  '✓':'✕'}} Nutrition guide</li>
+        <li>{{plan.tier == 'advanced'?  '✓':'✕'}} Recovery zone</li>
+      </ul>
+
+      <button>Select Plan</button>
+    </div>
+  </div>
+
+  <ng-template #emptyState>
+    <div class="plans-empty">
+      <p>No plans found for the selected filter.</p>
+    </div>
+  </ng-template>
+</section>
