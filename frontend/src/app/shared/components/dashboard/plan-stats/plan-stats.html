@@ -1,0 +1,83 @@
+<div class="plans-card">
+
+  <div class="plans-header">
+    <div>
+      <div class="plans-title">Plans Distribution</div>
+      <div class="plans-subtitle">Member plan breakdown</div>
+    </div>
+  </div>
+
+  <div class="plans-body">
+
+    <!-- DONUT CHART -->
+    <div class="donut-wrapper">
+
+      <svg viewBox="0 0 120 120" class="donut">
+
+        <!-- Background circle -->
+        <circle cx="60" cy="60" r="45" class="donut-bg"></circle>
+
+        <!-- Premium -->
+        <circle
+          cx="60"
+          cy="60"
+          r="45"
+          class="donut-segment premium"
+          stroke-dasharray="180 300"
+          stroke-dashoffset="0"
+        ></circle>
+
+        <!-- Standard -->
+        <circle
+          cx="60"
+          cy="60"
+          r="45"
+          class="donut-segment standard"
+          stroke-dasharray="110 300"
+          stroke-dashoffset="-180"
+        ></circle>
+
+        <!-- Basic -->
+        <circle
+          cx="60"
+          cy="60"
+          r="45"
+          class="donut-segment basic"
+          stroke-dasharray="70 300"
+          stroke-dashoffset="-290"
+        ></circle>
+
+      </svg>
+
+      <div class="donut-center">
+        <div class="donut-total">{{planStats.total}}</div>
+        <div class="donut-label">Total</div>
+      </div>
+
+    </div>
+
+    <!-- LEGEND -->
+    <div class="plans-legend">
+
+      <div class="legend-row">
+        <span class="dot premium"></span>
+        <span class="name">Premium</span>
+        <span class="value">{{planStats.premium}}</span>
+      </div>
+
+      <div class="legend-row">
+        <span class="dot standard"></span>
+        <span class="name">Standard</span>
+        <span class="value">{{planStats.standard}}</span>
+      </div>
+
+      <div class="legend-row">
+        <span class="dot basic"></span>
+        <span class="name">Basic</span>
+        <span class="value">{{planStats.basic}}</span>
+      </div>
+
+    </div>
+
+  </div>
+</div>

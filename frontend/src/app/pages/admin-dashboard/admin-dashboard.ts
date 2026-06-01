@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { LiveEnterance } from '../../shared/components/live-enterance/live-enterance';
 import { DashboardDTO } from './dto/admin-dashboard.dto';
 import { DashboardService } from '../../core/services/dashboard.service'
 import { Router } from '@angular/router';
+import { CoachStats} from '../../shared/components/dashboard/coach-stats/coach-stats'
+import { MemberStats} from '../../shared/components/dashboard/member-stats/member-stats'
+import { PlanStats} from '../../shared/components/dashboard/plan-stats/plan-stats'
+import { Stats} from '../../shared/components/dashboard/stats/stats'
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [LiveEnterance],
+  imports: [LiveEnterance, CommonModule, CoachStats, MemberStats, PlanStats, Stats],
   standalone: true,
   templateUrl: './admin-dashboard.html',
   styleUrl: './admin-dashboard.css',
@@ -35,31 +39,31 @@ export class AdminDashboard {
   }
 
   ngOnInit() {
-    this.dashboardService.dashboard().subscribe({
-      next: (res: DashboardDTO) => {
-        this.dashboardData = res
-      },
-      error: (err: any) => {
-        console.log(err);
+    // this.dashboardService.dashboard().subscribe({
+    //   next: (res: DashboardDTO) => {
+    //     this.dashboardData = res
+    //   },
+    //   error: (err: any) => {
+    //     console.log(err);
 
-      }
-    })
+    //   }
+    // })
   }
 
   exportData() {
-    this.dashboardService.exportData().subscribe({
-      next: (res: any) => {
-        console.log(res);
+    // this.dashboardService.exportData().subscribe({
+    //   next: (res: any) => {
+    //     console.log(res);
 
-      },
-      error: (err: any) => {
-        console.log(err);
+    //   },
+    //   error: (err: any) => {
+    //     console.log(err);
 
-      }
-    })
+    //   }
+    // })
   }
 
-  handleAddNewMember() {
-    this.router.navigate(['/add-manager'])
+  getDailyToken() {
+    this.router.navigate(['/dailyToken'])
   }
 }
