@@ -23,7 +23,9 @@
           <img src="https://i.pravatar.cc/150?u=ac" class="preview-avatar">
           <h3>{{ member?.fitapi_user?.first_name || 'Alex' }} {{ member?.fitapi_user?.last_name || 'Chen' }}</h3>
           <span class="badge" [ngClass]="member?.subscription_status === 'active' ? 'badge--active' : 'badge--inactive'">
-            {{ member?.subscription_status === 'active' ? 'Active' : 'Inactive' }} Member
+            {{member?.fitapi_membresubscription?.length
+                      ? member.fitapi_membresubscription[member.fitapi_membresubscription.length - 1].status
+                      : 'expired' }} 
           </span>
         </div>
         
@@ -33,12 +35,16 @@
             <span class="info-value">{{ member?.fitapi_user?.email || 'N/A' }}</span>
           </div>
           <div class="info-row">
-            <span class="info-label">Subscription Status</span>
-            <span class="info-value">{{ member?.subscription_status || 'N/A' }}</span>
+            <span class="info-label">Subscription Start Date</span>
+            <span class="info-value">{{ member?.fitapi_membresubscription?.length
+                      ? member.fitapi_membresubscription[member.fitapi_membresubscription.length - 1].start_date
+                      : 'N/A' }}</span>
           </div>
           <div class="info-row">
             <span class="info-label">Subscription End Date</span>
-            <span class="info-value">{{ member?.subscription_end_date || 'N/A' }}</span>
+            <span class="info-value">{{member?.fitapi_membresubscription?.length
+                      ? member.fitapi_membresubscription[member.fitapi_membresubscription.length - 1].end_date
+                      : 'N/A'}}</span>
           </div>
         </div>
       </div>

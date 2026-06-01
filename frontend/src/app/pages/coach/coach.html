@@ -1,98 +1,74 @@
 <div class="members-shell">
 
   <main class="members-content">
-  <div class="page-header">
-    <div>
-      <h1 class="page-title">Coaches Management</h1>
-      <p class="page-subtitle">Manage your roster of elite trainers and instructors.</p>
-    </div>
-    <button class="btn-primary" (click)="addCoach()">
-      <span class="material-symbols-outlined">add</span>
-      Add Coach
-    </button>
-  </div>
-
-  <!-- FILTER + SEARCH BAR -->
-  <!-- <-- class="filter-bar">
-
-    <button
-      class="filter"
-      [class.active]="currentFilter === 'all'"
-      (click)="filterCoach('all')"
-    >All</button>
-
-    <button
-      class="filter"
-      [class.active]="currentFilter === 'approved'"
-      (click)="filterCoach('approved')"
-    >Approved</button>
-
-    <button
-      class="filter"
-      [class.active]="currentFilter === 'pending'"
-      (click)="filterCoach('pending')"
-    >Pending</button>
-
-    <button
-      class="filter"
-      [class.active]="currentFilter === 'suspended'"
-      (click)="filterCoach('suspended')"
-    >Suspended</button> -->
-
-    <div class="search-box">
-      <span class="material-symbols-outlined search-icon">search</span>
-      <input
-        type="text"
-        placeholder="Search coaches..."
-        (input)="searchCoach($event)"
-      />
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Coaches Management</h1>
+        <p class="page-subtitle">Manage your roster of elite trainers and instructors.</p>
+      </div>
+      <button class="btn-primary" (click)="addCoach()">
+        <span class="material-symbols-outlined">add</span>
+        Add Coach
+      </button>
     </div>
 
-  
-  <section class="approval-section">
-    <div class="section-header">
-      <div class="header-inner">
-        <span class="material-symbols-outlined header-icon">verified_user</span>
-        <h3 class="section-title">Pending Approvals</h3>
-        <span class="count-badge">3 New</span>
+    <section class="approval-section">
+      <div class="section-header">
+        <div class="header-inner">
+          <span class="material-symbols-outlined header-icon">verified_user</span>
+          <h3 class="section-title">Pending Approvals</h3>
+          <span class="count-badge">{{pendingRequests.length}} New</span>
+        </div>
+      </div>
+      <div class="table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Candidate</th>
+              <th>Specialty</th>
+              <th>Applied Date</th>
+              <th class="th-right">Decision</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-row" *ngFor="let req of pendingRequests">
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar-placeholder">{{req.first_name?.charAt(0)}}{{req.last_name?.charAt(0)}}</div>
+                  <div class="user-info">
+                    <span class="user-name">{{req.first_name}} {{req.last_name}}</span>
+                    <small class="user-email">{{req.email}}</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="specialty-tag">{{req.fitapi_coach?.specialties}}</span></td>
+              <td>{{req.created_at | date}}</td>
+              <td class="td-right">
+                <div class="action-buttons">
+                  <button class="btn-icon-approve"><span class="material-symbols-outlined"
+                      (click)="approveApproval(req)">check</span></button>
+                  <button class="btn-icon-reject"><span class="material-symbols-outlined"
+                      (click)="rejectApproval(req)">close</span></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="filter-bar" >
+      <button class="filter active" [class.active]="currentFilter === 'all'" (click)="filterCoach('all')">All</button>
+      <button class="filter active" [class.active]="currentFilter === 'FITNESS'" (click)="filterCoach('FITNESS')">FITNESS</button>
+      <button class="filter active" [class.active]="currentFilter === 'MMA'" (click)="filterCoach('MMA')">MMA</button>
+      <button class="filter active" [class.active]="currentFilter === 'BODY BUILDER'" (click)="filterCoach('BODY BUILDER')">BODY BUILDER</button>
+
+      <div class="search-box">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input type="text" placeholder="Search machine..." (input)="searchCoach($event)"/>
       </div>
     </div>
-    <div class="table-card">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Candidate</th>
-            <th>Specialty</th>
-            <th>Applied Date</th>
-            <th class="th-right">Decision</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="table-row" *ngFor="let req of pendingRequests">
-            <td>
-              <div class="user-cell">
-                <div class="user-avatar-placeholder">{{req.first_name?.charAt(0)}}{{req.last_name?.charAt(0)}}</div>
-                <div class="user-info">
-                  <span class="user-name">{{req.first_name}} {{req.last_name}}</span>
-                  <small class="user-email">{{req.email}}</small>
-                </div>
-              </div>
-            </td>
-            <td><span class="specialty-tag">{{req.fitapi_coach?.specialties}}</span></td>
-            <td>{{req.created_at | date}}</td>
-            <td class="td-right">
-              <div class="action-buttons">
-                <button class="btn-icon-approve"><span class="material-symbols-outlined" (click)="approveApproval(req)">check</span></button>
-                <button class="btn-icon-reject"><span class="material-symbols-outlined" (click)="rejectApproval(req)">close</span></button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-  
-      <div class="content-split-grid">
+    <div class="content-split-grid">
 
       <div class="main-list-area">
         <div class="section-header">
