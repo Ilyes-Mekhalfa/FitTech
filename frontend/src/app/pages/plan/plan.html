@@ -1,27 +1,3 @@
-<header class="topbar">
-  <div class="topbar__search">
-    <span class="material-symbols-outlined topbar__search-icon">search</span>
-    <input type="text" placeholder="Search membership plans..." />
-  </div>
-
-  <div class="topbar__right">
-    <button class="topbar__notif">
-      <span class="material-symbols-outlined">notifications</span>
-      <span class="topbar__notif-dot"></span>
-    </button>
-    <div class="topbar__divider"></div>
-    <div class="topbar__user">
-      <div class="topbar__user-info">
-        <p class="topbar__user-name">Super-Admin</p>
-        <p class="topbar__user-role">Global Access</p>
-      </div>
-      <div class="topbar__avatar">
-        <span class="material-symbols-outlined">person</span>
-      </div>
-    </div>
-  </div>
-</header>
-
 <main class="main-canvas">
   <div class="page-content">
     <div class="page-header">
@@ -34,39 +10,18 @@
       </button>
     </div>
 
-    <div class="stats-grid">
-      <div class="stat-card">
-        <p class="stat-card__label">Total Active Plans</p>
-        <p class="stat-card__value">{{plans.length}}</p>
-        <p class="stat-card__meta stat-card__meta--positive">
-          <span class="material-symbols-outlined">trending_up</span> +2 this quarter
-        </p>
-      </div>
-      <div class="stat-card">
-        <p class="stat-card__label">Total Subscribers</p>
-        <p class="stat-card__value">3,452</p>
-        <p class="stat-card__meta stat-card__meta--positive">
-          <span class="material-symbols-outlined">arrow_upward</span> +12% from last month
-        </p>
-      </div>
-     
-      <div class="stat-card">
-        <p class="stat-card__label">Avg. Retention</p>
-        <p class="stat-card__value">91%</p>
-        <p class="stat-card__meta stat-card__meta--warning">
-          <span class="material-symbols-outlined">schedule</span> 7 plans up for review
-        </p>
-      </div>
-    </div>
-
     <div class="content-grid">
       <div class="main-column">
         <div class="filter-bar">
           <div class="filter-tabs">
-            <button class="filter-tab" [class.active]="currentFilter === 'all'" (click)="filterPlan('all')">All Plans</button>
-            <button class="filter-tab" [class.active]="currentFilter === 'weekly'" (click)="filterPlan('weekly')">Weekly</button>
-            <button class="filter-tab" [class.active]="currentFilter === 'monthly'" (click)="filterPlan('monthly')">Monthly</button>
-            <button class="filter-tab" [class.active]="currentFilter === 'yearly'" (click)="filterPlan('yearly')">Yearly</button>
+            <button class="filter-tab" [class.active]="currentFilter === 'all'" (click)="filterPlan('all')">All
+              Plans</button>
+            <button class="filter-tab" [class.active]="currentFilter === 'weekly'"
+              (click)="filterPlan('weekly')">Weekly</button>
+            <button class="filter-tab" [class.active]="currentFilter === 'monthly'"
+              (click)="filterPlan('monthly')">Monthly</button>
+            <button class="filter-tab" [class.active]="currentFilter === 'yearly'"
+              (click)="filterPlan('yearly')">Yearly</button>
           </div>
           <div class="filter-sort">
             <span class="filter-sort__label">Sort by:</span>
@@ -78,171 +33,172 @@
           </div>
         </div>
 
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Plan Name</th>
-                <th>Type</th>
-                <th class="align-center">Monthly / Yearly</th>
-                <th class="align-center">Members</th>
-                <th>Status</th>
-                <th class="align-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let plan of plans" (click)="selectPlan(plan)">
-              <tr>
-                <td>
-                  <div class="plan-name-cell">
-                    <div class="plan-indicator"></div>
-                    <div>
-                      <p class="plan-name">{{plan.name}}</p>
-                      <p class="plan-access">Full House Access</p>
-                    </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Plan Name</th>
+              <th>Type</th>
+              <th class="align-center">Monthly / Yearly</th>
+              <th class="align-center">Members</th>
+              <th>Status</th>
+              <th class="align-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let plan of paginatedPlans()" (click)="selectPlan(plan)">
+            <tr>
+              <td>
+                <div class="plan-name-cell">
+                  <div class="plan-indicator"></div>
+                  <div>
+                    <p class="plan-name">{{plan.name}}</p>
+                    <p class="plan-access">Full House Access</p>
                   </div>
-                </td>
-                <td><span class="plan-type-tag">{{plan.type}}</span></td>
-                <td class="align-center"><p class="plan-price">{{plan.price}}</p></td>
-                <td class="align-center"><p class="plan-members">452</p></td>
-                <td><span class="badge badge-active">Active</span></td>
-                <td class="align-right">
-                  <div class="row-actions">
-                    <button class="btn-icon btn-icon-danger"><span class="material-symbols-outlined" (click)="deletePlan(plan.id)">delete</span></button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          
-          <div class="pagination">
-            <div class="pagination__info">Showing 1 to 10 of 42 plans</div>
-            <div class="pagination__pages">
-              <button class="page-btn-nav" disabled>Previous</button>
-              <button class="page-btn active">1</button>
-              <button class="page-btn">2</button>
-              <button class="page-btn-nav">Next</button>
-            </div>
-          </div>
+                </div>
+              </td>
+              <td><span class="plan-type-tag">{{plan.type}}</span></td>
+              <td class="align-center">
+                <p class="plan-price">{{plan.price}}</p>
+              </td>
+              <td class="align-center">
+                <p class="plan-members">452</p>
+              </td>
+              <td><span class="badge badge-active">Active</span></td>
+              <td class="align-right">
+                <div class="row-actions">
+                  <button class="btn-icon btn-icon-danger"><span class="material-symbols-outlined"
+                      (click)="deletePlan(plan.id)">delete</span></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pagination__pages">
+          <button class="page-btn-nav" [disabled]="currentPage === 1" (click)="previousPage()">
+            Previous
+          </button>
+
+          <button *ngFor="let page of pagesArr" class="page-btn" [class.active]="currentPage === page"
+            (click)="goToPage(page)">
+            {{ page }}
+          </button>
+
+          <button class="page-btn-nav" [disabled]="currentPage === totalPageNumber" (click)="nextPage()">
+            Next
+          </button>
         </div>
       </div>
       @if(selectedPlan){
-        <div class="side-panel">
-          <div class="panel-banner">
-            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600" alt="Plan" />
-            <span class="panel-banner-label">Selected Preview</span>
-            <h2>{{ selectedPlan.name }}</h2>
-          </div>
+      <div class="side-panel">
+        <div class="panel-banner">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600"
+            alt="Plan" />
+          <span class="panel-banner-label">Selected Preview</span>
+          <h2>{{ selectedPlan.name }}</h2>
+        </div>
 
-          <div class="panel-mode-tabs">
-            <button [class.active]="panelMode === 'view'"
-                    (click)="panelMode = 'view'">Plan Info</button>
-            <button [class.active]="panelMode === 'edit'"
-                    (click)="switchToEdit()">Edit Plan</button>
-          </div>
+        <div class="panel-mode-tabs">
+          <button [class.active]="panelMode === 'view'" (click)="panelMode = 'view'">Plan Info</button>
+          <button [class.active]="panelMode === 'edit'" (click)="switchToEdit()">Edit Plan</button>
+        </div>
 
-          <!-- view mode -->
-          <div class="panel-body" *ngIf="panelMode === 'view'">
-            <div class="panel-meta-row">
-              <div class="panel-meta-item">
-                <span class="panel-meta-label">
-                  <span class="material-symbols-outlined">autorenew</span>
-                  Auto Renew
-                </span>
-                <span class="panel-meta-value">
-                  {{ selectedPlan.auto_renew ? 'Enabled' : 'Disabled' }}
-                </span>
-              </div>
-            </div>
-
-            <div class="panel-stats-grid">
-              <div>
-                <p>Sessions</p>
-                <strong>{{ selectedPlan.sessions_count }}</strong>
-              </div>
-              <div>
-                <p>Duration</p>
-                <strong>{{ selectedPlan.duration_days }} Days</strong>
-              </div>
-              <div>
-                <p>Price</p>
-                <strong>{{ selectedPlan.price }}</strong>
-              </div>
-              <div>
-                <p>Type</p>
-                <strong style="text-transform: capitalize;">{{ selectedPlan.type }}</strong>
-              </div>
+        <!-- view mode -->
+        <div class="panel-body" *ngIf="panelMode === 'view'">
+          <div class="panel-meta-row">
+            <div class="panel-meta-item">
+              <span class="panel-meta-label">
+                <span class="material-symbols-outlined">autorenew</span>
+                Auto Renew
+              </span>
+              <span class="panel-meta-value">
+                {{ selectedPlan.auto_renew ? 'Enabled' : 'Disabled' }}
+              </span>
             </div>
           </div>
 
-          <!-- edit mode -->
-          <div class="panel-body" *ngIf="panelMode === 'edit'"
-               [formGroup]="editPlanForm">
+          <div class="panel-stats-grid">
+            <div>
+              <p>Sessions</p>
+              <strong>{{ selectedPlan.sessions_count }}</strong>
+            </div>
+            <div>
+              <p>Duration</p>
+              <strong>{{ selectedPlan.duration_days }} Days</strong>
+            </div>
+            <div>
+              <p>Price</p>
+              <strong>{{ selectedPlan.price }}</strong>
+            </div>
+            <div>
+              <p>Type</p>
+              <strong style="text-transform: capitalize;">{{ selectedPlan.type }}</strong>
+            </div>
+          </div>
+        </div>
 
+        <!-- edit mode -->
+        <div class="panel-body" *ngIf="panelMode === 'edit'" [formGroup]="editPlanForm">
+
+          <div class="panel-field">
+            <label>Plan Name</label>
+            <input type="text" formControlName="name" />
+          </div>
+
+          <div class="panel-field">
+            <label>Type</label>
+            <div class="pill-group">
+              <button type="button" [class.active]="editPlanForm.get('type')?.value === 'monthly'"
+                (click)="setEditType('monthly')">Monthly</button>
+              <button type="button" [class.active]="editPlanForm.get('type')?.value === 'yearly'"
+                (click)="setEditType('yearly')">Yearly</button>
+            </div>
+          </div>
+
+          <div class="panel-field-row">
             <div class="panel-field">
-              <label>Plan Name</label>
-              <input type="text" formControlName="name" />
+              <label>Price</label>
+              <input type="number" formControlName="price" />
             </div>
-
             <div class="panel-field">
-              <label>Type</label>
-              <div class="pill-group">
-                <button type="button"
-                  [class.active]="editPlanForm.get('type')?.value === 'monthly'"
-                  (click)="setEditType('monthly')">Monthly</button>
-                <button type="button"
-                  [class.active]="editPlanForm.get('type')?.value === 'yearly'"
-                  (click)="setEditType('yearly')">Yearly</button>
+              <label>Sessions</label>
+              <input type="number" formControlName="sessions_count" />
+            </div>
+          </div>
+
+          <div class="panel-field">
+            <label>Duration (Days)</label>
+            <input type="number" formControlName="duration_days" />
+          </div>
+
+          <div class="panel-field">
+            <label>Auto Renew</label>
+            <div class="toggle" (click)="toggleEditAutoRenew()" [class.active]="editPlanForm.get('auto_renew')?.value">
+              <div class="track" [class.active]="editPlanForm.get('auto_renew')?.value">
+                <div class="thumb"></div>
               </div>
+              <span>{{ editPlanForm.get('auto_renew')?.value ? 'Enabled' : 'Disabled' }}</span>
             </div>
+          </div>
 
-            <div class="panel-field-row">
-              <div class="panel-field">
-                <label>Price</label>
-                <input type="number" formControlName="price" />
-              </div>
-              <div class="panel-field">
-                <label>Sessions</label>
-                <input type="number" formControlName="sessions_count" />
-              </div>
-            </div>
-
-            <div class="panel-field">
-              <label>Duration (Days)</label>
-              <input type="number" formControlName="duration_days" />
-            </div>
-
-            <div class="panel-field">
-              <label>Auto Renew</label>
-              <div class="toggle"
-                (click)="toggleEditAutoRenew()"
-                [class.active]="editPlanForm.get('auto_renew')?.value">
-                <div class="track"
-                  [class.active]="editPlanForm.get('auto_renew')?.value">
-                  <div class="thumb"></div>
-                </div>
-                <span>{{ editPlanForm.get('auto_renew')?.value ? 'Enabled' : 'Disabled' }}</span>
-              </div>
-            </div>
-
-            <div class="panel-actions">
-              <button class="btn btn-ghost" type="button" (click)="panelMode = 'view'">
-                Cancel
-              </button>
-              <button class="btn btn-primary" type="button" (click)="saveEdit()">
-                Save Changes
-              </button>
-            </div>
-
+          <div class="panel-actions">
+            <button class="btn btn-ghost" type="button" (click)="panelMode = 'view'">
+              Cancel
+            </button>
+            <button class="btn btn-primary" type="button" (click)="saveEdit()">
+              Save Changes
+            </button>
           </div>
 
         </div>
+
+      </div>
       } @else{
-        <aside class="sidebar-column">
-          <div class="sidebar-placeholder">
-            <span class="material-symbols-outlined placeholder-icon">inventory_2</span>
-            <p class="placeholder-text">Select a plan to view full plan details and history.</p>
-          </div>
-        </aside>
+      <aside class="sidebar-column">
+        <div class="sidebar-placeholder">
+          <span class="material-symbols-outlined placeholder-icon">inventory_2</span>
+          <p class="placeholder-text">Select a plan to view full plan details and history.</p>
+        </div>
+      </aside>
       }
     </div>
   </div>
