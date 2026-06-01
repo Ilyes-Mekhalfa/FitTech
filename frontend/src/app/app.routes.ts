@@ -13,6 +13,7 @@ import { canDeactivateGuard } from './core/guards/can-deactivate.guard';
 import { CreatePlan } from './shared/components/create-plan/create-plan';
 import { Machine} from './pages/machine/machine';
 import { LandingPage } from './pages/landing-page/landing-page';
+import { DailyToken } from './shared/components/daily-token/daily-token'
 export const routes: Routes = [
     {
         path: '',
@@ -69,5 +70,9 @@ export const routes: Routes = [
     {
         path: 'settings',
         component: Settings,
+    },
+    {
+        path: 'dailyToken',
+        component: DailyToken,
     }
 ];

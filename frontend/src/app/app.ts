@@ -28,6 +28,7 @@ export class App implements OnInit {
     'login',
     'reset-password',
     'forget-password',
+    'dailyToken',
     '',                 
   ];
 
