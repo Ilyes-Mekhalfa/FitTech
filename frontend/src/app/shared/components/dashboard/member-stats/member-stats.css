@@ -198,3 +198,32 @@
   transform: translateY(-4px);
   box-shadow: 0 16px 40px rgba(185,0,20,.08);
 }
+
+
+.chart-grid {
+  stroke: #e5e7eb;
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.chart-area {
+  fill: url(#areaGradient);
+  opacity: 0.15;
+  fill: #6366f1;
+}
+
+.chart-dot {
+  fill: #6366f1;
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+.chart-label {
+  font-size: 10px;
+  fill: #6b7280;
+}
+
+.chart-month {
+  font-size: 9px;
+  fill: #9ca3af;
+}

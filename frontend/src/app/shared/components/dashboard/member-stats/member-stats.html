@@ -3,7 +3,7 @@
 
   <div class="stat-card">
     <div class="stat-label">Active Members</div>
-    <div class="stat-value">{{memberStats.activeMembers}}</div>
+    <div class="stat-value">{{activeMembers}}</div>
     <div class="stat-change">
       <span class="material-symbols-outlined">bolt</span>
       <span>Currently active</span>
@@ -12,7 +12,7 @@
 
   <div class="stat-card">
     <div class="stat-label">Subscribed Members</div>
-    <div class="stat-value">{{memberStats.subscribedMembers}}</div>
+    <div class="stat-value">{{subscribedMembers}}</div>
     <div class="stat-change">
       <span class="material-symbols-outlined">check_circle</span>
       <span>Currently subscribed</span>
@@ -21,7 +21,7 @@
 
   <div class="stat-card">
     <div class="stat-label">New Members</div>
-    <div class="stat-value">{{memberStats.newMembers}}</div>
+    <div class="stat-value">{{newMembers}}</div>
     <div class="stat-change">
       <span class="material-symbols-outlined">person_add</span>
       <span>Last 30 days</span>
@@ -30,7 +30,7 @@
 
   <div class="stat-card featured">
     <div class="stat-label">Retention Rate</div>
-    <div class="stat-value">{{memberStats.retention}}%</div>
+    <div class="stat-value">{{retention}}%</div>
     <div class="stat-change">
       <span class="material-symbols-outlined">trending_up</span>
       <span>Member loyalty score</span>
@@ -39,24 +39,42 @@
 
   <div class="chart-card">
 
-  <div class="chart-header">
-    <div>
-      <div class="chart-title">Member Growth</div>
-      <div class="chart-subtitle">New registrations over time</div>
+    <div class="chart-header">
+      <div>
+        <div class="chart-title">Member Growth</div>
+        <div class="chart-subtitle">New registrations over time</div>
+      </div>
     </div>
+
+    <div class="chart-body">
+      <svg viewBox="0 0 400 200" class="chart-svg">
+
+        <!-- Grid lines -->
+        <line x1="20" y1="40" x2="380" y2="40" class="chart-grid" />
+        <line x1="20" y1="80" x2="380" y2="80" class="chart-grid" />
+        <line x1="20" y1="120" x2="380" y2="120" class="chart-grid" />
+        <line x1="20" y1="160" x2="380" y2="160" class="chart-grid" />
+
+        <!-- Filled area under the line -->
+        <path [attr.d]="chartPath + ' L ' + chartDots[chartDots.length-1]?.x + ' 180 L 20 180 Z'" class="chart-area" />
+
+        <!-- The line itself -->
+        <path [attr.d]="chartPath" class="chart-line primary" />
+
+        <!-- Dots + tooltips -->
+        <g *ngFor="let dot of chartDots">
+          <circle [attr.cx]="dot.x" [attr.cy]="dot.y" r="4" class="chart-dot" />
+          <text [attr.x]="dot.x" [attr.y]="dot.y - 10" class="chart-label" text-anchor="middle">
+            {{ dot.value }}
+          </text>
+          <text [attr.x]="dot.x" [attr.y]="185" class="chart-month" text-anchor="middle">
+            {{ dot.label }}
+          </text>
+        </g>
+
+      </svg>
+    </div>
+
   </div>
-
-  <div class="chart-body">
-    <svg viewBox="0 0 400 200" class="chart-svg">
-
-      <path
-        d="M 20 180 L 80 140 L 140 120 L 200 100 L 260 80 L 320 60 L 380 40"
-        class="chart-line primary"
-      />
-
-    </svg>
-  </div>
-
-</div>
 
 </div>
