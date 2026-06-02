@@ -76,6 +76,7 @@ export class Member implements OnInit {
   archiveMember(member: any) {
     this.memberService.archiveMember(member.fitapi_user.id).subscribe({
       next: (res: any) => {
+        this.members = this.members.filter((e)=> e.id !== res.id);
         console.log('user archived successfully');
       },
       error: (err: any) => {
