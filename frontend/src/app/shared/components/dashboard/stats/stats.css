@@ -7,21 +7,17 @@
 
 /* CARD BASE */
 .stat-card {
-  background: var(--surface-container-lowest);
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 150px;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s ease;
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  border: 1px solid rgba(185,0,20,.08);
+  transition: all .25s ease;
 }
 
-/* HOVER EFFECT */
 .stat-card:hover {
-  border-bottom-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(185,0,20,.08);
 }
-
 /* LABEL */
 .stat-label {
   font-size: 10px;
@@ -32,14 +28,7 @@
   font-weight: 700;
 }
 
-/* VALUE */
-.stat-value {
-  font-size: 34px;
-  font-weight: 800;
-  font-family: 'Lexend', sans-serif;
-  margin-bottom: 10px;
-  color: var(--on-surface);
-}
+
 
 /* CHANGE TEXT */
 .stat-change {
@@ -52,7 +41,7 @@
 }
 
 /* FEATURED CARD (Revenue) */
-.stat-card.featured {
+.featured {
   background: linear-gradient(
     135deg,
     var(--primary-container),
@@ -61,15 +50,15 @@
   color: var(--on-primary);
 }
 
-.stat-card.featured .stat-label {
+.featured .stat-label {
   color: rgba(255, 255, 255, 0.75);
 }
 
-.stat-card.featured .stat-value {
+.featured  {
   color: white;
 }
 
-.stat-card.featured .stat-change {
+.featured .stat-change {
   color: rgba(255, 255, 255, 0.9);
 }
 
@@ -77,4 +66,45 @@
 .material-symbols-outlined {
   font-size: 18px;
   vertical-align: middle;
+}
+
+
+
+.stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+
+
+.stat-change {
+  font-size: 12px;
+  color: var(--tertiary);
+}
+
+:host {
+  display: block;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+.section-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--on-surface);
+  margin-bottom: 24px;
+}
+
+.stat-value {
+  font-family: 'Lexend', sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--primary);
 }
