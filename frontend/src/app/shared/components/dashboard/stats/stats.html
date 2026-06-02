@@ -4,27 +4,36 @@
   <!-- GENERAL STATS -->
   <div class="stat-card">
     <div class="stat-label">Total Members</div>
-    <div class="stat-value">{{dashboardData.totalMembers}}</div>
+    <div class="stat-value">{{dashboardData.members}}</div>
     <div class="stat-change">
-      <span class="material-symbols-outlined">trending_up</span>
-      <span>{{dashboardData.trending_up}} this month</span>
+      <span class="material-symbols-outlined">groups</span>
+      <span>All registered members</span>
     </div>
   </div>
 
   <div class="stat-card">
-    <div class="stat-label">Active Classes</div>
-    <div class="stat-value">{{dashboardData.activeClasses}}</div>
+    <div class="stat-label">Total Coaches</div>
+    <div class="stat-value">{{dashboardData.coaches}}</div>
     <div class="stat-change">
-      <span>6 classes today</span>
+      <span class="material-symbols-outlined">groups</span>
+      <span>All registered coaches</span>
     </div>
   </div>
 
   <div class="stat-card">
-    <div class="stat-label">Live Capacity</div>
-    <div class="stat-value">{{dashboardData.liveCapacity}}</div>
-    <div class="stat-change">
+    <div class="stat-label">Total Plans</div>
+    <div class="stat-value">{{dashboardData.plans}}</div>
+    <!-- <div class="stat-change">
       <span>142 members active</span>
-    </div>
+    </div> -->
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-label">Total Machines</div>
+    <div class="stat-value">{{dashboardData.machines}}</div>
+    <!-- <div class="stat-change">
+      <span>142 members active</span>
+    </div> -->
   </div>
 
   <div class="stat-card featured">
