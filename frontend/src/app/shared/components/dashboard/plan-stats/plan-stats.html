@@ -1,7 +1,7 @@
-<h2 class="section-title">Plan Statistics</h2>
+<h2 class="section-title">Plan & Machines Statistics</h2>
 <div class="plans-card">
 
-  
+  <!-- ===== PLANS ===== -->
   <div class="plans-header">
     <div>
       <div class="plans-title">Plans Distribution</div>
@@ -11,74 +11,72 @@
 
   <div class="plans-body">
 
-    <!-- DONUT CHART -->
     <div class="donut-wrapper">
-
       <svg viewBox="0 0 120 120" class="donut">
-
-        <!-- Background circle -->
         <circle cx="60" cy="60" r="45" class="donut-bg"></circle>
 
-        <!-- Premium -->
         <circle
-          cx="60"
-          cy="60"
-          r="45"
-          class="donut-segment premium"
-          stroke-dasharray="180 300"
-          stroke-dashoffset="0"
+          *ngFor="let plan of plans; let i = index"
+          cx="60" cy="60" r="45"
+          class="donut-segment"
+          [class]="'segment-' + i"
+          [attr.stroke-dasharray]="getArc(plan.count, plansTotal)"
+          [attr.stroke-dashoffset]="getOffset(i)"
         ></circle>
-
-        <!-- Standard -->
-        <circle
-          cx="60"
-          cy="60"
-          r="45"
-          class="donut-segment standard"
-          stroke-dasharray="110 300"
-          stroke-dashoffset="-180"
-        ></circle>
-
-        <!-- Basic -->
-        <circle
-          cx="60"
-          cy="60"
-          r="45"
-          class="donut-segment basic"
-          stroke-dasharray="70 300"
-          stroke-dashoffset="-290"
-        ></circle>
-
       </svg>
 
       <div class="donut-center">
-        <div class="donut-total">{{planStats.total}}</div>
+        <div class="donut-total">{{ plansTotal }}</div>
         <div class="donut-label">Total</div>
       </div>
-
     </div>
 
-    <!-- LEGEND -->
     <div class="plans-legend">
-
-      <div class="legend-row">
-        <span class="dot premium"></span>
-        <span class="name">Premium</span>
-        <span class="value">{{planStats.premium}}</span>
+      <div class="legend-row" *ngFor="let plan of plans; let i = index">
+        <span class="dot" [class]="'segment-' + i"></span>
+        <span class="name">{{ plan.type }}</span>
+        <span class="value">{{ plan.count }}</span>
       </div>
+    </div>
 
-      <div class="legend-row">
-        <span class="dot standard"></span>
-        <span class="name">Standard</span>
-        <span class="value">{{planStats.standard}}</span>
+  </div>
+
+  <!-- ===== MACHINES ===== -->
+  <div class="plans-header">
+    <div>
+      <div class="plans-title">Machines Distribution</div>
+      <div class="plans-subtitle">Fitness equipment breakdown</div>
+    </div>
+  </div>
+
+  <div class="plans-body">
+
+    <div class="donut-wrapper">
+      <svg viewBox="0 0 120 120" class="donut">
+        <circle cx="60" cy="60" r="45" class="donut-bg"></circle>
+
+        <circle
+          *ngFor="let machine of machines; let i = index"
+          cx="60" cy="60" r="45"
+          class="donut-segment"
+          [class]="'segment-' + i"
+          [attr.stroke-dasharray]="getMachineArc(machine.count)"
+          [attr.stroke-dashoffset]="getMachineOffset(i)"
+        ></circle>
+      </svg>
+
+      <div class="donut-center">
+        <div class="donut-total">{{ machinesTotal }}</div>
+        <div class="donut-label">Total</div>
       </div>
+    </div>
 
-      <div class="legend-row">
-        <span class="dot basic"></span>
-        <span class="name">Basic</span>
-        <span class="value">{{planStats.basic}}</span>
+    <div class="plans-legend">
+      <div class="legend-row" *ngFor="let machine of machines; let i = index">
+        <span class="dot" [class]="'segment-' + i"></span>
+        <span class="name">{{ machine.type }} </span>
+        <span class="value">{{ machine.count }}</span>
       </div>
-
     </div>
 
   </div>
