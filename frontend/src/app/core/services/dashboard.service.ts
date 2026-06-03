@@ -31,7 +31,7 @@ export class DashboardService {
     return this.http.get(`${this.APIUrl}/admin/dailyToken`);
   }
 
-  liveEnterance() {
-    return this.http.get(`${this.APIUrl}/dashboard/liveEnterance`);
+  liveEntrance() {
+    return this.http.get(`${this.APIUrl}/dashboard/liveEntrance`);
   }
 }

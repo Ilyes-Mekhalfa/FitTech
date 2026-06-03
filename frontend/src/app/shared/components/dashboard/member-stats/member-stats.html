@@ -39,42 +39,42 @@
 
   <div class="chart-card">
 
-    <div class="chart-header">
-      <div>
-        <div class="chart-title">Member Growth</div>
-        <div class="chart-subtitle">New registrations over time</div>
-      </div>
+  <div class="chart-header">
+    <div>
+      <div class="chart-title">Member Growth</div>
+      <div class="chart-subtitle">New registrations over time</div>
     </div>
-
-    <div class="chart-body">
-      <svg viewBox="0 0 400 200" class="chart-svg">
-
-        <!-- Grid lines -->
-        <line x1="20" y1="40" x2="380" y2="40" class="chart-grid" />
-        <line x1="20" y1="80" x2="380" y2="80" class="chart-grid" />
-        <line x1="20" y1="120" x2="380" y2="120" class="chart-grid" />
-        <line x1="20" y1="160" x2="380" y2="160" class="chart-grid" />
-
-        <!-- Filled area under the line -->
-        <path [attr.d]="chartPath + ' L ' + chartDots[chartDots.length-1]?.x + ' 180 L 20 180 Z'" class="chart-area" />
-
-        <!-- The line itself -->
-        <path [attr.d]="chartPath" class="chart-line primary" />
-
-        <!-- Dots + tooltips -->
-        <g *ngFor="let dot of chartDots">
-          <circle [attr.cx]="dot.x" [attr.cy]="dot.y" r="4" class="chart-dot" />
-          <text [attr.x]="dot.x" [attr.y]="dot.y - 10" class="chart-label" text-anchor="middle">
-            {{ dot.value }}
-          </text>
-          <text [attr.x]="dot.x" [attr.y]="185" class="chart-month" text-anchor="middle">
-            {{ dot.label }}
-          </text>
-        </g>
-
-      </svg>
-    </div>
-
   </div>
+
+  <div class="chart-body">
+    <svg *ngIf="chartDots && chartDots.length > 0 && chartPath" viewBox="0 0 400 200" class="chart-svg">
+
+      <line x1="20" y1="40" x2="380" y2="40" class="chart-grid" />
+      <line x1="20" y1="80" x2="380" y2="80" class="chart-grid" />
+      <line x1="20" y1="120" x2="380" y2="120" class="chart-grid" />
+      <line x1="20" y1="160" x2="380" y2="160" class="chart-grid" />
+
+      <path [attr.d]="chartPath + ' L ' + chartDots[chartDots.length - 1].x + ' 180 L 20 180 Z'" class="chart-area" />
+
+      <path [attr.d]="chartPath" class="chart-line primary" />
+
+      <g *ngFor="let dot of chartDots">
+        <circle [attr.cx]="dot.x" [attr.cy]="dot.y" r="4" class="chart-dot" />
+        <text [attr.x]="dot.x" [attr.y]="dot.y - 10" class="chart-label" text-anchor="middle">
+          {{ dot.value }}
+        </text>
+        <text [attr.x]="dot.x" [attr.y]="185" class="chart-month" text-anchor="middle">
+          {{ dot.label }}
+        </text>
+      </g>
+
+    </svg>
+
+    <div *ngIf="!chartPath || chartDots.length === 0" class="chart-loader">
+      <p>Loading chart data...</p>
+    </div>
+  </div>
+
+</div>
 
 </div>

@@ -14,9 +14,9 @@ export class LiveEnterance {
   constructor(private dashboardService: DashboardService){}
 
   ngOnInit(): void {
-    this.dashboardService.liveEnterance().subscribe({
+    this.dashboardService.liveEntrance().subscribe({
       next: (res: any)=>{
-        this.users = res.users;
+        this.users = res || [];
       }
     })
   }
