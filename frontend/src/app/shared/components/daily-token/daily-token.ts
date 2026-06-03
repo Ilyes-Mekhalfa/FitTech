@@ -1,13 +1,14 @@
 // qr-display/qr-display.component.ts
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { DashboardService } from '../../../core/services/dashboard.service';
-import { interval, Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { WebsocketService } from '../../../core/services/websocket.service'; // 1. Import your WebSocket Service
+import { CommonModule } from '@angular/common';
 import QRCode from 'qrcode';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-qr-display',
+  imports: [CommonModule],
   template: `
     <div class="qr-container">
       <h2 class="qr-title">Daily Access QR</h2>
@@ -32,7 +33,7 @@ import { firstValueFrom } from 'rxjs';
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh; /* Centers the whole container on the screen if needed */
+      min-height: 100vh;
       background-color: #f8f9fa; 
       font-family: system-ui, -apple-system, sans-serif;
     }
@@ -92,7 +93,7 @@ import { firstValueFrom } from 'rxjs';
     }
 
     .countdown {
-      color: #b90014; /* Using FitTech brand red for urgency */
+      color: #b90014;
       font-weight: 500;
     }
 
@@ -108,7 +109,7 @@ import { firstValueFrom } from 'rxjs';
     .dot {
       width: 8px;
       height: 8px;
-      background-color: #2b8a3e; /* Green active pulse indicator */
+      background-color: #2b8a3e;
       border-radius: 50%;
       display: inline-block;
       animation: pulse 2s infinite;
@@ -125,40 +126,60 @@ export class DailyToken implements OnInit, OnDestroy {
   checkinsToday = 0;
   maskedToken = '';
   timeRemaining = '';
-  private subs = new Subscription();
+  private socketSubs = new Subscription();
+  private countdownInterval: any;
 
-  // Added ViewChild to safely target the canvas inside Angular
   @ViewChild('qrCanvas', { static: true }) qrCanvas!: ElementRef<HTMLCanvasElement>;
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private websocketService: WebsocketService // 2. Inject the WebSocket service
+  ) {}
 
   ngOnInit() {
-    this.loadTodayQr();
+    // 1. Fetch data when entering the page
+    this.loadTodayData();
 
-    this.subs.add(
-      interval(60_000)
-        .pipe(switchMap(() => this.dashboardService.dailyToken()))
-        .subscribe({
-          next: (res: any) => {
-            this.renderQr(res.token);
-          },
-          error: (err) => {
-            console.log('error', err);
-          },
-        }),
-    );
+    // 2. Start the local clock ticker (tocks every second client-side)
+    this.startCountdownTicker();
+
+    // 3. Listen for WebSocket token rotations
+    const tokenSub = this.websocketService.onEvent('token_rotated').subscribe({
+      next: (res: { token: string }) => {
+        console.log('Real-time update: Token rotated by server!');
+        this.renderQr(res.token);
+      },
+      error: (err) => console.error('Token stream socket error', err)
+    });
+
+    // 4. Listen for real-time turnstile member check-ins
+    const checkinSub = this.websocketService.onEvent('member_checked_in').subscribe({
+      next: (res: { totalCheckinsToday: number }) => {
+        console.log('Real-time update: Member checked in!');
+        this.checkinsToday = res.totalCheckinsToday;
+      },
+      error: (err) => console.error('Check-in stream socket error', err)
+    });
+
+    this.socketSubs.add(tokenSub);
+    this.socketSubs.add(checkinSub);
   }
 
-  private async loadTodayQr() {
-    const res: any = await firstValueFrom(this.dashboardService.dailyToken());
-    this.renderQr(res.token);
+  private async loadTodayData() {
+    try {
+      const res: any = await firstValueFrom(this.dashboardService.dailyToken());
+      this.checkinsToday = res.checkinsToday || 0;
+      this.renderQr(res.token);
+    } catch (err) {
+      console.error('Failed fetching initial token values:', err);
+    }
   }
 
   private async renderQr(token: string) {
-    // Replaced generic document.querySelector with the precise template ref
+    if (!token) return;
     const canvas = this.qrCanvas.nativeElement;
     await QRCode.toCanvas(canvas, token, {
-      width: 320, // Increased size to make it big and prominent
+      width: 320,
       margin: 1,
       color: { dark: '#b90014', light: '#ffffff' },
     });
@@ -167,17 +188,35 @@ export class DailyToken implements OnInit, OnDestroy {
     this.updateCountdown();
   }
 
+  private startCountdownTicker() {
+    this.updateCountdown();
+    this.countdownInterval = setInterval(() => {
+      this.updateCountdown();
+    }, 1000);
+  }
+
   private updateCountdown() {
     const now = new Date();
     const midnight = new Date();
     midnight.setHours(24, 0, 0, 0);
     const diff = midnight.getTime() - now.getTime();
+    
+    if (diff <= 0) {
+      this.timeRemaining = 'Resetting...';
+      return;
+    }
+
     const h = Math.floor(diff / 3_600_000);
     const m = Math.floor((diff % 3_600_000) / 60_000);
-    this.timeRemaining = `Resets in ${h}h ${m}m`;
+    const s = Math.floor((diff % 60_000) / 1000);
+    
+    this.timeRemaining = `Resets in ${h}h ${m}m ${s}s`;
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    this.socketSubs.unsubscribe();
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+    }
   }
 }

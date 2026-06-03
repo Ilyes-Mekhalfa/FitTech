@@ -11,8 +11,8 @@
       </div>
 
       <div class="live-info" *ngFor="let member of users">
-        <div class="live-name"> {{member.fullName}}</div>
-        <div class="live-time"> {{member.enteredAt}} </div>
+        <div class="live-name"> {{member?.fullName}}</div>
+        <div class="live-time"> {{member?.enteredAt}} </div>
       </div>
 
       <span class="material-symbols-outlined live-icon">

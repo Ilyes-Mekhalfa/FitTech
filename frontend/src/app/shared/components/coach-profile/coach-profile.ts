@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { CoachService } from '../../../core/services/coach.service';
+import { WebsocketService } from '../../../core/services/websocket.service'; // 1. Import your WebSocket Service
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs'; // 2. Import Subscription
 
 @Component({
   selector: 'app-coach-profile',
@@ -10,7 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './coach-profile.html',
   styleUrls: ['./coach-profile.css'],
 })
-export class CoachProfile implements OnInit, OnChanges {
+export class CoachProfile implements OnInit, OnChanges, OnDestroy {
   @Input() coach: any;
   @Output() close = new EventEmitter<void>();
 
@@ -19,8 +21,12 @@ export class CoachProfile implements OnInit, OnChanges {
   addCourse: FormGroup;
   private originalFormData: any = {};
 
+  // Track socket streams for lifecycle teardowns
+  private socketSubscriptions: Subscription = new Subscription();
+
   constructor(
     private coachService: CoachService,
+    private websocketService: WebsocketService, // 3. Inject the WebSocket service
     private fb: FormBuilder,
   ) {
     this.initForm();
@@ -41,6 +47,24 @@ export class CoachProfile implements OnInit, OnChanges {
       console.log('Coach data initialized:', this.coach);
       this.syncOriginalData();
     }
+
+    // 4. Listen for real-time course additions for this specific coach
+    const courseAddSub = this.websocketService.onEvent('course_added').subscribe({
+      next: (newCourse: any) => {
+        // Only append the course if it belongs to the coach currently being inspected
+        if (this.coach && newCourse.coach_id === this.coach.id) {
+          console.log('Real-time update: New course added for this coach', newCourse);
+          
+          // Ensure courses array exists before pushing
+          if (!this.coach.courses) {
+            this.coach.courses = [];
+          }
+          this.coach.courses.push(newCourse);
+        }
+      }
+    });
+
+    this.socketSubscriptions.add(courseAddSub);
   }
   
   ngOnChanges(changes: SimpleChanges) {
@@ -78,7 +102,6 @@ export class CoachProfile implements OnInit, OnChanges {
   toggleEditMode() {
     this.editMode = !this.editMode;
     this.editFormData.patchValue(this.originalFormData);
-
   }
 
   private getChangedFields(): any {
@@ -109,10 +132,11 @@ export class CoachProfile implements OnInit, OnChanges {
 
     this.coachService.updateCoach(this.coach.id, changedData).subscribe({
       next: (res) => {
-        console.log('Coach updated successfully');
-        this.coach = res;
-        this.syncOriginalData();
+        console.log('Update payload accepted by server');
         this.editMode = false;
+        // Note: We don't overwrite this.coach manually here. 
+        // The parent Coach component's socket stream handles broadcasting the update, 
+        // passing it back down into this @Input() beautifully!
       },
       error: (err) => {
         console.error('Error updating the coach', err);
@@ -121,21 +145,28 @@ export class CoachProfile implements OnInit, OnChanges {
   }
 
   addNewCourse() {
-    if(!this.addCourse.valid){
+    if (!this.addCourse.valid) {
       console.log('form invalid', this.addCourse.errors);
+      return;
     }
 
     this.coachService.addCourse(this.coach.id, this.addCourse.value).subscribe({
-      next: (res: any)=>{
-        console.log(res);
+      next: (res: any) => {
+        console.log('Course successfully saved on server:', res);
+        this.addCourse.reset(); // Wipe inputs clean upon success
       },
-      error: (err:any)=>{
-        console.log('error happened', err);
-        
+      error: (err: any) => {
+        console.log('error happened saving course', err);
       }
-    })
+    });
   }
+
   closeProfile() {
     this.close.emit();
+  }
+
+  ngOnDestroy(): void {
+    // 5. Tear down socket streams to prevent memory leaks
+    this.socketSubscriptions.unsubscribe();
   }
 }

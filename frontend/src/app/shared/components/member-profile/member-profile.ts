@@ -1,8 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MemberService } from '../../../core/services/member.service';
 import { PlanService } from '../../../core/services/plan.service';
+import { WebsocketService } from '../../../core/services/websocket.service'; // 1. Import your WebSocket Service
+import { Subscription } from 'rxjs'; // 2. Import Subscription
 
 @Component({
   selector: 'app-member-profile',
@@ -10,7 +12,7 @@ import { PlanService } from '../../../core/services/plan.service';
   templateUrl: './member-profile.html',
   styleUrl: './member-profile.css',
 })
-export class MemberProfile {
+export class MemberProfile implements OnInit, OnDestroy {
   @Input() member: any;
   @Output() close = new EventEmitter<void>();
 
@@ -20,7 +22,15 @@ export class MemberProfile {
   availablePlans: any[] = [];
   originalFormData: any = {};
 
-  constructor(private memberService: MemberService, private planService: PlanService, private fb: FormBuilder) {
+  // Track socket subscriptions
+  private socketSubscriptions: Subscription = new Subscription();
+
+  constructor(
+    private memberService: MemberService, 
+    private planService: PlanService, 
+    private websocketService: WebsocketService, // 3. Inject the WebSocket service
+    private fb: FormBuilder
+  ) {
     this.editFormData = this.fb.group({
       first_name: [''],
       last_name: [''],
@@ -31,16 +41,49 @@ export class MemberProfile {
       plan: [''],
       sessions: [1],
       paymentMethod: ['']
-    })
-   }
+    });
+  }
 
   ngOnInit() {
     this.getAvailablePlans();
+
+    // 4. Listen for new subscription membership plans added in real time
+    const planAddSub = this.websocketService.onEvent('plan_added').subscribe({
+      next: (newPlan: any) => {
+        console.log('Real-time update: Adding new plan option to dropdown', newPlan);
+        this.availablePlans.push(newPlan);
+      }
+    });
+
+    // 5. Listen for updates to membership pricing or details
+    const planUpdateSub = this.websocketService.onEvent('plan_updated').subscribe({
+      next: (updatedPlan: any) => {
+        console.log('Real-time update: Updating dropdown plan option data', updatedPlan.id);
+        this.availablePlans = this.availablePlans.map(p => p.id === updatedPlan.id ? updatedPlan : p);
+      }
+    });
+
+    // 6. Listen for deleted membership plans to remove them from options immediately
+    const planDeleteSub = this.websocketService.onEvent('plan_deleted').subscribe({
+      next: (data: { id: string }) => {
+        console.log('Real-time update: Removing plan option from dropdown', data.id);
+        this.availablePlans = this.availablePlans.filter(p => p.id !== data.id);
+        
+        // Reset selection if the currently selected plan was deleted
+        if (this.subscriptionFormData.get('plan')?.value === data.id) {
+          this.subscriptionFormData.patchValue({ plan: '' });
+        }
+      }
+    });
+
+    this.socketSubscriptions.add(planAddSub);
+    this.socketSubscriptions.add(planUpdateSub);
+    this.socketSubscriptions.add(planDeleteSub);
   }
 
   toggleEditMode() {
     this.editMode = !this.editMode;
-    if(this.editMode){
+    if (this.editMode) {
       this.editFormData.patchValue({
         first_name: this.member?.fitapi_user?.first_name,
         last_name: this.member?.fitapi_user?.last_name,
@@ -52,13 +95,13 @@ export class MemberProfile {
 
   getAvailablePlans() {
     this.planService.getAllPlans().subscribe({
-      next: (res: any)=>{
-        this.availablePlans = res
+      next: (res: any) => {
+        this.availablePlans = res;
       },
-      error: (err)=>{
+      error: (err) => {
         console.log(err);
       }
-    })
+    });
   }
 
   private getChangedFields(): any {
@@ -70,7 +113,6 @@ export class MemberProfile {
       const currentValue = control.value;
       const originalValue = this.originalFormData[key];
 
-      // Check if field is dirty AND value is different from original
       if (control.dirty && currentValue !== originalValue) {
         changedFields[key] = currentValue;
       }
@@ -87,10 +129,11 @@ export class MemberProfile {
     }
 
     this.memberService.updateMember(this.member.fitapi_user.id, changedData).subscribe({
-      next: (res: any) => {
-        this.member.fitapi_user = { ...this.member.fitapi_user, ...changedData };
-        this.editFormData.reset(this.editFormData.value);
+      next: () => {
+        console.log('Member update dispatched successfully');
         this.toggleEditMode();
+        // The parent component listens for real-time updates and pushes
+        // the modified data down into the member @Input() cleanly!
       },
       error: (err: any) => {
         console.log('Error updating member:', err);
@@ -99,28 +142,15 @@ export class MemberProfile {
   }
 
   updateSubscription() {
-    // const subscriptionData = {
-    //   plan_id: this.subscriptionFormData.plan,
-    //   sessions: this.subscriptionFormData.sessions,
-    //   payment_method: this.subscriptionFormData.paymentMethod,
-    // };
-
-    // this.memberService.updateSubscription(this.member.id, subscriptionData).subscribe({
-    //   next: (res: any) => {
-    //     this.member.subscription_plan_id = subscriptionData.plan_id;
-    //     this.member.subscription_sessions = subscriptionData.sessions;
-    //     this.member.payment_method = subscriptionData.payment_method;
-    //     this.member.subscription_status = 'active';
-    //     this.member.subscription_end_date = res.subscription_end_date;
-    //     console.log('Subscription updated successfully');
-    //   },
-    //   error: (err: any) => {
-    //     console.log('Error updating subscription:', err);
-    //   }
-    // });
+    // Un-comment and plug in matching socket broadcast events here when ready!
   }
 
   closeProfile() {
     this.close.emit();
+  }
+
+  ngOnDestroy(): void {
+    // 7. Cleanup subscriptions to prevent memory leaks
+    this.socketSubscriptions.unsubscribe();
   }
 }
