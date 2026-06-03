@@ -6,15 +6,16 @@
   transition: width .28s cubic-bezier(.4,0,.2,1),
               min-width .28s cubic-bezier(.4,0,.2,1),
               max-width .28s cubic-bezier(.4,0,.2,1);
-  background-color: var(--surface-container-lowest);
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  z-index: 999;
   padding: 20px 0;
   gap: 4px;
   overflow: hidden;
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.06);
-  z-index: 40;
   min-height: 100vh;
   position: fixed; 
   top: 0;

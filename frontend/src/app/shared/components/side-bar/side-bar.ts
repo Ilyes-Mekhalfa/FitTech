@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-side-bar',
   standalone: true,
@@ -10,4 +10,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class SideBar {
 
+  constructor(private router: Router){}
+  logout(){
+    this.router.navigate(['/login']);
+  }
 }
