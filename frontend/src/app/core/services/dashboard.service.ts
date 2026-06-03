@@ -7,28 +7,31 @@ import { DashboardDTO } from '../../pages/admin-dashboard/dto/admin-dashboard.dt
   providedIn: 'root',
 })
 export class DashboardService {
-   APIUrl = environment.apiUrl
+  APIUrl = environment.apiUrl;
 
-   constructor(private http: HttpClient){}
+  constructor(private http: HttpClient) {}
 
-   generalStats(){
-    return this.http.get<string>(`${this.APIUrl}/dashboard/stats`)
-   }
+  generalStats() {
+    return this.http.get<string>(`${this.APIUrl}/dashboard/stats`);
+  }
 
-   coachStats(){
-    return this.http.get<string>(`${this.APIUrl}/dashboard/coachStats`)
-   }
+  coachStats() {
+    return this.http.get<string>(`${this.APIUrl}/dashboard/coachStats`);
+  }
 
-   memberStats(){
-    return this.http.get<string>(`${this.APIUrl}/dashboard/memberStats`)
-   }
+  memberStats() {
+    return this.http.get<string>(`${this.APIUrl}/dashboard/memberStats`);
+  }
 
-   planStats(){
-    return this.http.get<string>(`${this.APIUrl}/dashboard/planStats`)
-   }
+  planStats() {
+    return this.http.get<string>(`${this.APIUrl}/dashboard/planStats`);
+  }
 
-   dailyToken(){
-    return this.http.get(`${this.APIUrl}/admin/dailyToken`)
-   }
-   
+  dailyToken() {
+    return this.http.get(`${this.APIUrl}/admin/dailyToken`);
+  }
+
+  liveEnterance() {
+    return this.http.get(`${this.APIUrl}/dashboard/liveEnterance`);
+  }
 }

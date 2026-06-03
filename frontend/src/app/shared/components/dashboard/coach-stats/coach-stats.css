@@ -9,12 +9,8 @@
 
 /* Featured coach metric (rating) */
 .coach-stats .featured {
-  background: linear-gradient(
-    135deg,
-    var(--tertiary-container),
-    var(--tertiary)
-  );
-  color: var(--on-primary);
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+  color: white;
 }
 
 .coach-stats .featured .stat-label {
@@ -84,4 +80,13 @@
 .stat-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 40px rgba(185,0,20,.08);
+}
+
+.stat-value-retention{
+font-family: 'Lexend', sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--on-primary);
+  bgcolor: var(--primary);
 }

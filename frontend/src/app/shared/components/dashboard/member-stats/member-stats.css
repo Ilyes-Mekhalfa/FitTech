@@ -227,3 +227,10 @@
   font-size: 9px;
   fill: #9ca3af;
 }
+.stat-value-retention{
+font-family: 'Lexend', sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--on-primary);
+}
