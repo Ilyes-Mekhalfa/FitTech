@@ -1,24 +1,4 @@
 :host {
-  --primary: #b90014;
-  --primary-container: #e31b23;
-  --primary-fixed: #ffdad6;
-  --on-primary: #ffffff;
-  --on-primary-container: #410002;
-  --secondary: #5f5e5e;
-  --tertiary: #005f93;
-  --tertiary-fixed: #cde5ff;
-  --on-tertiary-fixed: #001d32;
-  --surface: #f9f9f9;
-  --surface-low: #f3f3f3;
-  --surface-lowest: #ffffff;
-  --surface-high: #e8e8e8;
-  --surface-highest: #e2e2e2;
-  --on-surface: #1a1c1c;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
-  --font-headline: 'Lexend', sans-serif;
-  --font-body: 'Inter', sans-serif;
   display: block;
   font-family: var(--font-body);
   background: var(--surface);
@@ -26,7 +6,6 @@
   color: var(--on-surface);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
 
 /* ── Shell ───────────────────────────────────── */
 .members-shell {
@@ -202,48 +181,6 @@
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-}
-
-/* ── Buttons ─────────────────────────────────── */
-.btn-primary,
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 20px;
-  border-radius: var(--radius-md);
-  font-size: 13px;
-  font-weight: 700;
-  font-family: var(--font-body);
-  border: none;
-  cursor: pointer;
-  transition: all 0.18s ease;
-  white-space: nowrap;
-  line-height: 1;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--primary-container), var(--primary));
-  color: var(--on-primary);
-  box-shadow: 0 4px 12px rgba(185,0,20,0.18);
-}
-
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(185,0,20,0.24);
-}
-
-.btn-primary:active { transform: scale(0.98); }
-
-.btn-secondary {
-  background: var(--surface-highest);
-  color: var(--on-surface);
-  border: 1px solid var(--surface-high);
-}
-
-.btn-secondary:hover {
-  background: var(--surface-high);
-  border-color: var(--secondary);
 }
 
 /* ── Table Card ──────────────────────────────── */

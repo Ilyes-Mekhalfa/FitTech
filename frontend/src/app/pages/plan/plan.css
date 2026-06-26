@@ -1,42 +1,9 @@
-/* membership-plans.component.css */
-
 :host {
-  /* FitTech Design Tokens */
-  --surface: #f9f9f9;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f3f3f3;
-  --surface-container: #eeeeee;
-  --surface-container-high: #e8e8e8;
-  --surface-container-highest: #e2e2e2;
-
-  --primary: #b90014;
-  --primary-container: #e31b23;
-  --on-primary: #ffffff;
-  --secondary: #5f5e5e;
-  --tertiary-fixed: #cde5ff;
-  --on-tertiary-fixed: #001d32;
-  --on-surface: #1a1c1c;
-
-  --font-headline: 'Lexend', sans-serif;
-  --font-body: 'Inter', sans-serif;
-
-  --radius-sm: 0.125rem;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-
-  --shadow-ambient: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
-  --topbar-height: 64px;
-
   display: block;
   font-family: var(--font-body);
   color: var(--on-surface);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
 /* TOPBAR */
 .topbar {
@@ -271,49 +238,6 @@
   color: #f57c00;
 }
 
-/* BUTTONS */
-.btn {
-  border: none;
-  cursor: pointer;
-  border-radius: var(--radius-md);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 700;
-  font-family: var(--font-body);
-  white-space: nowrap;
-  line-height: 1;
-  transition: all 0.18s ease;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--primary-container), var(--primary));
-  color: white;
-  padding: 10px 20px;
-  box-shadow: 0 4px 12px rgba(185, 0, 20, 0.18);
-}
-
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(185, 0, 20, 0.24);
-}
-
-.btn-primary:active {
-  transform: scale(0.98);
-}
-
-.btn-secondary {
-  background: var(--surface-container-highest);
-  color: var(--on-surface);
-  padding: 10px 20px;
-  border: 1px solid var(--surface-container-high);
-}
-
-.btn-secondary:hover {
-  background: var(--surface-container-high);
-  border-color: var(--secondary);
-}
 
 /* TABLE & FILTERS */
 .content-grid {

@@ -1,58 +1,4 @@
-/* ─── add-member.component.css ──────────────────────────────────────────────
-   "Kinetic Gallery" design system — Add Member Wizard
-   Color tokens match the Tailwind config in DESIGN.md
-   Pure CSS (no Tailwind utilities in TS/template for Angular encapsulation)
-────────────────────────────────────────────────────────────────────────────── */
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   DESIGN TOKENS — mirror of tailwind.config colors
-══════════════════════════════════════════════════════════════════════════════ */
 :host {
-    --primary: #b90014;
-    --primary-container: #e31b23;
-    --primary-fixed: #ffdad6;
-    --on-primary: #ffffff;
-    --on-primary-container: #fff9f8;
-    --on-primary-fixed-variant: #93000d;
-
-    --surface: #f9f9f9;
-    --surface-container-low: #f3f3f3;
-    --surface-container: #eeeeee;
-    --surface-container-high: #e8e8e8;
-    --surface-container-highest: #e2e2e2;
-    --surface-container-lowest: #ffffff;
-    --surface-dim: #dadada;
-
-    --on-surface: #1a1c1c;
-    --on-surface-variant: #5d3f3c;
-    --secondary: #5f5e5e;
-
-    --tertiary: #005f93;
-    --tertiary-fixed: #cde5ff;
-    --on-tertiary-fixed: #001d32;
-
-    --error: #ba1a1a;
-    --error-container: #ffdad6;
-    --on-error-container: #93000a;
-
-    --outline: #926e6b;
-    --outline-variant: #e7bdb8;
-
-    /* Layout */
-    --sidebar-w: 16rem;
-    --topnav-h: 4rem;
-    --radius-sm: 0.125rem;
-    --radius-md: 0.25rem;
-    --radius-lg: 0.5rem;
-
-    /* Typography */
-    --font-headline: 'Lexend', sans-serif;
-    --font-body: 'Inter', sans-serif;
-
-    /* Transitions */
-    --transition-fast: 150ms ease;
-    --transition-std: 250ms ease;
-
     display: block;
     font-family: var(--font-body);
     background-color: var(--surface);
@@ -67,18 +13,6 @@
     max-width: 1280px;
     margin: 0 auto;
     animation: fadeInUp 0.3s ease both;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* ── Page Header ───────────────────────────────────────────────────────────── */
@@ -731,106 +665,7 @@ input[type="date"].field-input {
 }
 
 /* ── Button System ───────────────────────────────────────────────────────────── */
-.btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    height: 3rem;
-    padding: 0 1.5rem;
-    background: linear-gradient(135deg, var(--primary-container) 0%, var(--primary) 100%);
-    color: var(--on-primary);
-    font-family: var(--font-headline);
-    font-size: 0.9375rem;
-    font-weight: 700;
-    border: none;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(185, 0, 20, 0.25);
-    transition: all var(--transition-fast);
-    position: relative;
-    overflow: hidden;
-}
 
-.btn-primary:hover:not(:disabled) {
-    box-shadow: 0 6px 20px rgba(185, 0, 20, 0.4);
-    transform: translateY(-1px);
-}
-
-.btn-primary:active:not(:disabled) {
-    transform: scale(0.98);
-}
-
-.btn-primary:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-.btn-primary .material-symbols-outlined {
-    font-size: 1.125rem;
-}
-
-.btn-submit {
-    min-width: 11rem;
-    justify-content: center;
-}
-
-.btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    height: 3rem;
-    padding: 0 1.25rem;
-    background: none;
-    color: var(--secondary);
-    font-family: var(--font-body);
-    font-size: 0.9375rem;
-    font-weight: 600;
-    border: none;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-}
-
-.btn-ghost:hover:not(:disabled) {
-    background: var(--surface-container-high);
-    color: var(--on-surface);
-}
-
-.btn-ghost:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-}
-
-.btn-ghost .material-symbols-outlined {
-    font-size: 1.125rem;
-}
-
-.btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    height: 3rem;
-    padding: 0 1.5rem;
-    background: var(--surface-container-high);
-    color: var(--on-surface);
-    font-family: var(--font-headline);
-    font-size: 0.9375rem;
-    font-weight: 700;
-    border: none;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-}
-
-.btn-secondary:hover {
-    background: var(--surface-container-highest);
-}
-
-.btn-secondary .material-symbols-outlined {
-    font-size: 1.125rem;
-}
 
 /* Loading spinner inside submit button */
 .spinner {
@@ -842,12 +677,6 @@ input[type="date"].field-input {
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
     flex-shrink: 0;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════

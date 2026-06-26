@@ -2,16 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary: #b90014;
+  --primary-container: #e31b23;
+  --primary-fixed: #ffdad6;
+  --on-primary: #ffffff;
+  --on-primary-container: #410002;
+  --on-primary-fixed-variant: #93000d;
+
+  --surface: #f9f9f9;
+  --surface-low: #f3f3f3;
+  --surface-lowest: #ffffff;
+  --surface-dim: #dadada;
+  --surface-bright: #f9f9f9;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f3f3f3;
+  --surface-container: #eeeeee;
+  --surface-container-high: #e8e8e8;
+  --surface-container-highest: #e2e2e2;
+
+  --on-surface: #1a1c1c;
+  --on-surface-variant: #5d3f3c;
+  --secondary: #5f5e5e;
+  --on-secondary: #ffffff;
+
+  --tertiary: #005f93;
+  --tertiary-fixed: #cde5ff;
+  --tertiary-container: #0079b9;
+  --on-tertiary-fixed: #001d32;
+
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+
+  --outline: #926e6b;
+  --outline-variant: #e7bdb8;
+
+  --dark-surface: #1a1c22;
+  --dark-surface-2: #22252e;
+
+  /* Layout */
+  --sidebar-w: 16rem;
+  --topnav-h: 4rem;
+  --radius-sm: 0.125rem;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  --shadow-ambient: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+  --topbar-height: 64px;
+
+  /* Typography */
+  --font-headline: 'Lexend', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-std: 250ms ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 html {
   scroll-behavior: smooth;
 }
 
-/* Example: Custom animation */
+/* Global Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -19,8 +82,118 @@ html {
   }
 }
 
-/* Example: Global focus styles */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Global focus styles */
 :focus-visible {
   outline: 2px solid theme('colors.primary');
   outline-offset: 2px;
 }
+
+/* Global Buttons System */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  border: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  border: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--primary-container), var(--primary));
+  color: var(--on-primary);
+  box-shadow: 0 4px 12px rgba(185, 0, 20, 0.18);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(185, 0, 20, 0.24);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  border: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  line-height: 1;
+  background: var(--surface-container-highest);
+  color: var(--on-surface);
+  border: 1px solid var(--surface-container-high);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-container-high);
+  border-color: var(--secondary);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 3rem;
+  padding: 0 1.25rem;
+  background: none;
+  color: var(--secondary);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--surface-container-high);
+  color: var(--on-surface);
+}
+
+.btn-ghost:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
