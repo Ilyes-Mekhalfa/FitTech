@@ -10,6 +10,7 @@ import { Settings } from './pages/settings/settings';
 import { CreateCoach } from './shared/components/create-coach/create-coach';
 import { CreateMember } from './shared/components/create-member/create-member';
 import { canDeactivateGuard } from './core/guards/can-deactivate.guard';
+import { authGuardGuard } from './core/guards/auth.guard-guard';
 import { CreatePlan } from './shared/components/create-plan/create-plan';
 import { Machine} from './pages/machine/machine';
 import { LandingPage } from './pages/landing-page/landing-page';
@@ -35,44 +36,62 @@ export const routes: Routes = [
     },
     {
         path: 'admin-dashboard',
+        canActivate: [authGuardGuard],
+        canDeactivate: [canDeactivateGuard],
         component: AdminDashboard,
     },
     {
         path: 'coach',
+        canActivate: [authGuardGuard],
+        canDeactivate: [canDeactivateGuard],
         component: Coach,
     },
     {
         path: 'coach/add',
+        canActivate: [authGuardGuard],
         canDeactivate: [canDeactivateGuard],
         component: CreateCoach
     },
     {
         path: 'member',
+        canActivate: [authGuardGuard],
+        canDeactivate: [canDeactivateGuard],
         component: Member,
     },
     {
         path: "member/add",
+        canActivate: [authGuardGuard],
+        canDeactivate: [canDeactivateGuard],
         component: CreateMember,
     },
     {
         path: 'plan',
+        canActivate: [authGuardGuard],
+        canDeactivate: [canDeactivateGuard],
         component: Plan,
     },
     {
         path: 'plan/add',
-        // canDeactivate: [canDeactivateGuard],
+        canActivate: [authGuardGuard],
+        canDeactivate: [canDeactivateGuard],
         component: CreatePlan,
     },
     {
         path: 'machine',
+        canActivate: [authGuardGuard],
+        canDeactivate: [canDeactivateGuard],
         component: Machine,
     },
     {
         path: 'settings',
+        canActivate: [authGuardGuard],
+        canDeactivate: [canDeactivateGuard],
         component: Settings,
     },
     {
         path: 'dailyToken',
+        canActivate: [authGuardGuard],
+        canDeactivate: [canDeactivateGuard],
         component: DailyToken,
     }
 ];

@@ -11,19 +11,20 @@ import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 })
 export class ForgetPassword {
 
-  email = history.state.email || '';
+  email = new FormControl(history.state.email || '', [Validators.required, Validators.email]);
   constructor(private router: Router, private authService: AuthService){}
 
   sendEmail(){
-    if(this.email.invalid){
+    if(this.email.invalid || !this.email.value){
       throw new Error('invalid email')
     }
-    this.authService.forgetPassword(this.email.value).subscribe({
+    this.authService.forgetPassword({ email: this.email.value }).subscribe({
       next: (res)=>{
         console.log('email sent successfully');
+        this.router.navigate(['/login']);
       },
       error: (err)=>{
-        throw new Error(err.error.message)
+        throw new Error(err.error?.message || err.message || 'Error occurred');
       }
     })
   }

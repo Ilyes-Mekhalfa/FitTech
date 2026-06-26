@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { TokenService } from '../../core/services/token.service';
 import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
@@ -17,6 +18,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private tokenService: TokenService,
     private router: Router,
   ) {
     this.loginForm = this.fb.group({
@@ -41,11 +43,14 @@ export class LoginComponent {
       throw new Error('form invalid');
     }
     this.authService.login(this.loginForm.value).subscribe({
-      next: (res) => {
+      next: (res: any) => {
+        if (res?.accessToken) {
+          this.tokenService.setToken(res.accessToken);
+        }
         this.router.navigate(['/admin-dashboard']);
       },
       error: (err) => {
-        throw new Error(err.error.message);
+        throw new Error(err.error?.message || err.message || 'Login failed');
       },
     });
   }

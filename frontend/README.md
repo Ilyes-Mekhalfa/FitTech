@@ -10,6 +10,8 @@ To start a local development server, run:
 ng serve
 ```
 
+to get the backend for the project navigate to `https://github.com/Ilyes-Mekhalfa/fittech-backend.git`
+
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
 ## Code scaffolding

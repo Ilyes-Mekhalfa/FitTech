@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -12,7 +12,12 @@ import { Router } from '@angular/router';
 export class ResetPassword {
   passwordForm: FormGroup
 
-  constructor(private fb: FormBuilder,private authService: AuthService, private router: Router){
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ){
     this.passwordForm = this.fb.group({
       password: ['',[ Validators.required, Validators.minLength(8)]],
       confirmPassword: ['',[Validators.required, Validators.minLength(8)]]
@@ -43,14 +48,21 @@ export class ResetPassword {
     if(this.passwordForm.invalid){
       throw new Error('invalid password or confirmPassword')
     }
-    this.authService.resetPassword(this.passwordForm.value).subscribe({
+    const resetToken = this.route.snapshot.queryParams['token'] || this.route.snapshot.queryParams['reset_token'] || '';
+    if (!resetToken) {
+      throw new Error('Missing or invalid password reset token');
+    }
+    const payload = {
+      password: this.passwordForm.value.password,
+      confirmPassword: this.passwordForm.value.confirmPassword,
+      resetToken: resetToken
+    };
+    this.authService.resetPassword(payload).subscribe({
       next: (res)=>{
         this.router.navigate(['/login'])
-        
       },
       error: (err)=>{
         console.log(err);
-        
       }
     })
   }
