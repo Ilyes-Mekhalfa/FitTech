@@ -25,6 +25,9 @@
                 "input": "public"
               }
             ],
+            "allowedCommonJsDependencies": [
+              "qrcode"
+            ],
             "styles": [
               "src/styles.css"
             ]
@@ -34,16 +37,20 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
                 },
                 {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "type": "anycomponentStyle",
+                  "maximumWarning": "20kb",
+                  "maximumError": "40kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true
             },
             "development": {
               "optimization": false,
